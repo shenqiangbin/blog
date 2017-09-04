@@ -11,8 +11,12 @@
 涉及点：
 >* IDE：VS2015企业版（语言：英文）
 >* Framework：4.5
->* 技术：MVC WebApi Bootstrap
+>* 技术：MVC WebApi 
 
 新建一个项目名称为Blog，模板选择Empty，勾选MVC和WebApi。
 
-先做一个首页。新建之后，会自动引入，bootstrap，jquery等文件。为了提高加载速度，改为引入cdn的。modernizr
+先做了一个静态首页，单独部署，单独于博客之外的项目。
+
+博客项目，即此项目自己生成了很多东西，自动引入了jquery，bootstrap。先全部将文件删除掉了。考虑到自己买的服务器不会太好。
+
+样式决定手写。写好首页的导航。

@@ -3,15 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - sqber之家</title>
+    <title>@ViewBag.Title - sqber的博客</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="">
-        @Html.ActionLink("SQBER", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="nav">
+        <div class="nav-content">
+            <span class="logo"><a href="http://www.sqber.com">SQBER-博客</a></span>
+            <a href="/">首页</a>
+            <a href="/">分类</a>
+            <a href="/">关于</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content">
+             这是一个博客
+        </div>
     </div>
 
     <div>
-        @RenderBody()        
+        @RenderBody()
     </div>
 
     @*<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>*@
