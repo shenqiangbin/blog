@@ -23,6 +23,7 @@
 
 css样式的引用使用Bundle形式，实现动态压缩css和js文件。
 
-
 引入Microsoft.AspNet.Web.Optimization。添加BundleConfig.cs文件并在Global.asax中调用。在Views下的web.config文件中添加命名空间的引用。
 修改web.config中的debug模式来实现css和js的压缩。
+
+编写首页列表，主要是样式内容。
