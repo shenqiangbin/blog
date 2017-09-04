@@ -15,4 +15,4 @@
 
 新建一个项目名称为Blog，模板选择Empty，勾选MVC和WebApi。
 
-先做一个首页。
+先做一个首页。新建之后，会自动引入，bootstrap，jquery等文件。为了提高加载速度，改为引入cdn的。modernizr
