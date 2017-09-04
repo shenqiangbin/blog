@@ -20,3 +20,9 @@
 博客项目，即此项目自己生成了很多东西，自动引入了jquery，bootstrap。先全部将文件删除掉了。考虑到自己买的服务器不会太好。
 
 样式决定手写。写好首页的导航。
+
+css样式的引用使用Bundle形式，实现动态压缩css和js文件。
+
+
+引入Microsoft.AspNet.Web.Optimization。添加BundleConfig.cs文件并在Global.asax中调用。在Views下的web.config文件中添加命名空间的引用。
+修改web.config中的debug模式来实现css和js的压缩。
