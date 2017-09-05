@@ -42,3 +42,7 @@ SQLite的使用：
 Multiple types were found that match the controller named 'Home'
 
 添加命名空间，示例：namespaces:  new[] {"MyNamespace.Controllers"}，命名空间从各自的文件中去Copy命名空间。
+
+完成一个Repository。
+
+完成博客的新增界面。

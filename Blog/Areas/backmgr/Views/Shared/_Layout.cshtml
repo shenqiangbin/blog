@@ -6,14 +6,15 @@
     <title>@ViewBag.Title - SQBER的博客</title>
     @Styles.Render("~/Content/css")
     @RenderSection("header", required: false)
+    <style>
+        body{background-color:white !important;}
+    </style>
 </head>
 <body>
     <div class="nav">
         <div class="nav-content">
-            <span class="logo"><a href="http://www.sqber.com">博客后台</a></span>
-            <a href="/">首页</a>
-            <a href="/">分类</a>
-            <a href="/">关于</a>
+            <span class="logo"><a href="@Url.Action("index","home")">博客后台</a></span>
+            <a href="/home/index">前台</a>
         </div>
     </div>
     <div class="container">
