@@ -7,8 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog", "Blog\Blog.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9C8FA98E-5BCD-434F-B753-CD69C2C5FD78}"
 	ProjectSection(SolutionItems) = preProject
-		Readme.md = Readme.md
 		index.html = index.html
+		main.css = main.css
+		main.min.css = main.min.css
+		Readme.md = Readme.md
 	EndProjectSection
 EndProject
 Global
