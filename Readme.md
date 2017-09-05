@@ -28,3 +28,17 @@ css样式的引用使用Bundle形式，实现动态压缩css和js文件。
 
 编写首页列表，主要是样式内容。
 2017-9-4
+
+添加数据库访问层，因只是一个简单的日志系统，只是采用文件夹分层的形式，而没有使用项目分层。
+
+数据库采用SQLite，主要还是考虑到服务器的问题。一切轻量为主。避免了安装数据库软件。
+
+SQLite的使用：
+
+>* 拷贝Lib目录下的文件到项目，并引用System.Data.SQLite.dll，将sqlite3.def和sqllite3.dll拷贝到生成的bin目录下。
+>* 拷贝SqliteHelper文件
+>* 拷贝Repository文件，并修改即可。
+
+Multiple types were found that match the controller named 'Home'
+
+添加命名空间，示例：namespaces:  new[] {"MyNamespace.Controllers"}，命名空间从各自的文件中去Copy命名空间。
