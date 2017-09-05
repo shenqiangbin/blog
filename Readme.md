@@ -45,4 +45,4 @@ Multiple types were found that match the controller named 'Home'
 
 完成一个Repository。
 
-完成博客的新增界面。
+完成博客的新增界面。编辑器使用的Ueditor。
