@@ -5,7 +5,7 @@
     cursor:default;
 
     /*背影冒泡*/
-    background: linear-gradient(to bottom right, #53e3b5 0%, #50a3a2 90%);
+    background: linear-gradient(to bottom right, #53e3b5 0%, #53e3b5 90%);
     opacity: 0.8;    
 }
 
