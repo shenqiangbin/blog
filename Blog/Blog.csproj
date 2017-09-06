@@ -336,6 +336,8 @@
     <Compile Include="Areas\backmgr\Controllers\ArticleController.cs" />
     <Compile Include="Areas\backmgr\Controllers\HomeController.cs" />
     <Compile Include="Common\AutofacHelper.cs" />
+    <Compile Include="Common\ValidateException.cs" />
+    <Compile Include="Common\ValidateHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

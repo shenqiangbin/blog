@@ -10,11 +10,13 @@ namespace Blog.Repository
     {        
         public int Add(Article model)
         {
-            string cmdText = "insert into article values(?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+            string cmdText = "insert into article values(?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
                     model.Title,
                     model.Content,
+                    model.ContentLevel,
+                    model.PublishStatus,
                     model.DisplayCreatedTime,
                     model.CreatedTime,
                     model.UpdateTime,

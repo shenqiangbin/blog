@@ -52,3 +52,9 @@ Multiple types were found that match the controller named 'Home'
 >* 安装autofac.mvc的NuGet包
 >* 新增AutofacHelper类，新项目中直接拷贝过去即可。此项目放在了Common文件夹中
 >* 在Global.asax文件夹中调用AutofacHelper中的Inject方法即可。
+
+实现新增博客功能。
+
+枚举的处理：
+
+枚举并没有放到一个单独的地方，而是放在了与之相关的Model里面。感觉关联性更好些，也更容易理解。
