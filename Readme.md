@@ -27,7 +27,8 @@ css样式的引用使用Bundle形式，实现动态压缩css和js文件。
 修改web.config中的debug模式来实现css和js的压缩。
 
 编写首页列表，主要是样式内容。
-2017-9-4
+
+（以上 2017-9-4）
 
 添加数据库访问层，因只是一个简单的日志系统，只是采用文件夹分层的形式，而没有使用项目分层。
 
@@ -47,6 +48,8 @@ Multiple types were found that match the controller named 'Home'
 
 完成博客的新增界面。编辑器使用的Ueditor。(编辑器的使用在onenote笔记中搜索即可)
 
+（以上 2017-9-5）
+
 使用Autofac实现依赖注入
 
 >* 安装autofac.mvc的NuGet包
@@ -58,3 +61,6 @@ Multiple types were found that match the controller named 'Home'
 枚举的处理：
 
 枚举并没有放到一个单独的地方，而是放在了与之相关的Model里面。感觉关联性更好些，也更容易理解。
+
+
+（以上 2017-9-6）
