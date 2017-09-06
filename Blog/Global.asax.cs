@@ -9,6 +9,7 @@ using System.Web.SessionState;
 using System.Web.Http;
 using Blog.App_Start;
 using System.Web.Optimization;
+using Blog.Common;
 
 namespace Blog
 {
@@ -17,6 +18,9 @@ namespace Blog
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
+
+            AutofacHelper.Inject();
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

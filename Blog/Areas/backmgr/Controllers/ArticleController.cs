@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,13 @@ namespace Blog.Areas.backmgr.Controllers
         public ActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult Add(string articleId, string title, string content)
+        {
+            Article article = new Article();
+            return Json("ok");
         }
     }
 }

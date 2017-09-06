@@ -1,7 +1,7 @@
 # 博客开发记录
 
 ------
-[地址](https://www.zybuluo.com/mdeditor)
+[地址 https://www.sqber.com/](https://www.sqber.com/)(未开通)
 
 本文旨在记录开发博客的整个过程。
 
@@ -45,4 +45,10 @@ Multiple types were found that match the controller named 'Home'
 
 完成一个Repository。
 
-完成博客的新增界面。编辑器使用的Ueditor。
+完成博客的新增界面。编辑器使用的Ueditor。(编辑器的使用在onenote笔记中搜索即可)
+
+使用Autofac实现依赖注入
+
+>* 安装autofac.mvc的NuGet包
+>* 新增AutofacHelper类，新项目中直接拷贝过去即可。此项目放在了Common文件夹中
+>* 在Global.asax文件夹中调用AutofacHelper中的Inject方法即可。
