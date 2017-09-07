@@ -69,5 +69,6 @@ namespace Blog.Areas.backmgr.Controllers
             //if (ValidateHelper.IsOverLength(content, 50))
             //    throw new ValidateException(102, $"标题请在50字内");
         }
+
     }
 }

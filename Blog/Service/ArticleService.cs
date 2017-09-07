@@ -31,5 +31,10 @@ namespace Blog.Service
             var id = _articleRepository.Add(model);
             return id;
         }
+
+        public Article GetById(string articleId)
+        {
+           return _articleRepository.GetById(articleId);
+        }
     }
 }

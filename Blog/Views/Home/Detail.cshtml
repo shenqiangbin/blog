@@ -1,0 +1,24 @@
+﻿@model Blog.Models.Article
+@{
+    ViewBag.Title = "Detail";
+}
+
+@if (Model == null)
+{
+    <h2>文章不存在</h2>
+}
+else
+{
+    <h2>@Model.Title</h2>
+    <div>
+        @Html.Raw(Model.Content)
+    </div>
+}
+
+@section header{
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/prettify/r298/prettify.min.css">
+}
+@section footer{
+    <script type="text/javascript" src='http://cdn.bootcss.com/prettify/r298/prettify.min.js'></script>
+    <script type="text/javascript" src='~/Scripts/prettify.load.js'></script>
+}

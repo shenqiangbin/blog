@@ -136,6 +136,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Lib\System.Data.SQLite.XML" />
+    <Content Include="Scripts\prettify.load.js" />
     <Content Include="Scripts\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.html" />
@@ -359,6 +360,7 @@
     <Content Include="Areas\backmgr\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\backmgr\Views\Home\Index.cshtml" />
     <Content Include="Areas\backmgr\Views\Article\Add.cshtml" />
+    <Content Include="Views\Home\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
