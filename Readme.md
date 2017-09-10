@@ -68,3 +68,7 @@ Multiple types were found that match the controller named 'Home'
 完成文章的查看，代码块的美化
 
 （以上 2017-9-7）
+
+前台和后台列表展示，删除功能。
+
+（以上 2017-9-10）
