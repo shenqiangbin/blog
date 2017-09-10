@@ -47,6 +47,12 @@ namespace Blog.Repository
             return model;
         }
 
+        public void Remove(int id)
+        {
+            string sql = "update article set enable = 0 where articleid = ?";
+            SQLiteHelper.ExecuteNonQuery(sql, id);
+        }
+
         public Article GetById(string articleId)
         {
             string cmdText = "select * from article where articleid = ?";

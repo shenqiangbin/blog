@@ -1,0 +1,24 @@
+﻿.record{
+    border-bottom:1px solid gray;
+    margin-bottom:30px;
+    height:30px;
+    line-height:30px;
+    padding:5px;
+}
+
+.record:hover{
+    background-color:rgba(255, 255, 255, 0.15);
+}
+
+.indexcontainer{
+    margin-top:30px;
+}
+
+.indexcontainer .date{
+    margin-left:40px;
+    font-size:12px;
+}
+
+.operate{
+    float:right;
+}

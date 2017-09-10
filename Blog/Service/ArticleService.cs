@@ -41,5 +41,10 @@ namespace Blog.Service
         {
             return _articleRepository.GetPaged(listModel);
         }
+
+        public void Remove(int id)
+        {
+            _articleRepository.Remove(id);
+        }
     }
 }

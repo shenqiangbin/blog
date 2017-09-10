@@ -70,5 +70,23 @@ namespace Blog.Areas.backmgr.Controllers
             //    throw new ValidateException(102, $"标题请在50字内");
         }
 
+
+        [HttpPost]
+        public ActionResult Del(int? id)
+        {
+            try
+            {
+                if (!id.HasValue)
+                    return Json(new { code = 400, msg = "id不能为空" });
+
+                _articleService.Remove(id.Value);
+
+                return Json(new { code = 200, msg = "ok" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = 500, msg = ex.Message });
+            }
+        }
     }
 }
