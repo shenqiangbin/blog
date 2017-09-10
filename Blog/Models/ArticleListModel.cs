@@ -19,4 +19,10 @@ namespace Blog.Models
             this.PublishStatus = PublishStatus.Published;
         }
     }
+
+    public class ArticleListModelResult
+    {
+        public IList<Article> List { get; set; }
+        public int TotalCount { get; set; }
+    }
 }

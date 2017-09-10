@@ -54,9 +54,10 @@ namespace Blog.Repository
             return RowToModel(row);
         }
 
-        public IEnumerable<Article> GetPaged(ArticleListModel listModel)
+        public ArticleListModelResult GetPaged(ArticleListModel listModel)
         {
-            List<Article> list = new List<Article>();
+            ArticleListModelResult result = new ArticleListModelResult();
+            result.List = new List<Article>();
 
             string sql = "select * from article where Enable = 1";
             sql += " and PublishStatus = ?";
@@ -64,9 +65,15 @@ namespace Blog.Repository
             DataTable dt = SQLiteHelper.ExecutePager(listModel.PageIndex, listModel.PageSize, sql, para);
             foreach (DataRow item in dt.Rows)
             {
-                list.Add(RowToModel(item));
+                result.List.Add(RowToModel(item));
             }
-            return list;
+
+            string countSql = "select count(1) from article where Enable = 1";
+            countSql += " and PublishStatus = ?";
+            object countNum = SQLiteHelper.ExecuteScalar(countSql, para);
+            result.TotalCount = Convert.ToInt32(countNum);
+
+            return result;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Blog.Models;
 using Blog.Repository;
 using Blog.Service;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,16 @@ namespace Blog.Controllers
             _articleService = articleService;
         }
 
-        public ActionResult Index(int? pageId = 1)
+        public ActionResult Index(int? page = 1)
         {
             ArticleListModel listModel = new ArticleListModel();
-            listModel.PageIndex = Convert.ToInt32(pageId);
-            listModel.PageSize = 3;
+            listModel.PageIndex = Convert.ToInt32(page);
+            listModel.PageSize = 10;
 
-            IEnumerable<Article> list = _articleService.GetPaged(listModel);
-            return View(list);
+            ArticleListModelResult result = _articleService.GetPaged(listModel);
+            var pageList = new StaticPagedList<Article>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);
+
+            return View(pageList);
         }
 
         public ActionResult Detail(string id)

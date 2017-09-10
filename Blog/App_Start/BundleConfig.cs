@@ -14,7 +14,7 @@ namespace Blog.App_Start
             //            "~/Scripts/jquery-{version}.js"));     
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
-            bundles.Add(new StyleBundle("~/Content/index").Include("~/Content/index.css"));
+            bundles.Add(new StyleBundle("~/Content/index").Include("~/Content/index.css","~/Content/PagedList.css"));
 
 
             bundles.Add(new ScriptBundle("~/Scripts/ueditor/js").Include(

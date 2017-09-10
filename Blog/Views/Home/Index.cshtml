@@ -1,17 +1,15 @@
-﻿@model IEnumerable<Blog.Models.Article>
+﻿@model StaticPagedList<Article>
 
 @{
     ViewBag.Title = "首页";
 }
-
-
 
 @section header{
     @Styles.Render("~/Content/index")
 }
 
 <div class="indexcontainer">
-    @if (Model == null)
+    @if (Model == null || Model.Count == 0)
     {
         <div class="record">
             暂无数据
@@ -29,5 +27,9 @@
             </a>
         }
     }
-   
+    @if (Model.PageCount > 1)
+    {
+        
+        <div>@Html.PagedListPager((IPagedList)(Model), p => Url.Action("Index", new { page = p }), PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
+    }
 </div>
