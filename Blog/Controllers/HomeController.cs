@@ -18,21 +18,14 @@ namespace Blog.Controllers
             _articleService = articleService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? pageId = 1)
         {
-            ArticleRepository repository = new ArticleRepository();
-            repository.Add(new Models.Article
-            {
-                Title = "title",
-                Content = "content",
-                DisplayCreatedTime = DateTime.Now,
-                CreatedTime = DateTime.Now,
-                UpdateTime = DateTime.Now,
-                Enable = 1
-                
-            });
+            ArticleListModel listModel = new ArticleListModel();
+            listModel.PageIndex = Convert.ToInt32(pageId);
+            listModel.PageSize = 3;
 
-            return View();
+            IEnumerable<Article> list = _articleService.GetPaged(listModel);
+            return View(list);
         }
 
         public ActionResult Detail(string id)

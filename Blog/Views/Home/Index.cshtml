@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Blog.Models.Article>
+
+@{
     ViewBag.Title = "首页";
 }
 
@@ -9,76 +11,23 @@
 }
 
 <div class="indexcontainer">
-    <a href="#" title="Vue学习 - 概览">
+    @if (Model == null)
+    {
         <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
+            暂无数据
         </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
-    <a href="#" title="Vue学习 - 概览">
-        <div class="record">
-            Vue学习 - 概览
-            <span class="date">@DateTime.Now.ToString("yyyy-MM-dd")</span>
-        </div>
-    </a>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <a href="@Url.Action("Detail","Home", new { id=item.ArticleId} )" title="@item.Title">
+                <div class="record">
+                    <span>@item.Title</span>
+                    <span class="date">@item.DisplayCreatedTime.ToString("yyyy-MM-dd")</span>
+                </div>
+            </a>
+        }
+    }
+   
 </div>

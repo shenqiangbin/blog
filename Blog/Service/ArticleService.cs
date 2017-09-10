@@ -34,7 +34,12 @@ namespace Blog.Service
 
         public Article GetById(string articleId)
         {
-           return _articleRepository.GetById(articleId);
+            return _articleRepository.GetById(articleId);
+        }
+
+        public IEnumerable<Article> GetPaged(ArticleListModel listModel)
+        {
+            return _articleRepository.GetPaged(listModel);
         }
     }
 }
