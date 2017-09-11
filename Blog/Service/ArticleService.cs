@@ -32,6 +32,12 @@ namespace Blog.Service
             return id;
         }
 
+        public int Update(Article model)
+        {
+            model.UpdateTime = DateTime.Now;
+            return _articleRepository.Update(model);
+        }
+
         public Article GetById(string articleId)
         {
             return _articleRepository.GetById(articleId);
