@@ -26,9 +26,12 @@ namespace Blog.Areas.backmgr.Controllers
         public ActionResult Add(string id)
         {
             Article model = new Article();
+            ViewBag.IsNew = true;
+
             if (!string.IsNullOrEmpty(id))
             {
                 model = _articleService.GetById(id);
+                ViewBag.IsNew = false;
             }
 
             return View(model);
@@ -48,7 +51,7 @@ namespace Blog.Areas.backmgr.Controllers
                     Article article = new Article();
                     article.Title = title;
                     article.Content = content;
-                    _articleService.Add(article);
+                    articleId = _articleService.Add(article).ToString();
                 }
                 else //编辑
                 {
@@ -58,7 +61,7 @@ namespace Blog.Areas.backmgr.Controllers
                     _articleService.Update(model);
                 }
 
-                return Json(new { code = 200, msg = "ok" });
+                return Json(new { code = 200, msg = "ok", id = articleId });
             }
             catch (ValidateException ex)
             {
@@ -81,7 +84,6 @@ namespace Blog.Areas.backmgr.Controllers
             //if (ValidateHelper.IsOverLength(content, 50))
             //    throw new ValidateException(102, $"标题请在50字内");
         }
-
 
         [HttpPost]
         public ActionResult Del(int? id)

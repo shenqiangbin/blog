@@ -59,6 +59,10 @@ namespace Blog.Models
         /// <summary>
         /// 已发布
         /// </summary>
-        Published = 1
+        Published = 1,
+        /// <summary>
+        /// 全部
+        /// </summary>
+        All = 2,
     }
 }

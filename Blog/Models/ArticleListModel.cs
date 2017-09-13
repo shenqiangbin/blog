@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Blog.Models
 {
-    public class ArticleListModel
+    public class ArticleListQuery
     {
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
@@ -13,7 +13,7 @@ namespace Blog.Models
 
         public PublishStatus PublishStatus { get; set; }
 
-        public ArticleListModel()
+        public ArticleListQuery()
         {
             this.PageSize = 10;
             this.PublishStatus = PublishStatus.Published;

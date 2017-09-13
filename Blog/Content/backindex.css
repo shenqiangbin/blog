@@ -1,7 +1,6 @@
 ﻿.record{
     border-bottom:1px solid gray;
     margin-bottom:30px;
-    height:30px;
     line-height:30px;
     padding:5px;
 }
@@ -15,10 +14,10 @@
 }
 
 .indexcontainer .date{
-    margin-left:40px;
-    font-size:12px;
+    margin-right:40px;
+     font-size:12px;
 }
 
 .operate{
-    float:right;
+   
 }

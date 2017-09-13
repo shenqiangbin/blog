@@ -25,15 +25,18 @@
         {
 
             <div class="record">
-                <a href="@Url.Action("Detail","Home", new { area = "", id =item.ArticleId } )" title="@item.Title">
-                    <span>@item.Title</span>
+               <div>
+                   <a href="@Url.Action("Detail","Home", new { area = "", id =item.ArticleId } )" title="@item.Title" target="_blank">                      
+                       <span>@item.Title</span>
+                   </a>
+               </div>
+                <div class="operate">
                     <span class="date">@item.DisplayCreatedTime.ToString("yyyy-MM-dd")</span>
-                </a>
-                <span class="operate">
                     <a href="@Url.Action("Add","Article", new { id = item.ArticleId })">编辑</a>
                     <a href="javascript:void(0)" onclick="del(@item.ArticleId)">删除</a>
-                </span>
+                </div>
             </div>
+            
 
         }
     }
@@ -51,13 +54,15 @@
         });
 
         function del(id){
-            var url = '@Url.Action("Del","Article")';
-            $.post(url, { id: id }, function (data) {
-                if (data.code == 200)
-                    window.document.location.reload();
-                else
-                    alert(data.msg);
-            });
+            if(confirm("确定删除吗？")){
+                var url = '@Url.Action("Del","Article")';
+                $.post(url, { id: id }, function (data) {
+                    if (data.code == 200)
+                        window.document.location.reload();
+                    else
+                        alert(data.msg);
+                });
+            }
         }
     </script>
 }

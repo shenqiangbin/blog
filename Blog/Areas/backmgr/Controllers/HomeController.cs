@@ -20,12 +20,13 @@ namespace Blog.Areas.backmgr.Controllers
 
         public ActionResult Index(int? page = 1)
         {
-            ArticleListModel listModel = new ArticleListModel();
-            listModel.PageIndex = Convert.ToInt32(page);
-            listModel.PageSize = 10;
+            ArticleListQuery query = new ArticleListQuery();
+            query.PageIndex = Convert.ToInt32(page);
+            query.PageSize = 10;
+            query.PublishStatus = PublishStatus.All;
 
-            ArticleListModelResult result = _articleService.GetPaged(listModel);
-            var pageList = new StaticPagedList<Article>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);
+            ArticleListModelResult result = _articleService.GetPaged(query);
+            var pageList = new StaticPagedList<Article>(result.List, query.PageIndex, query.PageSize, result.TotalCount);
 
             return View(pageList);
         }

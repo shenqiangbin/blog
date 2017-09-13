@@ -21,7 +21,7 @@ namespace Blog.Controllers
 
         public ActionResult Index(int? page = 1)
         {
-            ArticleListModel listModel = new ArticleListModel();
+            ArticleListQuery listModel = new ArticleListQuery();
             listModel.PageIndex = Convert.ToInt32(page);
             listModel.PageSize = 10;
 

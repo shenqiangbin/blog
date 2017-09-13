@@ -93,14 +93,18 @@ Enable = ?
             return RowToModel(row);
         }
 
-        public ArticleListModelResult GetPaged(ArticleListModel listModel)
+        public ArticleListModelResult GetPaged(ArticleListQuery listModel)
         {
             ArticleListModelResult result = new ArticleListModelResult();
             result.List = new List<Article>();
 
             string sql = "select * from article where Enable = 1";
-            sql += " and PublishStatus = ?";
+
+            if (listModel.PublishStatus != PublishStatus.All)
+                sql += " and PublishStatus = ?";
+
             object[] para = { (int)listModel.PublishStatus };
+
             DataTable dt = SQLiteHelper.ExecutePager(listModel.PageIndex, listModel.PageSize, sql, para);
             foreach (DataRow item in dt.Rows)
             {
@@ -108,7 +112,10 @@ Enable = ?
             }
 
             string countSql = "select count(1) from article where Enable = 1";
-            countSql += " and PublishStatus = ?";
+
+            if (listModel.PublishStatus != PublishStatus.All)
+                countSql += " and PublishStatus = ?";
+
             object countNum = SQLiteHelper.ExecuteScalar(countSql, para);
             result.TotalCount = Convert.ToInt32(countNum);
 

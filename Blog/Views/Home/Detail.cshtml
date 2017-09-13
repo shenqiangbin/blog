@@ -1,6 +1,18 @@
 ﻿@model Blog.Models.Article
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = Model.Title;
+}
+
+@section header{
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/prettify/r298/prettify.min.css">
+    <style>
+        h2 {
+            margin-bottom: 45px;
+        }
+        p{
+            margin-bottom:30px;
+        }
+    </style>
 }
 
 @if (Model == null)
@@ -11,13 +23,10 @@ else
 {
     <h2>@Model.Title</h2>
     <div>
-        @Html.Raw(Model.Content)
+        @Html.Raw(Model.Content.Replace("<p><br/></p>", ""))
     </div>
 }
 
-@section header{
-    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/prettify/r298/prettify.min.css">
-}
 @section footer{
     <script type="text/javascript" src='http://cdn.bootcss.com/prettify/r298/prettify.min.js'></script>
     <script type="text/javascript" src='~/Scripts/prettify.load.js'></script>

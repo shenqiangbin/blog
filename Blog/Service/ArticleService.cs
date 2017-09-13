@@ -43,7 +43,7 @@ namespace Blog.Service
             return _articleRepository.GetById(articleId);
         }
 
-        public ArticleListModelResult GetPaged(ArticleListModel listModel)
+        public ArticleListModelResult GetPaged(ArticleListQuery listModel)
         {
             return _articleRepository.GetPaged(listModel);
         }

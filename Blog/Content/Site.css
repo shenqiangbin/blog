@@ -42,7 +42,6 @@
 
 .container {
     text-align: center;
-    
 }
 
 .content {
@@ -54,6 +53,7 @@
     padding:50px 20px 30px 20px;
     text-align: left;
     background-color:white;
+    min-height:800px;
 }
 
 a {
