@@ -23,14 +23,15 @@ namespace Blog.Areas.backmgr.Controllers
             return View();
         }
 
-        public ActionResult Add()
+        public ActionResult Add(string id)
         {
-            Article article = new Article();
-            article.Title = "test";
-            article.Content = "content";
-            _articleService.Add(article);
+            Article model = new Article();
+            if (!string.IsNullOrEmpty(id))
+            {
+                model = _articleService.GetById(id);
+            }
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -41,10 +42,21 @@ namespace Blog.Areas.backmgr.Controllers
             {
                 AddValidate(articleId, title, content);
 
-                Article article = new Article();
-                article.Title = title;
-                article.Content = content;
-                _articleService.Add(article);
+                //新增
+                if (string.IsNullOrEmpty(articleId))
+                {
+                    Article article = new Article();
+                    article.Title = title;
+                    article.Content = content;
+                    _articleService.Add(article);
+                }
+                else //编辑
+                {
+                    var model = _articleService.GetById(articleId);
+                    model.Title = title;
+                    model.Content = content;
+                    _articleService.Update(model);
+                }
 
                 return Json(new { code = 200, msg = "ok" });
             }

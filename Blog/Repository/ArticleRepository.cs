@@ -31,6 +31,36 @@ namespace Blog.Repository
             return 0;
         }
 
+        public int Update(Article model)
+        {
+            string sql = @"
+update Article set 
+title = ?,
+content = ?,
+ContentLevel = ?,
+PublishStatus = ?,
+DisplayCreatedTime = ?,
+CreatedTime = ?,
+UpdateTime = ?,
+Enable = ?
+    where ArticleId = ?
+";
+            object[] paramList = {
+                    model.Title,
+                    model.Content,
+                    model.ContentLevel,
+                    model.PublishStatus,
+                    model.DisplayCreatedTime,
+                    model.CreatedTime,
+                    model.UpdateTime,
+                    model.Enable,
+                    model.ArticleId
+            };
+
+            int rowCount = SQLiteHelper.ExecuteNonQuery(sql, paramList);
+            return rowCount;
+        }
+
         private Article RowToModel(DataRow row)
         {
             if (row == null)
@@ -43,6 +73,9 @@ namespace Blog.Repository
             model.ContentLevel = Convert.ToInt32(row["ContentLevel"]);
             model.PublishStatus = Convert.ToInt32(row["PublishStatus"]);
             model.DisplayCreatedTime = Convert.ToDateTime(row["DisplayCreatedTime"]);
+            model.CreatedTime = Convert.ToDateTime(row["CreatedTime"]);
+            model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
+            model.Enable = Convert.ToInt32(row["Enable"]);
 
             return model;
         }
