@@ -72,3 +72,7 @@ Multiple types were found that match the controller named 'Home'
 前台和后台列表展示，删除功能。
 
 （以上 2017-9-10）
+
+完成编辑和部分页面的样式调整
+
+（以上 2017-9-13）

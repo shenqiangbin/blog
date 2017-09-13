@@ -1,19 +1,33 @@
 ﻿@model Blog.Models.Article
 @{
     ViewBag.Title = Model.Title;
+    string backUrl = Request.UrlReferrer != null ? Request.UrlReferrer.OriginalString : "/";
 }
 
 @section header{
     <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/prettify/r298/prettify.min.css">
     <style>
-        h2 {
-            margin-bottom: 45px;
+        .detail-nav {
+            margin-top: 22px;
         }
-        p{
-            margin-bottom:30px;
+
+        .detail-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+        }
+
+        p {
+            margin-bottom: 30px;
         }
     </style>
 }
+
+<div class="detail-nav">
+    <a href="@backUrl">返回</a>
+</div>
 
 @if (Model == null)
 {
@@ -21,7 +35,10 @@
 }
 else
 {
-    <h2>@Model.Title</h2>
+    <div class="detail-title">
+        <h2>@Model.Title</h2>
+        <div>@Model.DisplayCreatedTime</div>
+    </div>
     <div>
         @Html.Raw(Model.Content.Replace("<p><br/></p>", ""))
     </div>

@@ -59,7 +59,16 @@
 a {
     text-decoration: none;
 }
-
+.copyright{
+    margin-top:2px;
+    height:80px;
+    line-height:80px;
+    text-align:center;
+   
+}
+.copyright div{
+    margin:0 auto;
+}
 
 /*背影冒泡*/
 .bg-bubbles {
