@@ -20,7 +20,7 @@
         }
 
         p {
-            margin-bottom: 30px;
+            margin-bottom: 18px;
         }
     </style>
 }
@@ -40,11 +40,32 @@ else
         <div>@Model.DisplayCreatedTime</div>
     </div>
     <div>
-        @Html.Raw(Model.Content.Replace("<p><br/></p>", ""))
+        @Html.Raw(Model.Content)
     </div>
 }
 
 @section footer{
     <script type="text/javascript" src='http://cdn.bootcss.com/prettify/r298/prettify.min.js'></script>
     <script type="text/javascript" src='~/Scripts/prettify.load.js'></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            
+            $('pre').each(function () {
+                var item = $("<div style='color:blue'>折叠</div>");
+                item.click(function () {
+                    var val = item.html();
+                    if (val == "折叠") {
+                        item.next().hide();
+                        item.html("展开");
+                    } else {
+                        item.next().show();
+                        item.html("折叠");
+                    }
+                });
+                $(this).before(item);
+            });
+        });
+    </script>
 }
+
