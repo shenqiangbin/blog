@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = Model.Title;
     string backUrl = Request.UrlReferrer != null ? Request.UrlReferrer.OriginalString : "/";
+
+    if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        Layout = "~/Views/Shared/_mLayout.cshtml";
+    }
 }
 
 @section header{

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>@ViewBag.Title - SQBER的博客</title>
+    @Styles.Render("~/Content/mcss")
+    @RenderSection("header", required: false)
+</head>
+<body>
+    <div class="nav">
+        <div class="nav-content">
+            <span class="logo"><a href="http://www.sqber.com">SQBER-博客</a></span>
+            <a href="/">首页</a>
+            <a href="/">分类</a>
+            <a href="/">关于</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content">
+             @RenderBody()
+        </div>
+    </div>
+    <div class="copyright">
+        <div>sqber  2017-@DateTime.Now.Year</div>
+    </div>
+
+    @RenderSection("footer", required: false)
+    @*<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>*@
+
+</body>
+</html>

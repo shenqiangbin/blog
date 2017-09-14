@@ -138,6 +138,7 @@
     <Content Include="Content\backindex.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\mSite.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Lib\sqlite3.def" />
@@ -349,6 +350,7 @@
     <Compile Include="Areas\backmgr\Controllers\ArticleController.cs" />
     <Compile Include="Areas\backmgr\Controllers\HomeController.cs" />
     <Compile Include="Common\AutofacHelper.cs" />
+    <Compile Include="Common\BrowserHelper.cs" />
     <Compile Include="Common\ValidateException.cs" />
     <Compile Include="Common\ValidateHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -376,6 +378,7 @@
     <Content Include="Areas\backmgr\Views\Home\Index.cshtml" />
     <Content Include="Areas\backmgr\Views\Article\Add.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
+    <Content Include="Views\Shared\_mLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

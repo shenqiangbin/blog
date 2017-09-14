@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     min-width: 1140px;
-    cursor:default;
 
     /*背影冒泡*/
     background: linear-gradient(to bottom right, #53e3b5 0%, #53e3b5 90%);
