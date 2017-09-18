@@ -2,10 +2,21 @@
 
 @{
     ViewBag.Title = "首页";
+    if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        Layout = "~/Views/Shared/_mLayout.cshtml";
+    }
 }
 
 @section header{
-    @Styles.Render("~/Content/index")
+    @if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        @Styles.Render("~/Content/mindex")
+    }
+    else
+    {
+        @Styles.Render("~/Content/index")
+    }
 }
 
 <div class="indexcontainer">
@@ -19,7 +30,7 @@
     {
         foreach (var item in Model)
         {
-            <div  class="record">
+            <div class="record">
                 <div>
                     <a href="@Url.Action("Detail","Home", new { id=item.ArticleId} )" title="@item.Title">
                         <span>@item.Title</span>

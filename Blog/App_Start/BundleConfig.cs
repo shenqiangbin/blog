@@ -15,7 +15,13 @@ namespace Blog.App_Start
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/mcss").Include("~/Content/msite.css"));
+
             bundles.Add(new StyleBundle("~/Content/index").Include("~/Content/index.css","~/Content/PagedList.css"));
+            bundles.Add(new StyleBundle("~/Content/mindex").Include("~/Content/mindex.css", "~/Content/PagedList.css"));
+
+            bundles.Add(new StyleBundle("~/Content/detail").Include("~/Content/detail.css"));
+            bundles.Add(new StyleBundle("~/Content/mdetail").Include("~/Content/mdetail.css"));
+
             bundles.Add(new StyleBundle("~/Content/backindex").Include("~/Content/backindex.css", "~/Content/PagedList.css"));
 
 

@@ -11,23 +11,14 @@
 
 @section header{
     <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/prettify/r298/prettify.min.css">
-    <style>
-        .detail-nav {
-            margin-top: 22px;
-        }
-
-        .detail-title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-        }
-
-        p {
-            margin-bottom: 18px;
-        }
-    </style>
+    @if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        @Styles.Render("~/Content/mdetail")
+    }
+    else
+    {
+        @Styles.Render("~/Content/detail")
+    }
 }
 
 <div class="detail-nav">
