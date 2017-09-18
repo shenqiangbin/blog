@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -14,7 +15,16 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
 
+            //GetTiKu();
+            //HandleTiKu();
+            HandleTiKu2();
 
+            Console.WriteLine("ok");
+            Console.ReadLine();
+        }
+
+        private static void GetTiKu()
+        {
             string items = @"
                 劳动法,
                 公务员法,
@@ -49,7 +59,7 @@ namespace ConsoleApplication
             itemList.ForEach(m => { list.Add(m.Trim()); });
 
             foreach (string item in list)
-            {              
+            {
                 if (string.IsNullOrEmpty(item))
                     continue;
                 for (int i = 1; i < 10; i++)
@@ -59,12 +69,10 @@ namespace ConsoleApplication
                         var content = RegisterMetadata(item, i.ToString(), j.ToString());
                         if (content.Trim().StartsWith("<div class=\"page\">"))
                             break;
-                        File.AppendAllText(file,content + "\r\n-----------------------------------------------------------------------------------------------");
+                        File.AppendAllText(file, content + "\r\n-----------------------------------------------------------------------------------------------");
                     }
                 }
             }
-            Console.WriteLine("ok");
-            Console.ReadLine();
         }
 
         private static string RegisterMetadata(string item, string questionType, string page)
@@ -110,6 +118,68 @@ namespace ConsoleApplication
                 }
             }
             return "";
+        }
+
+        private static void HandleTiKu()
+        {
+            string file = @"d:/exam.txt";
+            StreamReader reader = new StreamReader(File.OpenRead(file));
+
+            StringBuilder builder = new StringBuilder();
+
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                if (line.Contains("、"))
+                    builder.Append(line.Trim());
+                if (line.Contains("正确答案"))
+                {
+                    Regex reg = new Regex("(?i)(?<=（)[^（]*(?=）)");//commend by danielinbiti  
+                    MatchCollection mc = reg.Matches(line);
+                    foreach (Match m in mc)
+                    {
+                        builder.Append(",");
+                        builder.Append(m.Value);
+                        builder.Append("\r\n");
+                    }
+                }
+            }
+            string s = builder.ToString();
+        }
+
+        private static void HandleTiKu2()
+        {
+            List<string> questions = new List<string>();
+            List<string> answers = new List<string>();
+
+            string content = File.ReadAllText("d:/exam.txt");
+            var mc = GetMatch("<p class=\"qt\">", "</p>", content);
+            foreach (Match m in mc)
+            {
+                var index = m.Value.IndexOf("、");
+                var s = m.Value.Substring(index + 1).Trim();
+                questions.Add(s);
+            }
+
+            var mc2 = GetMatch("<div class=\"result\">", "</div>", content);
+            foreach (Match m in mc2)
+            {
+                var s = m.Value.Trim();
+                answers.Add(s);
+                //if (!string.IsNullOrEmpty(s) && Regex.IsMatch(s, "^[A-Z]+$"))
+                //{
+                //    answers.Add(s);
+                //}
+
+            }
+            var a = questions;
+        }
+
+        private static MatchCollection GetMatch(string qian, string hou, string content)
+        {
+            Regex reg = new Regex(string.Format("(?i)(?<={0})[^{0}]*(?={1})", qian, hou));//commend by danielinbiti  
+            MatchCollection mc = reg.Matches(content);
+            return mc;
         }
     }
 }
