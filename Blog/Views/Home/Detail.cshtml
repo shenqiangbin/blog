@@ -48,7 +48,7 @@ else
         $(function () {
             
             $('pre').each(function () {
-                var item = $("<div style='color:blue'>折叠</div>");
+                var item = $("<div style='color:blue;cursor:pointer;margin-bottom:-12px;'>折叠</div>");
                 item.click(function () {
                     var val = item.html();
                     if (val == "折叠") {
