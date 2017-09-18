@@ -163,7 +163,9 @@
 
             //定时保存
             setInterval(function () {
-                save();
+                save(function (id) {
+                    articleId = id;
+                });
             }, 1000*30);
         });
     </script>

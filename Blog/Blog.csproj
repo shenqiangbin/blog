@@ -136,6 +136,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\backindex.css" />
+    <Content Include="Content\mdetail.css" />
+    <Content Include="Content\detail.css" />
+    <Content Include="Content\mindex.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\mSite.css" />
