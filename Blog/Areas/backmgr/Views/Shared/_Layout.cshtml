@@ -7,7 +7,14 @@
     @Styles.Render("~/Content/css")
     @RenderSection("header", required: false)
     <style>
-        body{background-color:white !important;}
+        body {
+            background-color: white !important;
+        }
+
+        .nav-account {
+            display: inline-block;
+            float:right;
+        }
     </style>
 </head>
 <body>
@@ -15,6 +22,17 @@
         <div class="nav-content">
             <span class="logo"><a href="@Url.Action("index","home")">博客后台</a></span>
             <a href="/home/index">前台</a>
+            <div class="nav-account">
+                @if (Blog.Common.ContextUser.IsLogined)
+                {
+                    <span>您好，@Blog.Common.ContextUser.UserName</span>
+                    <span><a href="@Url.Action("LogOut", "Account")">退出</a></span>
+                }
+                else
+                {
+                    @*<span><a href="@Url.Action("Login", "Account")">登录</a></span>*@
+                }
+            </div>
         </div>
     </div>
     <div class="container">

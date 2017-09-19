@@ -55,6 +55,9 @@
 a {
     text-decoration: none;
 }
+a:hover{
+    
+}
 .copyright{
     margin-top:2px;
     height:80px;

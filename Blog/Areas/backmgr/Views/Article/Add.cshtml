@@ -81,6 +81,8 @@
     </div>
 </div>
 
+@Html.AntiForgeryToken()
+
 @section footer{
 
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -129,7 +131,7 @@
                 $.ajax({
                     type: "Post",
                     url: "/backmgr/Article/Add",
-                    data: data,
+                    data: AddAntiForgeryToken(data),
                     success: function (result) {
                         if (result.code == 200) {
                             showMsg('保存成功');
@@ -166,7 +168,12 @@
                 save(function (id) {
                     articleId = id;
                 });
-            }, 1000*30);
+            }, 1000 * 30);
+
+            AddAntiForgeryToken = function (data) {
+                data.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+                return data;
+            };
         });
     </script>
 }

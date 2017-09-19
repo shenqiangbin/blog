@@ -9,63 +9,63 @@ namespace Blog.Repository
 {
     public class UserRepository
     {
-//        public int Add(User model)
-//        {
-//            string cmdText = "insert into User values(?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
-//            object[] paramList = {
-//                    null,  //对应的主键不要赋值了
-//                    model.Title,
-//                    model.Content,
-//                    model.ContentLevel,
-//                    model.PublishStatus,
-//                    model.DisplayCreatedTime,
-//                    model.CreatedTime,
-//                    model.UpdateTime,
-//                    model.Enable
-//            };
-//            object result = SQLiteHelper.ExecuteScalar(cmdText, paramList);
+        //        public int Add(User model)
+        //        {
+        //            string cmdText = "insert into User values(?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+        //            object[] paramList = {
+        //                    null,  //对应的主键不要赋值了
+        //                    model.Title,
+        //                    model.Content,
+        //                    model.ContentLevel,
+        //                    model.PublishStatus,
+        //                    model.DisplayCreatedTime,
+        //                    model.CreatedTime,
+        //                    model.UpdateTime,
+        //                    model.Enable
+        //            };
+        //            object result = SQLiteHelper.ExecuteScalar(cmdText, paramList);
 
-//            int intResult;
-//            if (int.TryParse(result.ToString(), out intResult))
-//                return intResult;
-//            return 0;
-//        }
+        //            int intResult;
+        //            if (int.TryParse(result.ToString(), out intResult))
+        //                return intResult;
+        //            return 0;
+        //        }
 
-//        public int Update(User model)
-//        {
-//            string sql = @"
-//update User set 
-//title = ?,
-//content = ?,
-//ContentLevel = ?,
-//PublishStatus = ?,
-//DisplayCreatedTime = ?,
-//CreatedTime = ?,
-//UpdateTime = ?,
-//Enable = ?
-//    where UserId = ?
-//";
-//            object[] paramList = {
-//                    model.Title,
-//                    model.Content,
-//                    model.ContentLevel,
-//                    model.PublishStatus,
-//                    model.DisplayCreatedTime,
-//                    model.CreatedTime,
-//                    model.UpdateTime,
-//                    model.Enable,
-//                    model.UserId
-//            };
+        //        public int Update(User model)
+        //        {
+        //            string sql = @"
+        //update User set 
+        //title = ?,
+        //content = ?,
+        //ContentLevel = ?,
+        //PublishStatus = ?,
+        //DisplayCreatedTime = ?,
+        //CreatedTime = ?,
+        //UpdateTime = ?,
+        //Enable = ?
+        //    where UserId = ?
+        //";
+        //            object[] paramList = {
+        //                    model.Title,
+        //                    model.Content,
+        //                    model.ContentLevel,
+        //                    model.PublishStatus,
+        //                    model.DisplayCreatedTime,
+        //                    model.CreatedTime,
+        //                    model.UpdateTime,
+        //                    model.Enable,
+        //                    model.UserId
+        //            };
 
-//            int rowCount = SQLiteHelper.ExecuteNonQuery(sql, paramList);
-//            return rowCount;
-//        }
+        //            int rowCount = SQLiteHelper.ExecuteNonQuery(sql, paramList);
+        //            return rowCount;
+        //        }
 
         public List<User> GetUserByEmail(string email)
         {
             List<User> list = new List<User>();
 
-            string cmdText = "select * from User where email = ? and status = 1";
+            string cmdText = "select * from User where email = ? and enable = 1";
             DataSet dt = SQLiteHelper.ExecuteDataset(cmdText, email);
             foreach (DataRow item in dt.Tables[0].Rows)
             {
@@ -88,7 +88,10 @@ namespace Blog.Repository
             model.Salt = Convert.ToString(row["Salt"]);
             model.Phone = Convert.ToString(row["Phone"]);
             model.CreatedTime = Convert.ToDateTime(row["CreatedTime"]);
-            model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
+
+            if (row["UpdateTime"] != DBNull.Value)
+                model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
+
             model.Enable = Convert.ToInt32(row["Enable"]);
 
             return model;

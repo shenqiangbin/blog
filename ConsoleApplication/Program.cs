@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blog.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,9 @@ namespace ConsoleApplication
 
             //GetTiKu();
             //HandleTiKu();
-            HandleTiKu2();
+            //HandleTiKu2();
+            var md5 = MD5Helper.MD5Value("abc");
+            var s = HashHelper.HashMd5("123", md5);
 
             Console.WriteLine("ok");
             Console.ReadLine();

@@ -95,5 +95,11 @@ namespace Blog.Areas.backmgr.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult LogOut()
+        {
+            SessionHelper.Clear();
+            return RedirectToAction("login");
+        }
     }
 }

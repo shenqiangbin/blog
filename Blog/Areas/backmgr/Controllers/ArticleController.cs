@@ -40,6 +40,7 @@ namespace Blog.Areas.backmgr.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public JsonResult Add(string articleId, string title, string content)
         {

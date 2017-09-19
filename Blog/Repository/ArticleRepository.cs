@@ -104,7 +104,7 @@ Enable = ?
                 sql += " and PublishStatus = ?";
 
             if (string.IsNullOrEmpty(listModel.Order))
-                sql += "order by createdtime desc,articleId asc";
+                sql += " order by createdtime desc,articleId asc";
 
             object[] para = { (int)listModel.PublishStatus };
 

@@ -18,7 +18,7 @@ namespace Blog.Models
         public string Phone { get; set; }
 
         public DateTime CreatedTime { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public DateTime? UpdateTime { get; set; }
         /// <summary>
         /// 删除标识：（0：已删除，1：未删除）
         /// </summary>
