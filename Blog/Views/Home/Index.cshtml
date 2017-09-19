@@ -33,7 +33,11 @@
             <div class="record">
                 <div>
                     <a href="@Url.Action("Detail","Home", new { id=item.ArticleId} )" title="@item.Title">
-                        <span>@item.Title</span>
+                        @if (item.CreatedTime.AddDays(7) > DateTime.Now)
+                        {
+                            <span class="newflag"><img src="~/Images/new.png" /></span>
+                        }
+                        <span>@item.Title</span>                       
                     </a>
                 </div>
                 <div>

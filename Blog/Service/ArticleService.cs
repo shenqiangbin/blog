@@ -52,5 +52,18 @@ namespace Blog.Service
         {
             _articleRepository.Remove(id);
         }
+
+        public void Publish(int id)
+        {
+            var model = _articleRepository.GetById(id.ToString());
+            if (model.PublishStatus == (int)PublishStatus.Published)
+                model.PublishStatus = (int)PublishStatus.Not;
+            else if (model.PublishStatus == (int)PublishStatus.Not)
+                model.PublishStatus = (int)PublishStatus.Published;
+
+            model.UpdateTime = DateTime.Now;
+
+            _articleRepository.Update(model);
+        }
     }
 }

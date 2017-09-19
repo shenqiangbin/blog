@@ -103,6 +103,9 @@ Enable = ?
             if (listModel.PublishStatus != PublishStatus.All)
                 sql += " and PublishStatus = ?";
 
+            if (string.IsNullOrEmpty(listModel.Order))
+                sql += "order by createdtime desc,articleId asc";
+
             object[] para = { (int)listModel.PublishStatus };
 
             DataTable dt = SQLiteHelper.ExecutePager(listModel.PageIndex, listModel.PageSize, sql, para);

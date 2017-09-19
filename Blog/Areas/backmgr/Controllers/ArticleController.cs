@@ -86,6 +86,7 @@ namespace Blog.Areas.backmgr.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Del(int? id)
         {
             try
@@ -94,6 +95,25 @@ namespace Blog.Areas.backmgr.Controllers
                     return Json(new { code = 400, msg = "id不能为空" });
 
                 _articleService.Remove(id.Value);
+
+                return Json(new { code = 200, msg = "ok" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = 500, msg = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Publish(int? id)
+        {
+            try
+            {
+                if (!id.HasValue)
+                    return Json(new { code = 400, msg = "id不能为空" });
+
+                _articleService.Publish(id.Value);
 
                 return Json(new { code = 200, msg = "ok" });
             }

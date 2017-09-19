@@ -25,18 +25,21 @@
         {
 
             <div class="record">
-               <div>
-                   <a href="@Url.Action("Detail","Home", new { area = "", id =item.ArticleId } )" title="@item.Title" target="_blank">                      
-                       <span>@item.Title</span>
-                   </a>
-               </div>
+                <div>
+                    <a href="@Url.Action("Detail","Home", new { area = "", id =item.ArticleId } )" title="@item.Title" target="_blank">
+                        <span>@item.Title</span>
+                    </a>
+                </div>
                 <div class="operate">
                     <span class="date">@item.DisplayCreatedTime.ToString("yyyy-MM-dd")</span>
                     <a href="@Url.Action("Add","Article", new { id = item.ArticleId })">编辑</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="javascript:void(0)" onclick="publish(@item.ArticleId)">@(item.PublishStatus == (int)PublishStatus.Published ? "取消发布" : "发布")</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="javascript:void(0)" onclick="del(@item.ArticleId)">删除</a>
                 </div>
             </div>
-            
+
 
         }
     }
@@ -44,19 +47,21 @@
     {
         <div>@Html.PagedListPager((IPagedList)(Model), p => Url.Action("Index", new { page = p }), PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
     }
+
+    @Html.AntiForgeryToken()
 </div>
 
 @section footer{
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(function () {
-            
+
         });
 
-        function del(id){
-            if(confirm("确定删除吗？")){
+        function del(id) {
+            if (confirm("确定删除吗？")) {
                 var url = '@Url.Action("Del","Article")';
-                $.post(url, { id: id }, function (data) {
+                $.post(url, AddAntiForgeryToken({ id: id }), function (data) {
                     if (data.code == 200)
                         window.document.location.reload();
                     else
@@ -64,5 +69,21 @@
                 });
             }
         }
+
+        function publish(id){
+            var url = '@Url.Action("Publish","Article")';
+            $.post(url, AddAntiForgeryToken({ id: id }), function (data) {
+                if (data.code == 200)
+                    window.document.location.reload();
+                else
+                    alert(data.msg);
+            });
+        }
+
+        AddAntiForgeryToken = function (data) {
+            data.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+            return data;
+        };
+
     </script>
 }
