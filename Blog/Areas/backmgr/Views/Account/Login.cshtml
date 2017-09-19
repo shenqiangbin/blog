@@ -3,32 +3,102 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<style>
+    .lgContainer {
+        text-align: center;
+    }
 
-@if (!string.IsNullOrEmpty(ViewBag.Msg))
-{
-    <div>@ViewBag.Msg</div>
-}
+    .lgContent {
+        margin: 100px auto;
+        text-align: left;
+        width: 278px;
+    }
+
+        .lgContent span {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+    .lg-row {
+        height: 60px;
+    }
+
+    .info {
+        color: red;
+        margin-bottom: 10px;
+    }
+
+    input {
+        outline: none;
+        border: 1px solid gray;
+        height: 22px;
+        padding: 2px;
+        border-radius: 2px;
+        width: 100%;
+    }
+
+        input:focus {
+            border: 1px solid #38f;
+        }
+
+    .codeInput {
+        width: 64%;
+    }
+
+    img {
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    button {
+        margin-top: 10px;
+        outline: none;
+        border: 1px solid #38f;
+        height: 34px;
+        padding: 2px;
+        width: 100%;
+        color: white;
+        background-color: #38f;
+        cursor:pointer;
+    }
+
+        button:hover {
+            background-color: #538dde;
+        }
+</style>
+
+
+
+
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "", @class = "", role = "form" }))
 {
     <input type="hidden" name="tmpToken" />
 
     @Html.AntiForgeryToken()
-    <div class="form-group">
-        <label for="email">邮箱</label>
-        <input type="text" id="email" name="email" value="@ViewBag.Email" />
+    <div class="lgContainer">
+        <div class="lgContent">
+            <div style="text-align:center;"><h2>登录</h2></div>
+            @if (!string.IsNullOrEmpty(ViewBag.Msg))
+            {
+                <div class="info">@ViewBag.Msg</div>
+            }
+            <div class="lg-row">
+                <span><label for="email">邮箱</label></span>
+                <input type="text" id="email" name="email" value="@ViewBag.Email" />
+            </div>
+            <div class="lg-row">
+                <span><label for="password">密码</label></span>
+                <input type="password" class="form-control" id="password" />
+                <input type="hidden" name="password" />
+            </div>
+            <div class="lg-row">
+                <span><label for="validateCode">验证码</label></span>
+                <input type="text" class="codeInput" id="validateCode" name="validateCode" />
+                <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'" />
+            </div>
+            <button type="button" class="btn btn-default" onclick="login()">登  录</button>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="password">密码</label>
-        <input type="password" class="form-control" id="password" />
-        <input type="hidden" name="password" />
-    </div>
-    <div class="form-group">
-        <label for="validateCode">验证码</label>
-        <input type="text" class="form-control" id="validateCode" name="validateCode" />
-        <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'" />
-    </div>
-    <button type="button" class="btn btn-default" onclick="login()">登录</button>
 }
 
 @section footer{
