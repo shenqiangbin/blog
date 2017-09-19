@@ -34,6 +34,12 @@ namespace Blog.App_Start
                         "~/Scripts/ueditor/lang/zh-cn/zh-cn.js"
                         ));
 
+            bundles.Add(new ScriptBundle("~/Scripts/rsa/js").Include(
+                "~/Scripts/Rsa/Barrett.js",
+                "~/Scripts/Rsa/BigInt.js",
+                "~/Scripts/Rsa/RSA.js",
+                "~/Scripts/Rsa/RSAClient.js"));
+
         }
     }
 }

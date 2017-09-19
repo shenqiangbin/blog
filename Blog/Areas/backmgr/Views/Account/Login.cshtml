@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Msg))
+{
+    <div>@ViewBag.Msg</div>
+}
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "", @class = "", role = "form" }))
+{
+    <input type="hidden" name="tmpToken" />
+
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="email">邮箱</label>
+        <input type="text" id="email" name="email" value="@ViewBag.Email" />
+    </div>
+    <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" class="form-control" id="password" />
+        <input type="hidden" name="password" />
+    </div>
+    <div class="form-group">
+        <label for="validateCode">验证码</label>
+        <input type="text" class="form-control" id="validateCode" name="validateCode" />
+        <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'" />
+    </div>
+    <button type="button" class="btn btn-default" onclick="login()">登录</button>
+}
+
+@section footer{
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    @Scripts.Render("~/Scripts/rsa/js")
+
+    <script>
+        function login() {
+            var pwd = $("#password").val();
+            var result = RSAClient.Encryt([pwd]);
+
+            $("input[name=tmpToken]").val(result.tmpToken);
+            $("input[name=password]").val(result.encryptData[0]);
+
+            $("form").submit();
+        }
+
+        $("body").keydown(function () {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                login();
+            };
+        });
+        //var data={usercode:'abc',username:'de'};
+        //$.post('http://localhost:32311/api/user/Add', data, function (d) {
+        //    console.log(d);
+        //});
+    </script>
+}

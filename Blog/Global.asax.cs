@@ -17,14 +17,17 @@ namespace Blog
     {
         void Application_Start(object sender, EventArgs e)
         {
-            // Code that runs on application startup
-
             AutofacHelper.Inject();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_AuthorizeRequest(object sender, System.EventArgs e)
+        {
+            SessionHelper.SetUser();
         }
     }
 }

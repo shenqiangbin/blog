@@ -152,6 +152,10 @@
     </Content>
     <Content Include="Lib\System.Data.SQLite.XML" />
     <Content Include="Scripts\prettify.load.js" />
+    <Content Include="Scripts\Rsa\Barrett.js" />
+    <Content Include="Scripts\Rsa\BigInt.js" />
+    <Content Include="Scripts\Rsa\RSA.js" />
+    <Content Include="Scripts\Rsa\RSAClient.js" />
     <Content Include="Scripts\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.html" />
@@ -351,22 +355,36 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\backmgr\backmgrAreaRegistration.cs" />
+    <Compile Include="Areas\backmgr\Controllers\AccountController.cs" />
     <Compile Include="Areas\backmgr\Controllers\ArticleController.cs" />
     <Compile Include="Areas\backmgr\Controllers\HomeController.cs" />
     <Compile Include="Common\AutofacHelper.cs" />
     <Compile Include="Common\BrowserHelper.cs" />
+    <Compile Include="Common\ContextUser.cs" />
+    <Compile Include="Common\HashHelper.cs" />
+    <Compile Include="Common\MD5Helper.cs" />
+    <Compile Include="Common\RSAHelper.cs" />
+    <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\ValidateException.cs" />
     <Compile Include="Common\ValidateHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RSAController.cs" />
+    <Compile Include="Filters\UserAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\ArticleRepository.cs" />
     <Compile Include="Repository\SQLiteHelper.cs" />
+    <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\ArticleService.cs" />
+    <Compile Include="verify_code.ashx.cs">
+      <DependentUpon>verify_code.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -383,6 +401,8 @@
     <Content Include="Areas\backmgr\Views\Article\Add.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Shared\_mLayout.cshtml" />
+    <Content Include="Areas\backmgr\Views\Account\Login.cshtml" />
+    <Content Include="verify_code.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -393,6 +413,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\backmgr\Models\" />
+    <Folder Include="Views\RSA\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

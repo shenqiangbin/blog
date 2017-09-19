@@ -1,4 +1,5 @@
 ﻿using Blog.Common;
+using Blog.Filters;
 using Blog.Models;
 using Blog.Service;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Blog.Areas.backmgr.Controllers
 {
+    [UserAuthorize]
     public class ArticleController : Controller
     {
         private ArticleService _articleService;

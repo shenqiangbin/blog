@@ -19,3 +19,20 @@ CREATE TABLE [Category] (
   [CreatedTime] DATETIME NOT NULL, 
   [UpdateTime] DATETIME, 
   [Enable] INT NOT NULL);
+
+drop table if exists User;
+
+-- '用户表';
+create table User
+(
+   UserID     					int not null, --'用户唯一标识',
+   Email								varchar(50) not null UNIQUE, -- '邮箱',
+   UserName							nvarchar(50) not null, -- '用户名',
+   Password							varchar(200) not null, -- '密码',
+   Salt									varchar(37) not null, -- '盐',
+   Phone								varchar(20) not null default '', -- '手机',   
+   CreatedTime           datetime, -- '创建时间',
+   UpdateTime          datetime, -- '修改时间',
+   Enable               int, -- '状态：0删除，1未删除',
+   primary key (UserID)
+);
