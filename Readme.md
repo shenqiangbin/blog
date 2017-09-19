@@ -76,3 +76,7 @@ Multiple types were found that match the controller named 'Home'
 完成编辑和部分页面的样式调整
 
 （以上 2017-9-13）
+
+添加发布功能&按时间倒序&调整布局样式
+
+（以上 2017-9-19）
