@@ -80,3 +80,7 @@ Multiple types were found that match the controller named 'Home'
 添加发布功能&按时间倒序&调整布局样式
 
 （以上 2017-9-19）
+
+后台身份验证
+
+（以上 2017-9-20）
