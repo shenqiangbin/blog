@@ -61,7 +61,7 @@ namespace Blog.Areas.backmgr.Controllers
         {
             var tmpTokenInServer = TempData["TmpToken"];
             if (tmpTokenInServer == null || tmpTokenInServer.ToString() != tmpToken)
-                throw new ValidateException(403, "页面过期，请刷新");
+                throw new ValidateException(403, "-");
 
             if (string.IsNullOrEmpty(email))
                 throw new ValidateException(400, "邮箱不能为空");
