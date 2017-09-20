@@ -13,15 +13,15 @@
 
         .nav-account {
             display: inline-block;
-            float:right;
+            float: right;
         }
     </style>
 </head>
 <body>
     <div class="nav">
         <div class="nav-content">
-            <span class="logo"><a href="@Url.Action("index","home")">博客后台</a></span>
-            <a href="/home/index">前台</a>
+            <span class="logo"><a href="@Url.Action("index","home")">博客</a></span>
+            <a href="/home/index" class="firstPage">首页</a>
             <div class="nav-account">
                 @if (Blog.Common.ContextUser.IsLogined)
                 {
@@ -36,9 +36,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="content">
-            @RenderBody()
-        </div>
+        @RenderBody()
     </div>
 
     @RenderSection("footer", required: false)

@@ -1,8 +1,7 @@
 ﻿body {
     margin: 0;
     padding: 0;
-    min-width: 1140px;    
-    background-color:#fafafa;
+    min-width: 1280px;
 }
 
 .nav {
@@ -10,64 +9,89 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 50px;
-    line-height: 50px; /*上下居中了*/
-    border-bottom: 1px solid #ebebeb;
-    color: white;
+    height: 64px;
+    line-height: 64px; /*上下居中了*/
     z-index: 100;
     text-align: center;
-    background-color:#5333b5;
+    background-color: #FBFBFB;
+    box-sizing: border-box;
+    border-bottom: 4px solid transparent;
+    /*渐变：to right:从左到右*/
+    -moz-border-image: linear-gradient(to right, #7F26CE, #3D8FE4) 30 30; /* Old Firefox */
+    -webkit-border-image: linear-gradient(to right, #7F26CE, #3D8FE4) 30 30; /* Safari and Chrome */
+    -o-border-image: linear-gradient(to right, #7F26CE, #3D8FE4) 30 30; /* Opera */
+    border-image: linear-gradient(to right, #7F26CE, #3D8FE4) 30 30;
 }
 
 .nav-content {
-    width: 70%;
+    width: 1280px;
     margin: 0 auto;
     text-align: left;
 }
 
-    .nav-content a {
-        margin-right: 10px;
-        color: white;
-    }
-
 .logo {
-    margin-right: 40px;
-    font-weight: bold;
+    margin: 16px 136px auto 0px;
+    font-family: Avenir-Heavy;
     font-size: 24px;
 }
 
+.firstPage {
+    font-family: Avenir-Book;
+    font-size: 14px;
+    color: #000000;
+}
+
+
 .container {
     text-align: center;
+    background: #F7F7F7;
 }
 
 .content {
-    position:relative;
-    z-index:99;
-    width: 70%;
+    position: relative;
+    z-index: 99;
+    width: 1280px;
     border: 0px dotted green;
     margin: 0 auto;
-    padding:50px 20px 30px 20px;
+    padding: 50px 20px 30px 20px;
     text-align: left;
-    background-color:#fafafa;
-    min-height:800px;
+    background-color: #F7F7F7;
+    min-height: 800px;
 }
 
 a {
     text-decoration: none;
 }
-a:hover{
-    
+
+    a:hover {
+    }
+
+.copyright {
+    margin-top: 2px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
 }
-.copyright{
-    margin-top:2px;
-    height:80px;
-    line-height:80px;
-    text-align:center;
-   
+
+    .copyright div {
+        margin: 0 auto;
+    }
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
-.copyright div{
-    margin:0 auto;
+
+    pre.prettyprint {
+        padding: 12px;
+        border: 1px dotted #888744;
+        border-radius: 6px;
+    }
+
+.pln {
+    color: #449a44;
 }
-pre {white-space: pre-wrap;word-wrap: break-word;}
-pre.prettyprint {padding: 12px;border: 1px dotted #888744;border-radius: 6px;}.pln {color: #449a44;}
-.wl{color:green;}
+
+.wl {
+    color: green;
+}

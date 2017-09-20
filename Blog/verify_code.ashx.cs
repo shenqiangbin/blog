@@ -55,6 +55,7 @@ namespace CNKI.TPI.Web.UI
                 string fnt = font[rnd.Next(font.Length)];
                 Font ft = new Font(fnt, fontSize);
                 Color clr = color[rnd.Next(color.Length)];
+                clr = Color.FromArgb(55, 151, 147);
                 g.DrawString(chkCode[i].ToString(), ft, new SolidBrush(clr), (float)i * 18 + 2, (float)0);
             }
             //画噪点 

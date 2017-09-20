@@ -1,72 +1,107 @@
 ﻿
 @{
-    ViewBag.Title = "后台登录";
+    ViewBag.Title = "博客后台";
 }
 
 <style>
-    .lgContainer {
+    /*背景图片*/
+    .bgcontainer {
         text-align: center;
+        background-color: #0f51b2;
+        margin-top: 146px;
     }
+
+    .imgcontainer {
+        margin: 0 auto;
+        width: 1280px;
+        height: 474px;
+        border: 0px solid red;
+        background: url(/Images/login-background.png) no-repeat;
+    }
+    /*背景图片*/
 
     .lgContent {
-        margin: 100px auto;
-        text-align: left;
-        width: 331px;
-        background-color:#9d8ecd;
-        padding: 2px 20px 20px 20px;
-        border-radius:10px;
+        float: right;
+        margin-top: 42px;
+        margin-right: 240px;
+        width: 340px;
+        height: 348px;
+        text-align: center;
+        background-color: #FFFFFF;
+        /*padding: 2px 20px 20px 20px;*/
+        border-radius: 0px;
+        border: 0px solid blue;
     }
 
-        .lgContent span {
-            display: block;
-            margin-bottom: 2px;
-        }
-
+    /*每一行*/
     .lg-row {
-        height: 60px;
+        margin: 0 auto;
+        margin-bottom: 25px;
+        width: 240px;
+        border: 0px solid blue;
+        text-align: left;
     }
 
+    /*信息展示*/
     .info {
-        color: white;
-        margin-bottom: 10px;
+        margin: 0 auto;
+        margin-bottom: 4px;
+        width: 240px;
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        color: #F04134;
+        text-align:left;
+        border:0px solid red;
     }
 
+    .infopre{
+        
+    }
+
+    /*文本框*/
     input {
+        font-family: PingFangSC-Regular;
+        width: 240px;
+        height: 36px;
+        background: #FFFFFF;
+        border: 1px solid #D4D4D4;
+        border-radius: 4px;
+        font-size: 14px;
         outline: none;
-        border: 1px solid gray;
-        height: 33px;
-        line-height:33px;
         padding: 2px 5px;
-        border-radius: 2px;
-        width: 100%;
         box-sizing: border-box;
     }
 
         input:focus {
-            border: 1px solid #38f;
+            border: 1px solid #3D8FE4;
         }
 
     .codeInput {
-        width: 64%;
+        width: 140px;
     }
 
-    img {
-        vertical-align: middle;
+    .lg-row img {
+        float: right;
+        width: 80.2px;
+        height: 36px;
+        vertical-align: top;
         cursor: pointer;
-        height:31px;
-        box-sizing:border-box;
+        box-sizing: border-box;
     }
 
     button {
-        margin-top: 20px;
-        outline: none;
-        border: 1px solid #38f;
-        height: 34px;
-        padding: 2px;
-        width: 100%;
+        width: 240px;
+        height: 38px;
         color: white;
-        background-color: #38f;
-        cursor:pointer;
+        background: #3D8FE4;
+        border-radius: 4px;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        font-family: PingFangSC-Regular;
+        font-size: 16px;
+        color: #FFFFFF;
+        letter-spacing: 1.78px;
     }
 
         button:hover {
@@ -76,37 +111,42 @@
 
 
 
+<div class="bgcontainer">
+    <div class="imgcontainer">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "", @class = "", role = "form" }))
+        {
+            <input type="hidden" name="tmpToken" />
 
-@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "", @class = "", role = "form" }))
-{
-    <input type="hidden" name="tmpToken" />
+            @Html.AntiForgeryToken()
 
-    @Html.AntiForgeryToken()
-    <div class="lgContainer">
-        <div class="lgContent">
-            <h2 style="text-align:center;">登录</h2>
-            @if (!string.IsNullOrEmpty(ViewBag.Msg))
-            {
-                <div class="info">@ViewBag.Msg</div>
-            }
-            <div class="lg-row">
-                <span><label for="email">邮箱</label></span>
-                <input type="text" id="email" name="email" value="@ViewBag.Email" />
+            <div class="lgContent">
+                <h2>博客后台</h2>
+                @if (!string.IsNullOrEmpty(ViewBag.Msg))
+                {
+                    <div class="info"><div class="infopre"></div>@ViewBag.Msg</div>
+                }
+                else
+                {
+                    <div class="info">&nbsp;</div>
+                }
+                <div class="lg-row">
+                    <input type="text" id="email" name="email" value="@ViewBag.Email" placeholder="请输入邮箱" maxlength="50" />
+                </div>
+                <div class="lg-row">
+                    <input type="password" class="form-control" id="password" placeholder="请输入密码" maxlength="50" />
+                    <input type="hidden" name="password" />
+                </div>
+                <div class="lg-row">
+                    <input type="text" class="codeInput" id="validateCode" name="validateCode" placeholder="请输入验证码" />
+                    <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'" />
+                </div>
+                <button type="button" class="btn btn-default" onclick="login()">登  录</button>
             </div>
-            <div class="lg-row">
-                <span><label for="password">密码</label></span>
-                <input type="password" class="form-control" id="password" />
-                <input type="hidden" name="password" />
-            </div>
-            <div class="lg-row">
-                <span><label for="validateCode">验证码</label></span>
-                <input type="text" class="codeInput" id="validateCode" name="validateCode" />
-                <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'" />
-            </div>
-            <button type="button" class="btn btn-default" onclick="login()">登  录</button>
-        </div>
+        }
     </div>
-}
+</div>
+
+
 
 @section footer{
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>

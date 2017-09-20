@@ -20,33 +20,34 @@
         @Styles.Render("~/Content/detail")
     }
 }
+<div class="content">
+    <div class="detail-nav">
+        <a href="@backUrl">返回</a>
+    </div>
 
-<div class="detail-nav">
-    <a href="@backUrl">返回</a>
+    @if (Model == null)
+    {
+        <h2>文章不存在</h2>
+    }
+    else
+    {
+        <div class="detail-title">
+            <h2>@Model.Title</h2>
+            <div>@Model.DisplayCreatedTime</div>
+        </div>
+        <div>
+            @Html.Raw(Model.Content)
+        </div>
+    }
+
 </div>
-
-@if (Model == null)
-{
-    <h2>文章不存在</h2>
-}
-else
-{
-    <div class="detail-title">
-        <h2>@Model.Title</h2>
-        <div>@Model.DisplayCreatedTime</div>
-    </div>
-    <div>
-        @Html.Raw(Model.Content)
-    </div>
-}
-
 @section footer{
     <script type="text/javascript" src='http://cdn.bootcss.com/prettify/r298/prettify.min.js'></script>
     <script type="text/javascript" src='~/Scripts/prettify.load.js'></script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(function () {
-            
+
             $('pre').each(function () {
                 var item = $("<div style='color:blue;cursor:pointer;margin-bottom:-12px;'>折叠</div>");
                 item.click(function () {

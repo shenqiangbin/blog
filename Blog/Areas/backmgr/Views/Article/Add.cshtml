@@ -37,7 +37,6 @@
     }
 
     .handlearea {
-        
     }
 
     .savebtn {
@@ -51,38 +50,38 @@
     }
 </style>
 
-
-<div class="titleContainer">
-    <span class="title">@(ViewBag.IsNew ? "新增文章" : "编辑文章")</span>
-    <a href="@backUrl">返回</a>
-</div>
-
-
-<input type="hidden" id="articleId" name="articleId" value="@(ViewBag.IsNew ?  "" : Model.ArticleId.ToString() )" />
-<input type="hidden" id="contentHidden" value="@Model.Content" />
-
-题目：
-<br />
-<input type="text" name="title" value="@Model.Title" class="addtitle" id="title" />
-
-内容：
-<br />
-<script id="caseContent" name="caseContent" type="text/plain" style="width:100%;height:400px;margin-top:5px;">
-</script>
-
-<div class="handleContainer">
-    <div class="handlearea">
-        <button type="button" class="savebtn" id="btnSave">保存</button>
-        <button type="button" id="btnSavePreview">保存并预览</button>
+<div class="content">
+    <div class="titleContainer">
+        <span class="title">@(ViewBag.IsNew ? "新增文章" : "编辑文章")</span>
+        <a href="@backUrl">返回</a>
     </div>
 
-    <div class="msg" id="msg">
-        &nbsp;
+
+    <input type="hidden" id="articleId" name="articleId" value="@(ViewBag.IsNew ?  "" : Model.ArticleId.ToString() )" />
+    <input type="hidden" id="contentHidden" value="@Model.Content" />
+
+    题目：
+    <br />
+    <input type="text" name="title" value="@Model.Title" class="addtitle" id="title" />
+
+    内容：
+    <br />
+    <script id="caseContent" name="caseContent" type="text/plain" style="width:100%;height:400px;margin-top:5px;">
+    </script>
+
+    <div class="handleContainer">
+        <div class="handlearea">
+            <button type="button" class="savebtn" id="btnSave">保存</button>
+            <button type="button" id="btnSavePreview">保存并预览</button>
+        </div>
+
+        <div class="msg" id="msg">
+            &nbsp;
+        </div>
     </div>
+
+    @Html.AntiForgeryToken()
 </div>
-
-@Html.AntiForgeryToken()
-
 @section footer{
 
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
