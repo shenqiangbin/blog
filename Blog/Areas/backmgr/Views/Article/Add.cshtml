@@ -1,7 +1,7 @@
 ﻿@model Article
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = ViewBag.IsNew ? "新增文章" : "编辑文章";
     string backUrl = Request.UrlReferrer != null ? Request.UrlReferrer.OriginalString : "/backmgr/home";
 }
 
@@ -108,11 +108,14 @@
             }
 
             $("#btnSave").click(function () {
-                save();
+                save(function (id) {
+                    articleId = id;
+                });
             });
 
             $("#btnSavePreview").click(function () {
                 save(function (id) {
+                    articleId = id;
                     window.open("/Home/Detail/" + id, "_blank");
                 });
             });
