@@ -14,7 +14,7 @@ namespace Blog.Models
         /// <summary>
         /// 展示指定人的数据
         /// </summary>
-        public string ShowUserData { get; set; }
+        public string TheUserData { get; set; }
 
         public PublishStatus PublishStatus { get; set; }
 

@@ -14,10 +14,12 @@ namespace Blog.Areas.backmgr.Controllers
     public class ArticleController : Controller
     {
         private ArticleService _articleService;
+        private PermissionService _permissionService;
 
-        public ArticleController(ArticleService articleService)
+        public ArticleController(ArticleService articleService, PermissionService permissionService)
         {
             _articleService = articleService;
+            _permissionService = permissionService;
         }
 
         public ActionResult Index()
@@ -46,6 +48,8 @@ namespace Blog.Areas.backmgr.Controllers
         {
             try
             {
+               
+
                 AddValidate(articleId, title, content);
 
                 //新增
@@ -59,6 +63,14 @@ namespace Blog.Areas.backmgr.Controllers
                 else //编辑
                 {
                     var model = _articleService.GetById(articleId);
+
+                    //如果权限控制只能处理自已的数据的话
+                    if (_permissionService.OnlyAccessSelf(ContextUser.Email, Permission.BlogEdit))
+                    {
+                        if(model.CreateUser!=ContextUser.Email)
+                            return Json(new { code = 502, msg = "对不起，只能编辑自己创建的记录" });
+                    }
+
                     model.Title = title;
                     model.Content = content;
                     _articleService.Update(model);

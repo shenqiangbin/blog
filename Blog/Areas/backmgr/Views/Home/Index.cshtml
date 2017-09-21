@@ -33,6 +33,7 @@
                     </div>
                     <div class="operate">
                         <span class="date">@item.DisplayCreatedTime.ToString("yyyy-MM-dd")</span>
+                        <span class="author">作者：@(item.CreateUser)</span>
                         <a href="@Url.Action("Add","Article", new { id = item.ArticleId })">编辑</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="javascript:void(0)" onclick="publish(@item.ArticleId)">@(item.PublishStatus == (int)PublishStatus.Published ? "取消发布" : "发布")</a>
@@ -53,7 +54,6 @@
     </div>
 </div>
 @section footer{
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(function () {
 
@@ -66,7 +66,7 @@
                     if (data.code == 200)
                         window.document.location.reload();
                     else
-                        alert(data.msg);
+                        msger.tip(data.msg);
                 });
             }
         }
@@ -77,7 +77,7 @@
                 if (data.code == 200)
                     window.document.location.reload();
                 else
-                    alert(data.msg);
+                    msger.tip(data.msg);
             });
         }
 

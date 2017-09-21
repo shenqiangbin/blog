@@ -25,7 +25,8 @@ namespace Blog.Models
         /// 展示的创建时间
         /// </summary>
         public DateTime DisplayCreatedTime { get; set; }
-
+        
+        public string CreateUser { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdateTime { get; set; }
         /// <summary>

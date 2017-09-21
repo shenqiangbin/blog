@@ -153,6 +153,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Lib\System.Data.SQLite.XML" />
+    <Content Include="Scripts\backcommon.js" />
     <Content Include="Scripts\prettify.load.js" />
     <Content Include="Scripts\Rsa\Barrett.js" />
     <Content Include="Scripts\Rsa\BigInt.js" />
@@ -367,11 +368,13 @@
     <Compile Include="Common\Configer.cs" />
     <Compile Include="Common\ContextUser.cs" />
     <Compile Include="Common\HashHelper.cs" />
+    <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Common\MD5Helper.cs" />
     <Compile Include="Common\RSAHelper.cs" />
     <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\ValidateException.cs" />
     <Compile Include="Common\ValidateHelper.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSAController.cs" />
     <Compile Include="Filters\UserAuthorizeAttribute.cs" />
@@ -414,6 +417,7 @@
     <Content Include="Areas\backmgr\Views\Account\Login.cshtml" />
     <Content Include="verify_code.ashx" />
     <Content Include="Areas\backmgr\Views\Log\List.cshtml" />
+    <Content Include="Areas\backmgr\Views\Account\UnAuthorize.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

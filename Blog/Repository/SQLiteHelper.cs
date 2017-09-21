@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Blog.Common;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -114,7 +116,8 @@ namespace Blog.Repository
             SQLiteCommand command = new SQLiteCommand();
             using (SQLiteConnection connection = GetSQLiteConnection())
             {
-                Service.LogService.Instance.AddAsync(Models.Level.Info, cmdText);
+                Service.LogService.Instance.AddAsync(Models.Level.Info,string.Format("语句：{0} \r\n 参数：{1}", cmdText,JsonHelper.SerializeObject(p)));
+
                 PrepareCommand(command, connection, cmdText, p);
                 SQLiteDataAdapter da = new SQLiteDataAdapter(command);
                 da.Fill(ds, (pageIndex - 1) * pageSize, pageSize, "result");

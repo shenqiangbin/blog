@@ -1,23 +1,26 @@
-﻿.record{
-    border-bottom:1px solid gray;
-    margin-bottom:30px;
-    line-height:30px;
-    padding:5px;
+﻿.record {
+    border-bottom: 1px solid gray;
+    margin-bottom: 30px;
+    line-height: 30px;
+    padding: 5px;
 }
 
-.record:hover{
-    background-color:rgba(255, 255, 255, 0.15);
+    .record:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+
+.indexcontainer {
+    margin-top: 30px;
 }
 
-.indexcontainer{
-    margin-top:30px;
+.operate {
+    font-size: 12px;
 }
 
-.indexcontainer .date{
-    margin-right:40px;
-     font-size:12px;
-}
+    .operate .date {
+        margin-right: 40px;
+    }
 
-.operate{
-   
-}
+    .operate .author{
+        margin-right: 20px;
+    }

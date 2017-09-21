@@ -12,6 +12,10 @@ CREATE TABLE [Article] (
   [UpdateTime] DATETIME, 
   [Enable] INT NOT NULL);
 
+/*文章增加【创建人】字段*/
+ALTER TABLE Article ADD COLUMN CreateUser nvarchar(50)
+UPDATE Article set createuser  = 'shenqiangbin@163.com'
+
 /*分类*/
 CREATE TABLE [Category] (
   [CategoryId] INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -47,3 +51,4 @@ create table Log
    Logger						nvarchar(50), -- 'Logger',
    Message						text -- '信息',
 );
+

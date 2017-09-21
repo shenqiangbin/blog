@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace Blog.Repository
@@ -11,7 +12,7 @@ namespace Blog.Repository
     {
         public int Add(Article model)
         {
-            string cmdText = "insert into article values(?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+            string cmdText = "insert into article values(?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
                     model.Title,
@@ -19,6 +20,7 @@ namespace Blog.Repository
                     model.ContentLevel,
                     model.PublishStatus,
                     model.DisplayCreatedTime,
+                    model.CreateUser,
                     model.CreatedTime,
                     model.UpdateTime,
                     model.Enable
@@ -73,6 +75,7 @@ Enable = ?
             model.ContentLevel = Convert.ToInt32(row["ContentLevel"]);
             model.PublishStatus = Convert.ToInt32(row["PublishStatus"]);
             model.DisplayCreatedTime = Convert.ToDateTime(row["DisplayCreatedTime"]);
+            model.CreateUser = Convert.ToString(row["CreateUser"]);
             model.CreatedTime = Convert.ToDateTime(row["CreatedTime"]);
             model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
             model.Enable = Convert.ToInt32(row["Enable"]);
@@ -98,30 +101,40 @@ Enable = ?
             ArticleListModelResult result = new ArticleListModelResult();
             result.List = new List<Article>();
 
-            string sql = "select * from article where Enable = 1";
+            StringBuilder builder = new StringBuilder("select * from article where Enable = 1");
+            List<object> paraList = new List<object>();
 
             if (listModel.PublishStatus != PublishStatus.All)
-                sql += " and PublishStatus = ?";
+            {
+                builder.Append(" and PublishStatus = ?");
+                paraList.Add((int)listModel.PublishStatus);
+            }
+
+            if (!string.IsNullOrEmpty(listModel.TheUserData))
+            {
+                builder.Append(" and createUser = ? ");
+                paraList.Add(listModel.TheUserData);
+            }
 
             if (string.IsNullOrEmpty(listModel.Order))
-                sql += " order by createdtime desc,articleId asc";
+                builder.Append(" order by createdtime desc,articleId asc");
             else
-                sql += " " + listModel.Order;
+                builder.Append(listModel.Order);
 
-            object[] para = { (int)listModel.PublishStatus };
-
-            DataTable dt = SQLiteHelper.ExecutePager(listModel.PageIndex, listModel.PageSize, sql, para);
+            DataTable dt = SQLiteHelper.ExecutePager(listModel.PageIndex, listModel.PageSize, builder.ToString(), paraList.ToArray());
             foreach (DataRow item in dt.Rows)
             {
                 result.List.Add(RowToModel(item));
             }
 
-            string countSql = "select count(1) from article where Enable = 1";
+            StringBuilder countSqlBuilder = new StringBuilder("select count(1) from article where Enable = 1");
 
             if (listModel.PublishStatus != PublishStatus.All)
-                countSql += " and PublishStatus = ?";
+                countSqlBuilder.Append(" and PublishStatus = ?");
+            if (!string.IsNullOrEmpty(listModel.TheUserData))
+                countSqlBuilder.Append(" and createUser = ? ");
 
-            object countNum = SQLiteHelper.ExecuteScalar(countSql, para);
+            object countNum = SQLiteHelper.ExecuteScalar(countSqlBuilder.ToString(), paraList.ToArray());
             result.TotalCount = Convert.ToInt32(countNum);
 
             return result;

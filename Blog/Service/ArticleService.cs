@@ -1,4 +1,5 @@
-﻿using Blog.Models;
+﻿using Blog.Common;
+using Blog.Models;
 using Blog.Repository;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace Blog.Service
             var time = DateTime.Now;
 
             model.DisplayCreatedTime = time;
+
+            if (ContextUser.IsLogined)
+                model.CreateUser = ContextUser.Email;
+
             model.CreatedTime = time;
             model.UpdateTime = time;
             model.Enable = 1;

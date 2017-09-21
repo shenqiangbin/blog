@@ -25,16 +25,13 @@ namespace Blog.Areas.backmgr.Controllers
 
         public ActionResult Index(int? page = 1)
         {
-            if (!_permissionService.CanAccess(ContextUser.Email, Permission.BlogList))
-                return Content("对不起，无权操作");
-
             ArticleListQuery query = new ArticleListQuery();
             query.PageIndex = Convert.ToInt32(page);
             query.PageSize = 10;
             query.PublishStatus = PublishStatus.All;
 
             if (_permissionService.OnlyAccessSelf(ContextUser.Email, Permission.BlogList))
-                query.ShowUserData = ContextUser.Email;
+                query.TheUserData = ContextUser.Email;
 
 
             ArticleListModelResult result = _articleService.GetPaged(query);

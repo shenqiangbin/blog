@@ -32,18 +32,18 @@ namespace Blog.Service
 
             list.Add(new UserPermission { Email = email, PermissionCode = Permission.BlogList, OnlyAccessSelf = false });
             list.Add(new UserPermission { Email = email, PermissionCode = Permission.BlogEdit, OnlyAccessSelf = true });
-            list.Add(new UserPermission { Email = email, PermissionCode = Permission.DbDownload, OnlyAccessSelf = true });
+            list.Add(new UserPermission { Email = email, PermissionCode = Permission.LogList, OnlyAccessSelf = true });
 
             return list;
         }
 
-        public bool CanAccess(string email, string permissioncode)
+        public bool CanAccess(string email, string actionUrl)
         {
             if (email == "shenqiangbin@163.com")
                 return true;
 
             var userPermissions = GetUserPermissions();
-            var list = userPermissions.Where(m => m.Email == email && m.PermissionCode == permissioncode);
+            var list = userPermissions.Where(m => m.Email == email && m.PermissionCode == actionUrl);
             if (list != null && list.Any())
                 return true;
             else
@@ -70,9 +70,10 @@ namespace Blog.Service
         public string Code { get; set; }
         public string Desc { get; set; }
 
-        public static string BlogList = "blogList";
-        public static string BlogEdit = "blogEdit";
+        public static string BlogList = "/backmgr/home/index";
+        public static string BlogEdit = "/backmgr/article/add";
         public static string DbDownload = "dbDownload";
+        public static string LogList = "/backmgr/log/list";
     }
 
     public class UserPermission

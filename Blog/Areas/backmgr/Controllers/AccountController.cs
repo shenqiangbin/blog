@@ -101,5 +101,10 @@ namespace Blog.Areas.backmgr.Controllers
             SessionHelper.Clear();
             return RedirectToAction("login");
         }
+
+        public ActionResult UnAuthorize()
+        {
+            return View();
+        }
     }
 }

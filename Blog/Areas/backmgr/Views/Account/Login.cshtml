@@ -50,12 +50,11 @@
         font-family: PingFangSC-Regular;
         font-size: 12px;
         color: #F04134;
-        text-align:left;
-        border:0px solid red;
+        text-align: left;
+        border: 0px solid red;
     }
 
-    .infopre{
-        
+    .infopre {
     }
 
     /*文本框*/
@@ -120,7 +119,7 @@
             @Html.AntiForgeryToken()
 
             <div class="lgContent">
-                <h2>博客后台</h2>
+                <h2>博客后台</h2>               
                 @if (!string.IsNullOrEmpty(ViewBag.Msg))
                 {
                     <div class="info"><div class="infopre"></div>@ViewBag.Msg</div>
@@ -130,10 +129,10 @@
                     <div class="info">&nbsp;</div>
                 }
                 <div class="lg-row">
-                    <input type="text" id="email" name="email" value="@ViewBag.Email" placeholder="请输入邮箱" maxlength="50" />
+                    <input type="text" id="email" name="email" value="@ViewBag.Email" placeholder="游客账号：guest@163.com" maxlength="50" />
                 </div>
                 <div class="lg-row">
-                    <input type="password" class="form-control" id="password" placeholder="请输入密码" maxlength="50" />
+                    <input type="password" class="form-control" id="password" placeholder="游客密码：123" maxlength="50" />
                     <input type="hidden" name="password" />
                 </div>
                 <div class="lg-row">
@@ -149,7 +148,6 @@
 
 
 @section footer{
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     @Scripts.Render("~/Scripts/rsa/js")
 
     <script>
