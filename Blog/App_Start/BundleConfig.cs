@@ -23,7 +23,7 @@ namespace Blog.App_Start
             bundles.Add(new StyleBundle("~/Content/mdetail").Include("~/Content/mdetail.css"));
 
             bundles.Add(new StyleBundle("~/Content/backindex").Include("~/Content/backindex.css", "~/Content/PagedList.css"));
-
+            bundles.Add(new StyleBundle("~/Content/backLogList").Include("~/Content/backLogList.css", "~/Content/PagedList.css"));
 
             bundles.Add(new ScriptBundle("~/Scripts/ueditor/js").Include(
                         "~/Scripts/ueditor/ueditor.config.js",

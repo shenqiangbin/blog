@@ -36,3 +36,14 @@ create table User
    Enable               int, -- '状态：0删除，1未删除',
    primary key (UserID)
 );
+
+drop table if exists Log;
+-- '日志表';
+create table Log
+(
+   LogID     					INTEGER PRIMARY KEY AUTOINCREMENT,  --'日志唯一标识',
+   Date						    datetime, -- '日期',
+   Level						nvarchar(50), -- '级别',
+   Logger						nvarchar(50), -- 'Logger',
+   Message						text -- '信息',
+);
