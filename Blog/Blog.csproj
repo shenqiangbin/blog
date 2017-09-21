@@ -358,6 +358,7 @@
     <Compile Include="Areas\backmgr\backmgrAreaRegistration.cs" />
     <Compile Include="Areas\backmgr\Controllers\AccountController.cs" />
     <Compile Include="Areas\backmgr\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\backmgr\Controllers\DbController.cs" />
     <Compile Include="Areas\backmgr\Controllers\HomeController.cs" />
     <Compile Include="Common\AutofacHelper.cs" />
     <Compile Include="Common\BrowserHelper.cs" />
@@ -414,6 +415,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\backmgr\Models\" />
+    <Folder Include="Areas\backmgr\Views\Db\" />
     <Folder Include="Views\RSA\" />
   </ItemGroup>
   <PropertyGroup>
