@@ -11,6 +11,11 @@ namespace Blog.Models
         public int PageSize { get; set; }
         public string Order { get; set; }
 
+        /// <summary>
+        /// 展示指定人的数据
+        /// </summary>
+        public string ShowUserData { get; set; }
+
         public PublishStatus PublishStatus { get; set; }
 
         public ArticleListQuery()

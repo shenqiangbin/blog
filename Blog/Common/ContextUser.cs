@@ -9,7 +9,7 @@ namespace Blog.Common
 {
     public class ContextUser
     {
-        public static string UserCode
+        public static string Email
         {
             get
             {
@@ -33,7 +33,7 @@ namespace Blog.Common
             get
             {
                 var userService = AutofacDependencyResolver.Current.GetService(typeof(UserService)) as UserService;
-                var user = userService.GetUserByEmail(ContextUser.UserCode);
+                var user = userService.GetUserByEmail(ContextUser.Email);
                 if (user != null)
                     return user.UserName;
                 else

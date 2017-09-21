@@ -1,4 +1,5 @@
-﻿using Blog.Filters;
+﻿using Blog.Common;
+using Blog.Filters;
 using Blog.Models;
 using Blog.Service;
 using PagedList;
@@ -14,18 +15,27 @@ namespace Blog.Areas.backmgr.Controllers
     public class HomeController : Controller
     {
         private ArticleService _articleService;
+        private PermissionService _permissionService;
 
-        public HomeController(ArticleService articleService)
+        public HomeController(ArticleService articleService, PermissionService permissionService)
         {
             _articleService = articleService;
+            _permissionService = permissionService;
         }
 
         public ActionResult Index(int? page = 1)
         {
+            if (!_permissionService.CanAccess(ContextUser.Email, Permission.BlogList))
+                return Content("对不起，无权操作");
+
             ArticleListQuery query = new ArticleListQuery();
             query.PageIndex = Convert.ToInt32(page);
             query.PageSize = 10;
             query.PublishStatus = PublishStatus.All;
+
+            if (_permissionService.OnlyAccessSelf(ContextUser.Email, Permission.BlogList))
+                query.ShowUserData = ContextUser.Email;
+
 
             ArticleListModelResult result = _articleService.GetPaged(query);
             var pageList = new StaticPagedList<Article>(result.List, query.PageIndex, query.PageSize, result.TotalCount);

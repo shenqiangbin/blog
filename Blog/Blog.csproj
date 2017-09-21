@@ -389,6 +389,7 @@
     <Compile Include="Repository\ArticleRepository.cs" />
     <Compile Include="Repository\SQLiteHelper.cs" />
     <Compile Include="Service\LogService.cs" />
+    <Compile Include="Service\PermissionService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\ArticleService.cs" />
     <Compile Include="verify_code.ashx.cs">
