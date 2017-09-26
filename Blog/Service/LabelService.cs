@@ -56,5 +56,11 @@ namespace Blog.Service
         {
             return _labelRepository.GetAll();
         }
+
+        public List<Label> GetLablesByArticle(int articleId)
+        {
+            return _labelRepository.GetLablesByArticle(articleId);
+        }
+        
     }
 }

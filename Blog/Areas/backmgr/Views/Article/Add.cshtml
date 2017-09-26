@@ -49,43 +49,44 @@
         color: red;
     }
 
-    #labelContainer{
-        display:inline-block;
-        margin:10px;
-    }
-    #labelContainer div {
-        display:inline-block;
-        border: 1px solid red;
-        margin-right:10px;
-        cursor: pointer;
+    #labelContainer {
+        display: inline-block;
+        margin: 10px;
     }
 
-        #labelContainer div span {
-            border: 1px solid gray;
+        #labelContainer div {
             display: inline-block;
+            border: 1px solid red;
+            margin-right: 10px;
             cursor: pointer;
         }
 
-    #labelDb{
+            #labelContainer div span {
+                border: 1px solid gray;
+                display: inline-block;
+                cursor: pointer;
+            }
+
+    #labelDb {
         border: 1px solid gray;
         padding: 5px;
         margin-top: 5px;
     }
 
-    #labelDb div{
-        border: 1px solid gray;
-        display: inline-block;
-        padding: 2px;
-        cursor:pointer;
-        margin-right:10px;
-    }
+        #labelDb div {
+            border: 1px solid gray;
+            display: inline-block;
+            padding: 2px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
 
-    #labelDb div:hover{
-        background:red;
-    }
+            #labelDb div:hover {
+                background: red;
+            }
 
-    .hidden{
-        display:none;
+    .hidden {
+        display: none;
     }
 </style>
 
@@ -113,7 +114,7 @@
 
     </div>
     <div id="labelDb" class="hidden">
-        
+
     </div>
 
     <div class="handleContainer">
@@ -206,10 +207,13 @@
                 $('#msg').html(msg);
             }
 
+            //编辑时，初始化数据
             if (isEdit()) {
                 ue.ready(function () {
                     ue.setContent($("#contentHidden").val());
                 });
+
+                initLabelContainer();
             }
 
             //定时保存
@@ -251,27 +255,44 @@
 
             });
 
-            function buildList(arr) {
-                $("#labelDb").html("");
-                for (var i = 0; i < arr.length; i++) {
-                    var item = arr[i];
-                    buildItem(item);
-                }
+            function initLabelContainer() {
+                $.get("/backmgr/label/GetLablesByArticle", { articleId: articleId }, function (result) {
+                    if (result.code == 200) {
+                        console.log(result.data);
+                        var arr = result.data;
+                        for (var i = 0; i < arr.length; i++) {
+                            var item = arr[i];
+                            //这里和selectLabel时代码相同
+                            var div = $("<div onclick='remove(this)'>{1} <span>x</span></div>".replace("{1}", item.Name));
+                            div.data(item);
+                            $("#labelContainer").append(div);
+                        }
+                    }
+                });
             }
-
-            function buildItem(item) {
-                var div = $("<div onclick='selectLabel(this)'>{1}</div>".replace("{1}", item.Name));
-                div.data(item);
-                $("#labelDb").append(div);
-            }
-
         });
+
+
+
+        function buildList(arr) {
+            $("#labelDb").html("");
+            for (var i = 0; i < arr.length; i++) {
+                var item = arr[i];
+                buildItem(item);
+            }
+        }
+
+        function buildItem(item) {
+            var div = $("<div onclick='selectLabel(this)'>{1}</div>".replace("{1}", item.Name));
+            div.data(item);
+            $("#labelDb").append(div);
+        }
 
         function selectLabel(ele) {
             var item = $(ele).data();
             var div = $("<div onclick='remove(this)'>{1} <span>x</span></div>".replace("{1}", item.Name));
             div.data(item);
-            $("#labelContainer").append(div);            
+            $("#labelContainer").append(div);
         }
 
         //得到选中的标签id值列表
@@ -283,6 +304,7 @@
                 arr.push($(item).data().LabelId);
             }
             console.log(arr);
+            return arr;
         }
 
         function remove(ele) {
@@ -291,6 +313,6 @@
             $(ele).remove();
         }
 
-        
+
     </script>
 }

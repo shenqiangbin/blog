@@ -13,10 +13,12 @@ namespace Blog.Areas.backmgr.Controllers
     public class LabelController : Controller
     {
         private LabelService _labelService;
+        private ArticleLabelService _articleLabelService;
 
-        public LabelController(LabelService labelService)
+        public LabelController(LabelService labelService, ArticleLabelService articleLabelService)
         {
             _labelService = labelService;
+            _articleLabelService = articleLabelService;
         }
 
         public JsonResult GetAll()
@@ -28,6 +30,21 @@ namespace Blog.Areas.backmgr.Controllers
             }
             catch (Exception ex)
             {
+                LogService.Instance.AddAsync(Models.Level.Error, ex.Message);
+                return Json(new { code = 500, msg = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetLablesByArticle(int articleId)
+        {
+            try
+            {               
+                var models = _labelService.GetLablesByArticle(articleId);
+                return Json(new { code = 200, data = models }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogService.Instance.AddAsync(Models.Level.Error, ex.Message);
                 return Json(new { code = 500, msg = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }

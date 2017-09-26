@@ -15,11 +15,13 @@ namespace Blog.Areas.backmgr.Controllers
     {
         private ArticleService _articleService;
         private PermissionService _permissionService;
+        private ArticleLabelService _articleLabelService;
 
-        public ArticleController(ArticleService articleService, PermissionService permissionService)
+        public ArticleController(ArticleService articleService, PermissionService permissionService, ArticleLabelService articleLabelService)
         {
             _articleService = articleService;
             _permissionService = permissionService;
+            _articleLabelService = articleLabelService;
         }
 
         public ActionResult Index()
@@ -44,12 +46,10 @@ namespace Blog.Areas.backmgr.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public JsonResult Add(string articleId, string title, string content)
+        public JsonResult Add(string articleId, string title, string content, List<int> lables)
         {
             try
             {
-               
-
                 AddValidate(articleId, title, content);
 
                 //新增
@@ -59,6 +59,22 @@ namespace Blog.Areas.backmgr.Controllers
                     article.Title = title;
                     article.Content = content;
                     articleId = _articleService.Add(article).ToString();
+
+                    try
+                    {
+                        if (lables != null)
+                        {
+                            foreach (var item in lables)
+                            {
+                                _articleLabelService.Add(int.Parse(articleId), item);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogService.Instance.AddAsync(Level.Error, ex.Message);
+                        return Json(new { code = 503, msg = "文章保存成功，标签保存失败" });
+                    }
                 }
                 else //编辑
                 {
@@ -67,13 +83,30 @@ namespace Blog.Areas.backmgr.Controllers
                     //如果权限控制只能处理自已的数据的话
                     if (_permissionService.OnlyAccessSelf(ContextUser.Email, Permission.BlogEdit))
                     {
-                        if(model.CreateUser!=ContextUser.Email)
+                        if (model.CreateUser != ContextUser.Email)
                             return Json(new { code = 502, msg = "对不起，只能编辑自己创建的记录" });
                     }
 
                     model.Title = title;
                     model.Content = content;
                     _articleService.Update(model);
+
+                    try
+                    {
+                        _articleLabelService.RemoveByArticleId(int.Parse(articleId));
+                        if (lables != null)
+                        {
+                            foreach (var item in lables)
+                            {
+                                _articleLabelService.Add(int.Parse(articleId), item);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogService.Instance.AddAsync(Level.Error, ex.Message);
+                        return Json(new { code = 503, msg = "文章保存成功，标签保存失败" });
+                    }
                 }
 
                 return Json(new { code = 200, msg = "ok", id = articleId });

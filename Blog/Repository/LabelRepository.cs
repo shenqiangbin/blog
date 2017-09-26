@@ -88,5 +88,19 @@ Enable = ?
 
             return list;
         }
+
+        public List<Label> GetLablesByArticle(int articleId)
+        {
+            List<Label> list = new List<Label>();
+
+            string sql = "select * from label where enable = 1 and labelid in (select labelid from ArticleLabel where articleid = ? and enable = 1)";
+            DataSet dt = SQLiteHelper.ExecuteDataset(sql,articleId);
+            foreach (DataRow item in dt.Tables[0].Rows)
+            {
+                list.Add(RowToModel(item));
+            }
+
+            return list;
+        }
     }
 }

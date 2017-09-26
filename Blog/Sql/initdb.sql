@@ -26,6 +26,16 @@ CREATE TABLE [Label] (
   [UpdateTime] DATETIME, 
   [Enable] INT NOT NULL);
 
+  /*文章&标签关系表*/
+drop table if exists [ArticleLabel];
+CREATE TABLE [ArticleLabel] (
+  [LabelId] INTEGER,
+  [ArticleId] INTEGER,
+  [CreateUser] string not null,
+  [CreateTime] DATETIME NOT NULL, 
+  [UpdateTime] DATETIME, 
+  [Enable] INT NOT NULL);
+
 drop table if exists User;
 
 -- '用户表';
