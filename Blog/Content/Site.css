@@ -35,16 +35,15 @@
     font-size: 24px;
 }
 
-.navli{
+.navli {
     font-family: Avenir-Book;
     font-size: 14px;
     color: #000000;
-    
 }
 
-.navli a{
-    margin-right:20px;   
-}
+    .navli a {
+        margin-right: 20px;
+    }
 
 
 
@@ -100,4 +99,21 @@ pre {
 
 .wl {
     color: green;
+}
+
+/*设置placeholder的颜色*/
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #BEBEBE;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #BEBEBE;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #BEBEBE;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #BEBEBE;
 }

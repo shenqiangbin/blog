@@ -33,10 +33,21 @@
         border: 0px solid blue;
     }
 
+        .lgContent h2 {
+            padding: 0px;
+            margin: 0px;
+            font-size: 20px;
+            color: #222222;
+            margin-top: 36px;
+            margin-bottom: 10px;
+            border: 0px solid;
+            letter-spacing: 1.78px;
+        }
+
     /*每一行*/
     .lg-row {
         margin: 0 auto;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         width: 240px;
         border: 0px solid blue;
         text-align: left;
@@ -55,6 +66,10 @@
     }
 
     .infopre {
+        width: 14px;
+        height: 14px;
+        vertical-align: bottom;
+        margin-right:7px;
     }
 
     /*文本框*/
@@ -67,13 +82,18 @@
         border-radius: 4px;
         font-size: 14px;
         outline: none;
-        padding: 2px 5px;
+        padding: 2px 10px;
         box-sizing: border-box;
     }
 
-        input:focus {
-            border: 1px solid #3D8FE4;
-        }
+    input:focus {
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba(16,142,233,.2);
+    }
+
+    input:focus, input:hover {
+        border: 1px solid #3D8FE4;
+    }
 
     .codeInput {
         width: 140px;
@@ -100,12 +120,13 @@
         font-family: PingFangSC-Regular;
         font-size: 16px;
         color: #FFFFFF;
-        letter-spacing: 1.78px;
+        letter-spacing: 2.78px;
     }
 
         button:hover {
             background-color: #538dde;
         }
+
 </style>
 
 
@@ -119,10 +140,10 @@
             @Html.AntiForgeryToken()
 
             <div class="lgContent">
-                <h2>博客后台</h2>               
+                <h2>博客后台</h2>
                 @if (!string.IsNullOrEmpty(ViewBag.Msg))
                 {
-                    <div class="info"><div class="infopre"></div>@ViewBag.Msg</div>
+                    <div class="info"><img class="infopre" src="~/Images/tip.svg"/>@ViewBag.Msg</div>
                 }
                 else
                 {
@@ -139,7 +160,7 @@
                     <input type="text" class="codeInput" id="validateCode" name="validateCode" placeholder="请输入验证码" />
                     <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'" />
                 </div>
-                <button type="button" class="btn btn-default" onclick="login()">登  录</button>
+                <button type="button" class="btn btn-default" onclick="login()">登录</button>
             </div>
         }
     </div>
