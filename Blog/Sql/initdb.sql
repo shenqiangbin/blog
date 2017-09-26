@@ -17,10 +17,12 @@ ALTER TABLE Article ADD COLUMN CreateUser nvarchar(50)
 UPDATE Article set createuser  = 'shenqiangbin@163.com'
 
 /*分类*/
-CREATE TABLE [Category] (
-  [CategoryId] INTEGER PRIMARY KEY AUTOINCREMENT, 
-  [Name] NVARCHAR(50) NOT NULL,  
-  [CreatedTime] DATETIME NOT NULL, 
+drop table if exists [Label];
+CREATE TABLE [Label] (
+  [LabelId] INTEGER PRIMARY KEY AUTOINCREMENT, 
+  [Name] NVARCHAR(50) NOT NULL UNIQUE,  
+  [CreateUser] string not null,
+  [CreateTime] DATETIME NOT NULL, 
   [UpdateTime] DATETIME, 
   [Enable] INT NOT NULL);
 
