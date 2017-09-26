@@ -48,6 +48,45 @@
         font-size: small;
         color: red;
     }
+
+    #labelContainer{
+        display:inline-block;
+        margin:10px;
+    }
+    #labelContainer div {
+        display:inline-block;
+        border: 1px solid red;
+        margin-right:10px;
+        cursor: pointer;
+    }
+
+        #labelContainer div span {
+            border: 1px solid gray;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+    #labelDb{
+        border: 1px solid gray;
+        padding: 5px;
+        margin-top: 5px;
+    }
+
+    #labelDb div{
+        border: 1px solid gray;
+        display: inline-block;
+        padding: 2px;
+        cursor:pointer;
+        margin-right:10px;
+    }
+
+    #labelDb div:hover{
+        background:red;
+    }
+
+    .hidden{
+        display:none;
+    }
 </style>
 
 <div class="content">
@@ -69,7 +108,13 @@
     <script id="caseContent" name="caseContent" type="text/plain" style="width:100%;height:400px;margin-top:5px;">
     </script>
 
-    <input type="button" value="选择标签" id="selectLabel"/>
+    <input type="button" value="选择标签" id="selectLabel" />
+    <div id="labelContainer">
+
+    </div>
+    <div id="labelDb" class="hidden">
+        
+    </div>
 
     <div class="handleContainer">
         <div class="handlearea">
@@ -123,6 +168,7 @@
             function save(callback) {
                 var data = {};
                 data.title = $("#title").val().trim();
+                data.lables = getSelectedItems();
                 if (ue)
                     data.content = ue.getContent();
 
@@ -179,16 +225,72 @@
             };
 
             $("#selectLabel").click(function () {
-                layer.open({
-                    type: 2,
-                    title:'选择标签',
-                    area: ['700px', '450px'],
-                    fixed: false,
-                    maxmin: false,
-                    shadeClose:true,
-                    content: 'test/iframe.html'
-                });
+                //layer.open({
+                //    type: 2,
+                //    title:'选择标签',
+                //    area: ['700px', '450px'],
+                //    fixed: false,
+                //    maxmin: false,
+                //    shadeClose:true,
+                //    content: 'test/iframe.html'
+                //});
+
+                if ($("#labelDb").hasClass('hidden')) {
+                    $("#labelDb").removeClass('hidden');
+
+                    $.get("/backmgr/label/getall", function (result) {
+                        if (result.code == 200) {
+                            console.log(result.data);
+                            buildList(result.data);
+                        }
+                    });
+
+                } else {
+                    $("#labelDb").addClass('hidden');
+                }
+
             });
+
+            function buildList(arr) {
+                $("#labelDb").html("");
+                for (var i = 0; i < arr.length; i++) {
+                    var item = arr[i];
+                    buildItem(item);
+                }
+            }
+
+            function buildItem(item) {
+                var div = $("<div onclick='selectLabel(this)'>{1}</div>".replace("{1}", item.Name));
+                div.data(item);
+                $("#labelDb").append(div);
+            }
+
         });
+
+        function selectLabel(ele) {
+            var item = $(ele).data();
+            var div = $("<div onclick='remove(this)'>{1} <span>x</span></div>".replace("{1}", item.Name));
+            div.data(item);
+            $("#labelContainer").append(div);            
+        }
+
+        //得到选中的标签id值列表
+        function getSelectedItems() {
+            var arr = new Array();
+            var divs = $("#labelContainer").find('div');
+            for (var i = 0; i < divs.length; i++) {
+                var item = divs[i];
+                arr.push($(item).data().LabelId);
+            }
+            console.log(arr);
+        }
+
+        function remove(ele) {
+            event.cancelBubble = true;
+            //$($(ele).parent()).remove();
+            $(ele).remove();
+        }
+
+        
     </script>
 }

@@ -155,6 +155,7 @@
     </Content>
     <Content Include="Lib\System.Data.SQLite.XML" />
     <Content Include="Scripts\backcommon.js" />
+    <Content Include="Scripts\layer.js" />
     <Content Include="Scripts\prettify.load.js" />
     <Content Include="Scripts\Rsa\Barrett.js" />
     <Content Include="Scripts\Rsa\BigInt.js" />
