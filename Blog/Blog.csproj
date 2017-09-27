@@ -457,6 +457,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\Config.cs" />
+    <Content Include="App_Code\ConfigHandler.cs" />
+    <Content Include="App_Code\CrawlerHandler.cs" />
+    <Content Include="App_Code\Handler.cs" />
+    <Content Include="App_Code\ListFileHandler.cs" />
+    <Content Include="App_Code\NotSupportedHandler.cs" />
+    <Content Include="App_Code\PathFormater.cs" />
+    <Content Include="App_Code\UploadHandler.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -532,6 +540,8 @@
     <Content Include="Scripts\layui\font\iconfont.eot" />
     <Content Include="Scripts\layui\font\iconfont.ttf" />
     <Content Include="Scripts\layui\font\iconfont.woff" />
+    <Content Include="controller.ashx" />
+    <Content Include="config.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -543,6 +553,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\backmgr\Models\" />
     <Folder Include="Areas\backmgr\Views\Db\" />
+    <Folder Include="Areas\backmgr\Views\ueImg\" />
     <Folder Include="Views\RSA\" />
   </ItemGroup>
   <PropertyGroup>
