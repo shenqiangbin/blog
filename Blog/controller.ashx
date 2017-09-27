@@ -10,6 +10,12 @@ public class UEditorHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
+        if (!context.User.Identity.IsAuthenticated)
+        {
+            context.Response.AddHeader("Content-Type", "text/plain");
+            context.Response.Write("ÓÃ»§Î´µÇÂ¼");
+            return;
+        }
         Handler action = null;
         switch (context.Request["action"])
         {
