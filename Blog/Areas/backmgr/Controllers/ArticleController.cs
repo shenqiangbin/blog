@@ -72,7 +72,7 @@ namespace Blog.Areas.backmgr.Controllers
                     }
                     catch (Exception ex)
                     {
-                        LogService.Instance.AddAsync(Level.Error, ex.Message);
+                        LogService.Instance.AddAsync(Level.Error, ex);
                         return Json(new { code = 503, msg = "文章保存成功，标签保存失败" });
                     }
                 }
@@ -104,7 +104,7 @@ namespace Blog.Areas.backmgr.Controllers
                     }
                     catch (Exception ex)
                     {
-                        LogService.Instance.AddAsync(Level.Error, ex.Message);
+                        LogService.Instance.AddAsync(Level.Error, ex);
                         return Json(new { code = 503, msg = "文章保存成功，标签保存失败" });
                     }
                 }

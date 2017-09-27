@@ -30,7 +30,7 @@ namespace Blog.Areas.backmgr.Controllers
             }
             catch (Exception ex)
             {
-                LogService.Instance.AddAsync(Models.Level.Error, ex.Message);
+                LogService.Instance.AddAsync(Models.Level.Error, ex);
                 return Json(new { code = 500, msg = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -44,7 +44,7 @@ namespace Blog.Areas.backmgr.Controllers
             }
             catch (Exception ex)
             {
-                LogService.Instance.AddAsync(Models.Level.Error, ex.Message);
+                LogService.Instance.AddAsync(Models.Level.Error, ex);
                 return Json(new { code = 500, msg = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }

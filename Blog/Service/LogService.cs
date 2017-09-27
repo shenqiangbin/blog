@@ -28,6 +28,11 @@ namespace Blog.Service
             _LogRepository = LogRepository;
         }
 
+        public void AddAsync(Level level, Exception ex)
+        {
+            this.AddAsync(level, $"{ex.Message} {ex.StackTrace}");
+        }
+
         public void AddAsync(Level level, string msg)
         {
             Task.Run(() =>
