@@ -7,10 +7,15 @@
     margin-bottom: 30px;
 }
 
+.detail-title div{
+    font-size:14px;
+}
+
 h2 {
 }
 
 p {
     margin-bottom: 18px;
     margin:5px 0;
+    font-size:14px;
 }
