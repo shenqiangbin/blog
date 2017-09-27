@@ -553,7 +553,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\backmgr\Models\" />
     <Folder Include="Areas\backmgr\Views\Db\" />
-    <Folder Include="Areas\backmgr\Views\ueImg\" />
     <Folder Include="Views\RSA\" />
   </ItemGroup>
   <PropertyGroup>

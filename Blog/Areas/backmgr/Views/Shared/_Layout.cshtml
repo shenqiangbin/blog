@@ -21,10 +21,12 @@
     <div class="nav">
         <div class="nav-content">
             <span class="logo"><a href="/home/index">博客</a></span>
-            <span class="navli">
-                <a href="@Url.Action("index","home")">首页</a>
-                <a href="@Url.Action("list","log")">日志</a>
-            </span>
+            @if (Blog.Common.ContextUser.IsLogined) { 
+                <span class="navli">
+                    <a href="@Url.Action("index","home")">首页</a>
+                    <a href="@Url.Action("list","log")">错误日志</a>
+                </span>
+            }
             <div class="nav-account">
                 @if (Blog.Common.ContextUser.IsLogined)
                 {
