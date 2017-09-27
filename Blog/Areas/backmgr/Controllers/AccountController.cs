@@ -20,8 +20,9 @@ namespace Blog.Areas.backmgr.Controllers
         public ActionResult Login()
         {
             if (ContextUser.IsLogined)
-                GoUrl();
-            return View();
+               return GoUrl();
+            else
+                return View();
         }
 
         [HttpPost]
