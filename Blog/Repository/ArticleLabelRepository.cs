@@ -30,7 +30,8 @@ namespace Blog.Repository
 
         public void RemoveByArticleId(int articleId)
         {
-            string sql = "update ArticleLabel set enable = 0 where articleId = ?";
+            //string sql = "update ArticleLabel set enable = 0 where articleId = ?";
+            string sql = "delete from ArticleLabel where articleId = ?";
             SQLiteHelper.ExecuteNonQuery(sql, articleId);
         }
 
