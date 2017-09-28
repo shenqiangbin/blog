@@ -117,10 +117,12 @@ namespace Blog.Areas.backmgr.Controllers
             }
             catch (ValidateException ex)
             {
+                LogService.Instance.AddAsync(Level.Error, ex);
                 return Json(new { code = ex.Code, msg = ex.Message });
             }
             catch (Exception ex)
             {
+                LogService.Instance.AddAsync(Level.Error, ex);
                 return Json(new { code = 500, msg = ex.Message });
             }
         }

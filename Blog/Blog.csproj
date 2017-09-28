@@ -158,6 +158,7 @@
     <Content Include="Images\login-background.png" />
     <Content Include="Images\new.png" />
     <Content Include="Images\tip.svg" />
+    <Content Include="Images\useravatar.svg" />
     <Content Include="Lib\System.Data.SQLite.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

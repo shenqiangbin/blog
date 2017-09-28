@@ -14,7 +14,8 @@ namespace Blog.Repository
         {
             model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
 
-            string cmdText = "insert into article values(?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+            string cmdText = @"insert into article (ArticleId, Title, Content, ContentLevel, PublishStatus, KeyWords, UrlTitle, UrlTitleNum, DisplayCreatedTime, CreateUser, CreatedTime, UpdateTime, Enable) 
+                values(?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
                     model.Title,

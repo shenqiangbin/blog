@@ -46,7 +46,14 @@
 </div>
 <div>
     <div class="qrcodeContainer">
-        <div>扫码分享</div>
+        @if (Blog.Common.BrowserHelper.IsPhone())
+        {
+            <div></div>
+        }
+        else
+        {
+            <div>扫码分享</div>
+        }
         <div id="qrcode" style=""></div>
     </div>    
 </div>
@@ -65,9 +72,11 @@
                     if (val == "折叠") {
                         item.next().hide();
                         item.html("展开");
+                        item.css('margin-bottom', '0px');
                     } else {
                         item.next().show();
                         item.html("折叠");
+                        item.css('margin-bottom', '-12px');
                     }
                 });
                 $(this).before(item);
@@ -76,8 +85,8 @@
             $("#qrcode").qrcode({
                 render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
                 text: url,    //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
-                width : "106",               //二维码的宽度
-                height: "106",              //二维码的高度
+                width : "150",               //二维码的宽度
+                height: "150",              //二维码的高度
                 background : "#ffffff",       //二维码的后景色
                 foreground: "#07a0e1",        //二维码的前景色
                 src: ''             //二维码中间的图片
