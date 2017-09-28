@@ -42,6 +42,11 @@ namespace Blog.App_Start
                 "~/Scripts/Rsa/RSA.js",
                 "~/Scripts/Rsa/RSAClient.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/erweima/js").Include(
+                    "~/Scripts/erweima/utf.js",
+                    "~/Scripts/erweima/jquery.qrcode.js"
+                    ));
+
         }
     }
 }

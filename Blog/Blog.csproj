@@ -155,6 +155,8 @@
     </Content>
     <Content Include="Lib\System.Data.SQLite.XML" />
     <Content Include="Scripts\backcommon.js" />
+    <Content Include="Scripts\erweima\jquery.qrcode.js" />
+    <Content Include="Scripts\erweima\utf.js" />
     <Content Include="Scripts\layer.js" />
     <Content Include="Scripts\layui\css\layui.css" />
     <Content Include="Scripts\layui\css\layui.mobile.css" />

@@ -19,3 +19,18 @@ p {
     margin:5px 0;
     font-size:14px;
 }
+
+.qrcodeContainer{
+    position: fixed;
+    right: 10px;
+    top: 75px;
+    text-align:center;
+    font-size:14px;
+    letter-spacing:4px; 
+    z-index: 999;  
+}
+.qrcodeContainer div:first-child{
+    background-color:#07a0e1;
+    color:white;
+}
+ 
