@@ -100,7 +100,9 @@ Multiple types were found that match the controller named 'Home'
 
 AntiXss防止XSS攻击,禁止cookie通过js读取。
 详情页URL重写
-
+定义针对搜索引擎的关键词
+定义对页面的描述
+（以上 2017-9-29）
 
 todo:
 后台适配手机（登录+列表+日志+新增文章）
@@ -110,9 +112,6 @@ todo:
 详情页添加版本信息
 底部添加版本信息
 评论，点赞，分享
-定义针对搜索引擎的关键词
-定义对页面的描述
-
 
 
 待整理：
