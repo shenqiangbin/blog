@@ -20,5 +20,12 @@ namespace Blog.Common
             byte[] targetStr = md5.ComputeHash(UnicodeEncoding.UTF8.GetBytes(value));
             return BitConverter.ToString(targetStr).Replace("-", "");
         }
+
+        public static long MD5ToNum(string value)
+        {
+            var md5 = MD5.Create();
+            byte[] targetStr = md5.ComputeHash(UnicodeEncoding.UTF8.GetBytes(value));
+            return Math.Abs(BitConverter.ToInt64(targetStr,0));
+        }
     }
 }

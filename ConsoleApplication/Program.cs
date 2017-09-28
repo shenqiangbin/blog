@@ -19,6 +19,9 @@ namespace ConsoleApplication
             //GetTiKu();
             //HandleTiKu();
             //HandleTiKu2();
+            //long number = Convert.ToInt64("sqlite-helper-summary");
+            long number = MD5Helper.MD5ToNum($"sqlite-helper-summary");
+
             var md5 = MD5Helper.MD5Value("abc");
             var s = HashHelper.HashMd5("123", md5);
 
