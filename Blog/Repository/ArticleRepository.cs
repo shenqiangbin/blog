@@ -12,6 +12,8 @@ namespace Blog.Repository
     {
         public int Add(Article model)
         {
+            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
+
             string cmdText = "insert into article values(?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
@@ -38,6 +40,8 @@ namespace Blog.Repository
 
         public int Update(Article model)
         {
+            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
+
             string sql = @"
 update Article set 
 title = ?,
@@ -91,6 +95,8 @@ Enable = ?
             model.CreatedTime = Convert.ToDateTime(row["CreatedTime"]);
             model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
             model.Enable = Convert.ToInt32(row["Enable"]);
+
+            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
 
             return model;
         }
