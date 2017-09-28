@@ -46,11 +46,11 @@ namespace Blog.Areas.backmgr.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public JsonResult Add(string articleId, string title, string content, List<int> lables)
+        public JsonResult Add(string articleId, string title, string content, List<int> lables, string keyWords, string urlTitle)
         {
             try
             {
-                AddValidate(articleId, title, content);
+                AddValidate(articleId, title, content, urlTitle);
 
                 //新增
                 if (string.IsNullOrEmpty(articleId))
@@ -58,6 +58,8 @@ namespace Blog.Areas.backmgr.Controllers
                     Article article = new Article();
                     article.Title = title;
                     article.Content = content;
+                    article.KeyWords = keyWords;
+                    article.UrlTitle = urlTitle;
                     articleId = _articleService.Add(article).ToString();
 
                     try
@@ -89,6 +91,8 @@ namespace Blog.Areas.backmgr.Controllers
 
                     model.Title = title;
                     model.Content = content;
+                    model.KeyWords = keyWords;
+                    model.UrlTitle = urlTitle;
                     _articleService.Update(model);
 
                     try
@@ -121,7 +125,7 @@ namespace Blog.Areas.backmgr.Controllers
             }
         }
 
-        private void AddValidate(string articleId, string title, string content)
+        private void AddValidate(string articleId, string title, string content, string urlTitle)
         {
             if (ValidateHelper.IsEmpty(title))
                 throw new ValidateException(101, "请填写标题");
@@ -129,6 +133,19 @@ namespace Blog.Areas.backmgr.Controllers
                 throw new ValidateException(102, $"标题请在50字内");
             if (ValidateHelper.IsEmpty(content))
                 throw new ValidateException(101, "请填写内容");
+            if (ValidateHelper.IsEmpty(urlTitle))
+                throw new ValidateException(101, "请填写Url题目");
+
+            var dbmodel = _articleService.GetByUrlTitle(urlTitle);
+            if (dbmodel != null)
+            {
+                //如果是新增
+                if (string.IsNullOrEmpty(articleId))
+                    throw new ValidateException(409, "url标题已存在");
+                else if (dbmodel.ArticleId.ToString() != articleId)
+                    throw new ValidateException(409, "url标题已存在");
+            }
+
             //if (ValidateHelper.IsOverLength(content, 50))
             //    throw new ValidateException(102, $"标题请在50字内");
         }

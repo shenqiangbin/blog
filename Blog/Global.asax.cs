@@ -19,15 +19,25 @@ namespace Blog
         {
             AutofacHelper.Inject();
 
+            RegisterGlobalFilters(GlobalFilters.Filters);
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
+        private void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new Blog.Filters.ExcepitonFilter());
+        }
+
         protected void Application_AuthorizeRequest(object sender, System.EventArgs e)
         {
             SessionHelper.SetUser();
         }
+
+
+
     }
 }

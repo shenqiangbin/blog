@@ -25,7 +25,19 @@ namespace Blog.Models
         /// 展示的创建时间
         /// </summary>
         public DateTime DisplayCreatedTime { get; set; }
-        
+        /// <summary>
+        /// 关键字
+        /// </summary>
+        public string KeyWords { get; set; }
+        /// <summary>
+        /// url标题
+        /// </summary>
+        public string UrlTitle { get; set; }
+        /// <summary>
+        /// url标题数字（需要唯一）
+        /// </summary>
+        public string UrlTitleNum { get; set; }
+
         public string CreateUser { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime UpdateTime { get; set; }

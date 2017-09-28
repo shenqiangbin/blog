@@ -491,6 +491,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSAController.cs" />
+    <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Filters\UserAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

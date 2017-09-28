@@ -15,6 +15,11 @@ CREATE TABLE [Article] (
 /*文章增加【创建人】字段*/
 ALTER TABLE Article ADD COLUMN CreateUser nvarchar(50)
 UPDATE Article set createuser  = 'shenqiangbin@163.com'
+/*文章增加【关键字(在页的meta中使用)，url标题（重写url时使用），utl标题数字（加速搜索时使用）】字段*/
+ALTER TABLE Article ADD COLUMN KeyWords nvarchar(50);
+ALTER TABLE Article ADD COLUMN UrlTitle nvarchar(50);
+ALTER TABLE Article ADD COLUMN UrlTitleNum int;
+
 
 /*分类*/
 drop table if exists [Label];

@@ -25,6 +25,7 @@ namespace Blog.Service
             var time = DateTime.Now;
 
             model.DisplayCreatedTime = time;
+            model.UrlTitleNum = MD5Helper.MD5ToNum(model.UrlTitle).ToString();
 
             if (ContextUser.IsLogined)
                 model.CreateUser = ContextUser.Email;
@@ -40,12 +41,32 @@ namespace Blog.Service
         public int Update(Article model)
         {
             model.UpdateTime = DateTime.Now;
+            model.UrlTitleNum = MD5Helper.MD5ToNum(model.UrlTitle).ToString();
+
             return _articleRepository.Update(model);
         }
 
         public Article GetById(string articleId)
         {
             return _articleRepository.GetById(articleId);
+        }
+
+        public Article GetByUrlTitle(string urlTitle)
+        {
+            var list = _articleRepository.GetByColumn("urlTitle", urlTitle);
+            if (list.Count > 1)
+                throw new ValidateException(409, "urltitle重复");
+            else
+                return list.FirstOrDefault();
+        }
+
+        public Article GetByUrlTitleNum(string urlTitleNum)
+        {
+            var list = _articleRepository.GetByColumn("urlTitleNum", urlTitleNum);
+            if (list.Count > 1)
+                throw new ValidateException(409, "urlTitleNum重复");
+            else
+                return list.FirstOrDefault();
         }
 
         public ArticleListModelResult GetPaged(ArticleListQuery listModel)

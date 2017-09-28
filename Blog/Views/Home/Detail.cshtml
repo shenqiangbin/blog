@@ -1,6 +1,7 @@
 ﻿@model Blog.Models.Article
 @{
     ViewBag.Title = Model.Title;
+    ViewBag.Keywords = Model.KeyWords;
     string backUrl = Request.UrlReferrer != null ? Request.UrlReferrer.OriginalString : "/";
 
     if (Blog.Common.BrowserHelper.IsPhone())

@@ -12,13 +12,16 @@ namespace Blog.Repository
     {
         public int Add(Article model)
         {
-            string cmdText = "insert into article values(?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+            string cmdText = "insert into article values(?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
                     model.Title,
                     model.Content,
                     model.ContentLevel,
                     model.PublishStatus,
+                    model.KeyWords,
+                    model.UrlTitle,
+                    model.UrlTitleNum,
                     model.DisplayCreatedTime,
                     model.CreateUser,
                     model.CreatedTime,
@@ -42,6 +45,9 @@ content = ?,
 ContentLevel = ?,
 PublishStatus = ?,
 DisplayCreatedTime = ?,
+KeyWords = ?,
+UrlTitle = ?,
+UrlTitleNum = ?,
 CreatedTime = ?,
 UpdateTime = ?,
 Enable = ?
@@ -53,6 +59,9 @@ Enable = ?
                     model.ContentLevel,
                     model.PublishStatus,
                     model.DisplayCreatedTime,
+                    model.KeyWords,
+                    model.UrlTitle,
+                    model.UrlTitleNum,
                     model.CreatedTime,
                     model.UpdateTime,
                     model.Enable,
@@ -75,6 +84,9 @@ Enable = ?
             model.ContentLevel = Convert.ToInt32(row["ContentLevel"]);
             model.PublishStatus = Convert.ToInt32(row["PublishStatus"]);
             model.DisplayCreatedTime = Convert.ToDateTime(row["DisplayCreatedTime"]);
+            model.KeyWords = Convert.ToString(row["KeyWords"]);
+            model.UrlTitle = Convert.ToString(row["UrlTitle"]);
+            model.UrlTitleNum = Convert.ToString(row["UrlTitleNum"]);
             model.CreateUser = Convert.ToString(row["CreateUser"]);
             model.CreatedTime = Convert.ToDateTime(row["CreatedTime"]);
             model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
@@ -94,6 +106,21 @@ Enable = ?
             string cmdText = "select * from article where articleid = ?";
             DataRow row = SQLiteHelper.ExecuteDataRow(cmdText, articleId);
             return RowToModel(row);
+        }
+
+        public List<Article> GetByColumn(string colName, string val)
+        {
+            List<Article> list = new List<Article>();
+
+            string cmdText = $"select * from article where {colName} = ? and enable = 1";
+            DataSet dt = SQLiteHelper.ExecuteDataset(cmdText, val);
+
+            foreach (DataRow item in dt.Tables[0].Rows)
+            {
+                list.Add(RowToModel(item));
+            }
+
+            return list;
         }
 
         public ArticleListModelResult GetPaged(ArticleListQuery listModel)
