@@ -23,7 +23,7 @@ namespace Blog.Controllers
         {
             ArticleListQuery listModel = new ArticleListQuery();
             listModel.PageIndex = Convert.ToInt32(page);
-            listModel.PageSize = 10;            
+            listModel.PageSize = 10;
 
             ArticleListModelResult result = _articleService.GetPaged(listModel);
             var pageList = new StaticPagedList<Article>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);
@@ -41,6 +41,14 @@ namespace Blog.Controllers
             }
 
             return View(model);
+        }
+
+        public ActionResult ViewArticle(string urlTitle)
+        {
+            if (string.IsNullOrEmpty(urlTitle))
+                return Content("参数呢?你吃了?");
+            Article model = _articleService.GetByUrlTitle(urlTitle);            
+            return View("Detail",model);
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Web.Http;
 using Blog.App_Start;
 using System.Web.Optimization;
 using Blog.Common;
+using System.IO;
 
 namespace Blog
 {
@@ -36,7 +37,13 @@ namespace Blog
         {
             SessionHelper.SetUser();
         }
-
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/data.txt"), true))
+            {
+                _testData.WriteLine(Request.Url.ToString());
+            }
+        }
 
 
     }

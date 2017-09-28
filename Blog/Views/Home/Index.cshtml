@@ -33,7 +33,13 @@
             {
                 <div class="record">
                     <div>
-                        <a href="@Url.Action("Detail","Home", new { id=item.ArticleId} )" title="@item.Title">
+                        @{
+                            string url = string.IsNullOrEmpty(item.UrlTitle) ?
+                            Url.Action("Detail", "Home", new { id = item.ArticleId }) :
+                            $"/articles/{item.UrlTitle}.html";
+                        }
+
+                        <a href="@(url)" title="@item.Title">
                             @if (item.CreatedTime.AddDays(7) > DateTime.Now)
                             {
                                 <span class="newflag"><img src="~/Images/new.png" /></span>

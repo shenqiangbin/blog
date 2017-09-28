@@ -98,9 +98,13 @@ Multiple types were found that match the controller named 'Home'
 添加标签
 （以上 2017-9-26）
 
+AntiXss防止XSS攻击,禁止cookie通过js读取。
+详情页URL重写
+
+
 todo:
 后台适配手机（登录+列表+日志+新增文章）
-详情页URL重写
+
 文章详情显示标签
 标签分组页展示
 详情页添加版本信息
@@ -108,7 +112,7 @@ todo:
 评论，点赞，分享
 定义针对搜索引擎的关键词
 定义对页面的描述
-AntiXss防止XSS攻击,禁止cookie通过js读取。
+
 
 
 待整理：
