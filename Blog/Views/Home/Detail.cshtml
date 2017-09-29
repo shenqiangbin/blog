@@ -1,6 +1,7 @@
 ﻿@model Blog.Models.Article
 @{
-    if (Model != null) {
+    if (Model != null)
+    {
         ViewBag.Title = Model.Title;
         ViewBag.Keywords = Model.KeyWords;
     }
@@ -37,7 +38,13 @@
     {
         <div class="detail-title">
             <h2>@Model.Title</h2>
-            <div>@Model.DisplayCreatedTime</div>
+            <div class="sec">
+                <span class="timebox">
+                    <img src="/Images/time2.png" alt="时间" width="14"/>
+                    <span>@Model.DisplayCreatedTime</span>
+                </span>
+                <span id='labelContainer'><img src="~/Images/loadingbar.gif" alt="加载中..."/></span>
+            </div>
         </div>
         <div>
             @Html.Raw(Model.Content)
@@ -55,43 +62,13 @@
             <div>扫码分享</div>
         }
         <div id="qrcode" style=""></div>
-    </div>    
+    </div>
 </div>
 @section footer{
+    <script>var articleId = '@(Model!=null? Model.ArticleId.ToString() :"")';</script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     @Scripts.Render("~/Scripts/erweima/js")
     <script type="text/javascript" src='http://cdn.bootcss.com/prettify/r298/prettify.min.js'></script>
-    <script type="text/javascript" src='~/Scripts/prettify.load.js'></script>   
-    <script>
-        $(function () {
-
-            $('pre').each(function () {
-                var item = $("<div style='color:blue;cursor:pointer;margin-bottom:-12px;font-size:14px;'>折叠</div>");
-                item.click(function () {
-                    var val = item.html();
-                    if (val == "折叠") {
-                        item.next().hide();
-                        item.html("展开");
-                        item.css('margin-bottom', '0px');
-                    } else {
-                        item.next().show();
-                        item.html("折叠");
-                        item.css('margin-bottom', '-12px');
-                    }
-                });
-                $(this).before(item);
-            });
-            var url = location.href;
-            $("#qrcode").qrcode({
-                render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
-                text: url,    //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
-                width : "150",               //二维码的宽度
-                height: "150",              //二维码的高度
-                background : "#ffffff",       //二维码的后景色
-                foreground: "#07a0e1",        //二维码的前景色
-                src: ''             //二维码中间的图片
-            });
-        });
-    </script>
+    @Scripts.Render("~/Scripts/business/articledetail")
 }
 

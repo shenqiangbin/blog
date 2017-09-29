@@ -143,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <Content Include="Content\backLogList.css" />
     <Content Include="Content\backindex.css" />
     <Content Include="Content\mdetail.css" />
@@ -155,8 +156,16 @@
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Lib\sqlite3.def" />
     <EmbeddedResource Include="Lib\sqlite3.dll" />
+    <Content Include="Images\label2.png" />
+    <Content Include="Images\label3.png" />
+    <Content Include="Images\loadingbar.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\label.png" />
     <Content Include="Images\login-background.png" />
     <Content Include="Images\new.png" />
+    <Content Include="Images\scrolltop.png" />
+    <Content Include="Images\time.png" />
+    <Content Include="Images\time2.png" />
     <Content Include="Images\tip.svg" />
     <Content Include="Images\useravatar.svg" />
     <Content Include="Lib\System.Data.SQLite.dll">
@@ -164,6 +173,7 @@
     </Content>
     <Content Include="Lib\System.Data.SQLite.XML" />
     <Content Include="Scripts\backcommon.js" />
+    <Content Include="Scripts\business\articledetail.js" />
     <Content Include="Scripts\erweima\jquery.qrcode.js" />
     <Content Include="Scripts\erweima\utf.js" />
     <Content Include="Scripts\layer.js" />

@@ -7,8 +7,40 @@
     margin-bottom: 30px;
 }
 
-.detail-title div{
-    font-size:14px;
+    .detail-title div {
+        font-size: 14px;
+    }
+
+.sec * {
+    vertical-align: middle;
+}
+
+.sec img {
+    border: none;
+    margin-right: 3px;
+}
+
+.sec .timebox {
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.sec .label-item {
+    border: 1px solid #999;
+    border-radius: 14px;
+    padding: 0px 5px;
+    margin-right: 3px;
+    color: #999;
+}
+
+.sec .label-item:hover{
+    color:white;
+    border: 1px solid #00a2ca;
+    background-color:#00a2ca;
+}
+
+#labelContainer {
+    /*display: inline-block;*/    
 }
 
 h2 {
@@ -16,21 +48,21 @@ h2 {
 
 p {
     margin-bottom: 18px;
-    margin:5px 0;
-    font-size:14px;
+    margin: 5px 0;
+    font-size: 14px;
 }
 
-.qrcodeContainer{
+.qrcodeContainer {
     position: fixed;
     right: 10px;
     top: 75px;
-    text-align:center;
-    font-size:14px;
-    letter-spacing:4px; 
-    z-index: 999;  
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 4px;
+    z-index: 999;
 }
-.qrcodeContainer div:first-child{
-    background-color:#07a0e1;
-    color:white;
-}
- 
+
+    .qrcodeContainer div:first-child {
+        background-color: #07a0e1;
+        color: white;
+    }

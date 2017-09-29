@@ -8,8 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Blog.Areas.backmgr.Controllers
-{
-    [UserAuthorize]
+{    
     public class LabelController : Controller
     {
         private LabelService _labelService;
