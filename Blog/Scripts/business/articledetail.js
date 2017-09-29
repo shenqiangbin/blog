@@ -34,10 +34,10 @@
     function initLabelContainer() {
         $.get("/backmgr/label/GetLablesByArticle", { articleId: articleId }, function (result) {
             if (result.code == 200) {
-                console.log(result.data);
                 $("#labelContainer").html('');
-                $("#labelContainer").append('<img src="/Images/label3.png" alt="标签" width="14"/>');
                 var arr = result.data;
+                if (arr.length!=0)
+                    $("#labelContainer").append('<img src="/Images/label3.png" alt="标签" width="14"/>');                
                 for (var i = 0; i < arr.length; i++) {
                     var item = arr[i];                                    
                     var div = $("<a href='#' class='label-item'>{1}</a>".replace("{1}", item.Name));
