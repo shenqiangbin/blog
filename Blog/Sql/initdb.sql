@@ -69,3 +69,13 @@ create table Log
    Message						text -- '信息',
 );
 
+/*评论*/
+drop table if exists [Comment];
+CREATE TABLE [Comment] (
+  [CommentId] INTEGER PRIMARY KEY AUTOINCREMENT, 
+  [ArticleId] INTEGER NOT NULL,
+  [UserName] NVARCHAR(50),
+  [Content] NVARCHAR(50),
+  [CreateTime] DATETIME NOT NULL, 
+  [UpdateTime] DATETIME, 
+  [Enable] INT NOT NULL);

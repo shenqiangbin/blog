@@ -64,11 +64,12 @@
         <div id="qrcode" style=""></div>
     </div>
 </div>
+
 @section footer{
     <script>var articleId = '@(Model!=null? Model.ArticleId.ToString() :"")';</script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     @Scripts.Render("~/Scripts/erweima/js")
     <script type="text/javascript" src='http://cdn.bootcss.com/prettify/r298/prettify.min.js'></script>
-    @Scripts.Render("~/Scripts/business/articledetail")
+    @Scripts.Render("~/Scripts/business/articledetail")    
 }
 

@@ -507,15 +507,19 @@
     <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\ValidateException.cs" />
     <Compile Include="Common\ValidateHelper.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSAController.cs" />
+    <Compile Include="Controllers\XSSController.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Filters\UserAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ArticleLabel.cs" />
+    <Compile Include="Models\CommentListModel.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\LogListModel.cs" />
     <Compile Include="Models\Log.cs" />
@@ -526,6 +530,7 @@
     <Compile Include="Repository\ArticleLabelRepository.cs" />
     <Compile Include="Repository\LabelRepository.cs" />
     <Compile Include="Repository\LogRepository.cs" />
+    <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\ArticleRepository.cs" />
     <Compile Include="Repository\SQLiteHelper.cs" />
@@ -533,6 +538,7 @@
     <Compile Include="Service\LabelService.cs" />
     <Compile Include="Service\LogService.cs" />
     <Compile Include="Service\PermissionService.cs" />
+    <Compile Include="Service\CommentService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\ArticleService.cs" />
     <Compile Include="verify_code.ashx.cs">
@@ -575,7 +581,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\backmgr\Models\" />
     <Folder Include="Areas\backmgr\Views\Db\" />
+    <Folder Include="Views\Comment\" />
     <Folder Include="Views\RSA\" />
+    <Folder Include="Views\XSS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
