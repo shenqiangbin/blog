@@ -19,6 +19,12 @@ namespace Blog.Controllers
             _commentService = commentService;
         }
 
+        public ActionResult Index(string articleId)
+        {
+            ViewBag.articleId = articleId; 
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(string CommentId, string content)

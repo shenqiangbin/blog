@@ -50,26 +50,41 @@
             @Html.Raw(Model.Content)
         </div>
     }
-</div>
-<div>
-    <div class="qrcodeContainer">
-        @if (Blog.Common.BrowserHelper.IsPhone())
-        {
-            <div></div>
-        }
-        else
-        {
-            <div>扫码分享</div>
-        }
-        <div id="qrcode" style=""></div>
+    <div>
+        <div class="qrcodeContainer">
+            @if (Blog.Common.BrowserHelper.IsPhone())
+            {
+                <div></div>
+            }
+            else
+            {
+                <div>扫码分享</div>
+            }
+            <div id="qrcode" style=""></div>
+        </div>
+    </div>
+    <div>
+        <iframe id="iframe" onload="iframeLoad()" src="http://192.168.25.76:8080/comment/index?articleid=23134" scrolling="no" frameborder="0" style="width:100%;"></iframe>
+        
     </div>
 </div>
 
+
+
 @section footer{
     <script>var articleId = '@(Model!=null? Model.ArticleId.ToString() :"")';</script>
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    @*<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>*@
+    <script src="~/Scripts/jquery.min.js"></script>
     @Scripts.Render("~/Scripts/erweima/js")
     <script type="text/javascript" src='http://cdn.bootcss.com/prettify/r298/prettify.min.js'></script>
-    @Scripts.Render("~/Scripts/business/articledetail")    
+    @Scripts.Render("~/Scripts/business/articledetail") 
+    <script>
+        function iframeLoad() {
+            debugger;
+            document.getElementById("iframe").height = 0;
+            document.getElementById("iframe").height = document.getElementById("iframe").contentWindow.document.body.scrollHeight + 50;            
+        }
+    </script>   
+   
 }
 
