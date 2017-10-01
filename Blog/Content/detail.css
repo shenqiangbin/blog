@@ -3,7 +3,7 @@
 }
 
 .detail-title {
-    text-align: center;
+    text-align: left;
     margin-bottom: 30px;
 }
 
@@ -66,3 +66,45 @@ p {
         background-color: #07a0e1;
         color: white;
     }
+
+/*评论*/
+.commentBox{
+     
+}
+
+.commentcontent {
+    height: 100px;
+    width:500px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.commentcontent:focus {
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}
+
+.commentcontent *{
+    vertical-align:middle;
+}
+
+#publishBtn{
+    float:right;
+    margin-top: 5px;
+}
+
+.emoji_icon{
+    height:26px;
+}
+
+.commentBox #btn{
+    margin-top:4px;
+}

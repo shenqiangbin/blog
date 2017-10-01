@@ -19,6 +19,7 @@
     background-color: #fff;
     border: 1px solid #bfbfbf;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.176);
+    z-index: 999;
 }
 
 .emoji_container ul {
