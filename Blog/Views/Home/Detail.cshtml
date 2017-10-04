@@ -42,10 +42,10 @@
             <h2>@Model.Title</h2>
             <div class="sec">
                 <span class="timebox">
-                    <img src="/Images/time2.png" alt="时间" width="14"/>
+                    <img src="/Images/time2.png" alt="时间" width="14" />
                     <span>@Model.DisplayCreatedTime</span>
                 </span>
-                <span id='labelContainer'><img src="~/Images/loadingbar.gif" alt="加载中..."/></span>
+                <span id='labelContainer'><img src="~/Images/loadingbar.gif" alt="加载中..." /></span>
             </div>
         </div>
         <div>
@@ -70,9 +70,24 @@
         <div style="width:526px;">
             <div id="content" class="commentcontent" contenteditable="true"></div>
             <img id="btn" src="~/Images/emoji.png" />
-            <button id="publishBtn">发表</button> 
-        </div>   
+            <button id="publishBtn">发表</button>
+        </div>
+        <div id="commentlist" style="margin-top: 23px;"></div>
     </div>
+    <div class="hidden">
+        <div id="commentlistModel" class="commentlist">
+            <img class="avatar" src="~/Images/useravatar.svg" alt="">
+            <div class="right">
+                <div class="c">
+                    <div class="name">{0}</div>
+                    <div class="cc">{1}</div>
+                </div>
+                <div class="handle">{2}<a href="#">回复</a></div>
+            </div>
+        </div>
+    </div>
+
+    @Html.AntiForgeryToken()
 </div>
 
 
@@ -84,7 +99,7 @@
     <script src="~/Scripts/jquery.min.js"></script>
     @Scripts.Render("~/Scripts/erweima/js")
     <script type="text/javascript" src='http://cdn.bootcss.com/prettify/r298/prettify.min.js'></script>
-    @Scripts.Render("~/Scripts/business/articledetail")    
+    @Scripts.Render("~/Scripts/business/articledetail")
 
     <script src="~/Scripts/emoji/js/jquery.mCustomScrollbar.min.js"></script>
     <script src="~/Scripts/emoji/js/jquery.emoji.min.js"></script>
@@ -107,10 +122,65 @@
                         file: ".gif"
                     }]
                 });
+
+                getList();
             });
-            
+
+            $("#publishBtn").click(function () {
+                var content = $("#content").html();
+                var data = { articleId: articleId, Content: content };
+                $.post("/Comment/Add", AddAntiForgeryToken(data), function (result) {
+                    console.log(result);
+                    if (result.code == 200) {
+                        showMsg("发表成功");
+                        getList();
+                    } else {
+                        showMsg("发表失败");
+                    }
+                });
+            });
         });
+
+        AddAntiForgeryToken = function (data) {
+            data.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+            return data;
+        };
+
+        showMsg = function (msg) {
+            $("#msg").html(msg);
+        }
+
+        getList = function () {
+            $.get("/comment/List", { articleId: articleId }, function (result) {
+                if (result.code == 200) {
+                    $("#commentlist").html("");
+                    for (var i = 0; i < result.data.length; i++) {
+                        var record = result.data[i];
+                        addRecord(record);
+                    }
+                }
+            });
+        }
+        var content = $("#commentlistModel").prop("outerHTML");
+        addRecord = function (record) {
+            
+            
+            var c2 = content
+                     .replace("{0}", record.UserName)
+                     .replace("{1}", record.Content)
+                     .replace("{2}",data_string(record.CreateTime));
+            $("#commentlist").append(c2);
+        }
+
+        function data_string(str) {
+            var d = eval('new ' + str.substr(1, str.length - 2));
+            var ar_date = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
+            for (var i = 0; i < ar_date.length; i++) ar_date[i] = dFormat(ar_date[i]);
+            return ar_date.slice(0, 3).join('-') + ' ' + ar_date.slice(3).join(':');
+
+            function dFormat(i) { return i < 10 ? "0" + i.toString() : i; }
+        }
     </script>
-   
+
 }
 

@@ -21,19 +21,20 @@ namespace Blog.Controllers
 
         public ActionResult Index(string articleId)
         {
-            ViewBag.articleId = articleId; 
+            ViewBag.articleId = articleId;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(string CommentId, string content)
+        [ValidateInput(false)]
+        public ActionResult Add(string articleId, string content)
         {
             try
             {
-                AddValidate(CommentId, content);
+                AddValidate(articleId, content);
 
-                _commentService.Add(new Comment { CommentId = Convert.ToInt32(CommentId), Content = content });
+                _commentService.Add(new Comment { ArticleId = Convert.ToInt32(articleId), UserName = "游客", Content = content });
 
                 return Json(new { code = 200, msg = "ok" });
             }
@@ -44,16 +45,16 @@ namespace Blog.Controllers
             }
         }
 
-        private void AddValidate(string CommentId, string content)
+        private void AddValidate(string articleId, string content)
         {
-            if (ValidateHelper.IsEmpty(CommentId))
-                throw new ValidateException(101, "CommentId不能为空");
-            if (ValidateHelper.IsOverLength(CommentId, 50))
-                throw new ValidateException(102, $"CommentId请在50字内");
+            if (ValidateHelper.IsEmpty(articleId))
+                throw new ValidateException(101, "articleId不能为空");
+            if (ValidateHelper.IsOverLength(articleId, 50))
+                throw new ValidateException(102, $"articleId请在50字内");
             if (ValidateHelper.IsEmpty(content))
                 throw new ValidateException(101, "请填写内容");
-            if (ValidateHelper.IsOverLength(content, 50))
-                throw new ValidateException(102, $"内容请少于50字");
+            if (ValidateHelper.IsOverLength(content, 500))
+                throw new ValidateException(102, $"内容请少于500字");
         }
 
         public ActionResult List(string articleId, int? page = 1)
@@ -68,14 +69,13 @@ namespace Blog.Controllers
                 listModel.PageSize = 10;
 
                 CommentListModelResult result = _commentService.GetPaged(listModel);
-                var pageList = new StaticPagedList<Comment>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);
-
-                return View(pageList);
+                //StaticPagedList<Comment> pageList = new StaticPagedList<Comment>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);                
+                return Json(new { code = 200, data = result.List }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 LogService.Instance.AddAsync(Level.Error, ex);
-                return Json(new { code = 500, msg = ex.Message });
+                return Json(new { code = 500, msg = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
     }

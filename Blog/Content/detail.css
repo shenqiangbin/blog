@@ -108,3 +108,50 @@ p {
 .commentBox #btn{
     margin-top:4px;
 }
+
+.commentlist{
+    font-size:14px;
+    width: 528px;
+    border-top: 1px solid #EDEDED;
+    padding: 5px 0;    
+}
+
+.commentlist .avatar{
+    display:inline-block;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    margin: 5px 10px;   
+}
+
+.commentlist *{
+    vertical-align:top;
+}
+
+.commentlist .right{
+    display:inline-block;
+}
+
+.commentlist .right .c{
+    color: gray;
+}
+.commentlist .right .cc *{
+    vertical-align:middle;
+}
+
+.commentlist .name{
+    color:#339b53;
+}
+
+.commentlist .right .handle{
+    font-size: 12px;
+    color: gray;
+    margin-top: 10px;
+}
+    .commentlist .right .handle a {
+        margin-left:20px;
+        color: gray;
+    }
+    .commentlist .right .handle a:hover{
+        color:blue;
+    }

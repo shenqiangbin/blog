@@ -12,11 +12,12 @@ namespace Blog.Repository
     {
         public int Add(Comment model)
         {
+            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
+
             string cmdText = @"INSERT INTO Comment (CommentId, ArticleId, UserName, Content, CreateTime, UpdateTime, Enable)
                 VALUES (?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                             null,  //对应的主键不要赋值了
-                            model.CommentId,
                             model.ArticleId,
                             model.UserName,
                             model.Content,
@@ -95,6 +96,8 @@ namespace Blog.Repository
 
             model.Enable = Convert.ToInt32(row["Enable"]);
 
+            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
+
             return model;
         }
 
@@ -122,7 +125,7 @@ namespace Blog.Repository
                 builder.Append(" and ArticleId = ?");
 
             if (string.IsNullOrEmpty(listModel.Order))
-                builder.Append(" order by createdtime asc,CommentId asc");
+                builder.Append(" order by createtime desc,CommentId asc");
 
             object[] para = { listModel.ArticleId };
 
