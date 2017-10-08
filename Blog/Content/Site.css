@@ -47,6 +47,10 @@ button {
     button:hover {
         background-color: #538dde;
     }
+    button.disable{
+        background-color: gray;
+       cursor:not-allowed;
+    }
 
 /*必填*/
 .must {

@@ -112,12 +112,16 @@ p {
 .commentlist{
     font-size:14px;
     width: 528px;
-    border-top: 1px solid #EDEDED;
+    border-top: 1px solid #555;
     padding: 5px 0;    
 }
 
+.commentlist .avatarBox{
+    width: 12%;
+    display: inline-block;
+}
+
 .commentlist .avatar{
-    display:inline-block;
     width: 48px;
     height: 48px;
     overflow: hidden;
@@ -129,7 +133,8 @@ p {
 }
 
 .commentlist .right{
-    display:inline-block;
+    width: 83%;
+    display: inline-block;
 }
 
 .commentlist .right .c{

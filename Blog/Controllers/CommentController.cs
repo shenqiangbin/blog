@@ -69,8 +69,8 @@ namespace Blog.Controllers
                 listModel.PageSize = 10;
 
                 CommentListModelResult result = _commentService.GetPaged(listModel);
-                //StaticPagedList<Comment> pageList = new StaticPagedList<Comment>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);                
-                return Json(new { code = 200, data = result.List }, JsonRequestBehavior.AllowGet);
+                StaticPagedList<Comment> pageList = new StaticPagedList<Comment>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);                
+                return Json(new { code = 200, data = result.List, pageNumber = pageList.PageNumber, pageCount = pageList.PageCount }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

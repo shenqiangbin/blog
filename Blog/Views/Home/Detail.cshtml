@@ -73,10 +73,16 @@
             <button id="publishBtn">发表</button>
         </div>
         <div id="commentlist" style="margin-top: 23px;"></div>
+        <div>
+            <button id="btnPreview">上一页</button>
+            <button id="btnNext">下一页</button>
+        </div>
     </div>
     <div class="hidden">
         <div id="commentlistModel" class="commentlist">
-            <img class="avatar" src="~/Images/useravatar.svg" alt="">
+            <div class="avatarBox">
+                <img class="avatar" src="~/Images/useravatar.svg" alt="">
+            </div>
             <div class="right">
                 <div class="c">
                     <div class="name">{0}</div>
@@ -123,7 +129,7 @@
                     }]
                 });
 
-                getList();
+                getList(1);
             });
 
             $("#publishBtn").click(function () {
@@ -150,25 +156,37 @@
             $("#msg").html(msg);
         }
 
-        getList = function () {
-            $.get("/comment/List", { articleId: articleId }, function (result) {
+        getList = function (page) {
+            $.get("/comment/List", { articleId: articleId, page: page }, function (result) {
                 if (result.code == 200) {
                     $("#commentlist").html("");
                     for (var i = 0; i < result.data.length; i++) {
                         var record = result.data[i];
                         addRecord(record);
                     }
+                    debugger
+                    if (result.pageNumber == 1) {
+                        $("#btnPreview").addClass('disable');
+                    } else {
+                        $("#btnPreview").removeClass('disable');
+                    }
+                    if (result.pageNumber == result.pageCount) {
+                        $("#btnNext").addClass('disable');
+                    } else {
+                        $("#btnNext").removeClass('disable');
+                    }
+
                 }
             });
         }
         var content = $("#commentlistModel").prop("outerHTML");
         addRecord = function (record) {
-            
-            
+
+
             var c2 = content
                      .replace("{0}", record.UserName)
                      .replace("{1}", record.Content)
-                     .replace("{2}",data_string(record.CreateTime));
+                     .replace("{2}", data_string(record.CreateTime));
             $("#commentlist").append(c2);
         }
 
