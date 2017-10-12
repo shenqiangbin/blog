@@ -48,6 +48,10 @@ namespace Blog.Service
         {
             return _commentRepository.GetPaged(listModel);
         }
-       
+
+        public List<Comment> GetByParentIds(List<int> ids)
+        {
+            return _commentRepository.GetByParentIds(ids);
+        }
     }
 }

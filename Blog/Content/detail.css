@@ -69,7 +69,17 @@ p {
 
 /*评论*/
 .commentBox{
-     
+    margin-top:30px;
+}
+
+.commentBoxTitle{
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+    width: 516px;
+    background: #2e7ed0;
+    color: white;
+    padding: 5px;
 }
 
 .commentcontent {
@@ -93,10 +103,14 @@ p {
 }
 
 .commentcontent *{
-    vertical-align:middle;
+    vertical-align:middle !important;
 }
 
-#publishBtn{
+.emojiBtn{
+    margin-top:4px;
+}
+
+.publishBtn{
     float:right;
     margin-top: 5px;
 }
@@ -105,10 +119,9 @@ p {
     height:26px;
 }
 
-.commentBox #btn{
-    margin-top:4px;
-}
 
+
+/*评论列表*/
 .commentlist{
     font-size:14px;
     width: 528px;
@@ -133,7 +146,7 @@ p {
 }
 
 .commentlist .right{
-    width: 83%;
+    width: 87%;
     display: inline-block;
 }
 
@@ -160,3 +173,24 @@ p {
     .commentlist .right .handle a:hover{
         color:blue;
     }
+
+/*回复列表*/
+ .replyContainer{
+     margin-top:5px;
+     border:1px solid #aff6a7;     
+ }
+
+ .replytitle{
+     display: inline-block;
+     color:#339b53;
+ }
+
+ .replyContent{
+      margin: 5px 0;
+ }
+
+ .replyDate{
+    font-size: 12px;
+    color: gray;
+    margin-top: 10px;
+ }

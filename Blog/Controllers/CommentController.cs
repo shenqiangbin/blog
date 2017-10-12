@@ -28,15 +28,23 @@ namespace Blog.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Add(string articleId, string content)
+        public ActionResult Add(string articleId, string content, string commentId)
         {
             try
             {
                 AddValidate(articleId, content);
 
-                _commentService.Add(new Comment { ArticleId = Convert.ToInt32(articleId), UserName = "游客", Content = content });
+                int id = _commentService.Add(
+                    new Comment
+                    {
+                        ArticleId = Convert.ToInt32(articleId),
+                        UserName = "游客",
+                        Content = content,
+                        ParentId = Convert.ToInt32(commentId)
+                    }
+                );
 
-                return Json(new { code = 200, msg = "ok" });
+                return Json(new { code = 200, msg = "ok", data = _commentService.GetById(id.ToString()) });
             }
             catch (Exception ex)
             {
@@ -67,15 +75,30 @@ namespace Blog.Controllers
                 CommentListQuery listModel = new CommentListQuery();
                 listModel.PageIndex = Convert.ToInt32(page);
                 listModel.PageSize = 10;
+                listModel.ArticleId = articleId;
 
                 CommentListModelResult result = _commentService.GetPaged(listModel);
-                StaticPagedList<Comment> pageList = new StaticPagedList<Comment>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);                
+                StaticPagedList<Comment> pageList = new StaticPagedList<Comment>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);
+
+                GetChildren(result.List.ToList());
+
                 return Json(new { code = 200, data = result.List, pageNumber = pageList.PageNumber, pageCount = pageList.PageCount }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 LogService.Instance.AddAsync(Level.Error, ex);
                 return Json(new { code = 500, msg = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        private void GetChildren(List<Comment> comments)
+        {
+            List<int> ids = comments.Select(m => m.CommentId).ToList();
+            List<Comment> children = _commentService.GetByParentIds(ids);
+
+            foreach (var comment in comments)
+            {
+                comment.Children = children.Where(m => m.ParentId == comment.CommentId);
             }
         }
     }

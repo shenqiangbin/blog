@@ -14,13 +14,14 @@ namespace Blog.Repository
         {
             model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
 
-            string cmdText = @"INSERT INTO Comment (CommentId, ArticleId, UserName, Content, CreateTime, UpdateTime, Enable)
-                VALUES (?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+            string cmdText = @"INSERT INTO Comment (CommentId, ArticleId, UserName, Content,ParentId, CreateTime, UpdateTime, Enable)
+                VALUES (?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                             null,  //对应的主键不要赋值了
                             model.ArticleId,
                             model.UserName,
                             model.Content,
+                            model.ParentId,
                             model.CreateTime,
                             model.UpdateTime,
                             model.Enable
@@ -67,7 +68,7 @@ namespace Blog.Repository
         {
             List<Comment> list = new List<Comment>();
 
-            string cmdText = "select * from Comment where articleId = ? and enable = 1 order by createtime asc";
+            string cmdText = "select * from Comment where articleId = ? and enable = 1  order by createtime asc";
             DataSet dt = SQLiteHelper.ExecuteDataset(cmdText, articleId);
             foreach (DataRow item in dt.Tables[0].Rows)
             {
@@ -87,6 +88,7 @@ namespace Blog.Repository
             model.ArticleId = Convert.ToInt32(row["ArticleId"]);
             model.UserName = Convert.ToString(row["UserName"]);
             model.Content = Convert.ToString(row["Content"]);
+            model.ParentId = Convert.ToInt32(row["ParentId"]);
             model.CreateTime = Convert.ToDateTime(row["CreateTime"]);
             model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
             model.Enable = Convert.ToInt32(row["Enable"]);
@@ -114,12 +116,26 @@ namespace Blog.Repository
             return RowToModel(row);
         }
 
+        public List<Comment> GetByParentIds(List<int> ids)
+        {
+            List<Comment> list = new List<Comment>();
+
+            string cmdText = $"select * from Comment where enable = 1 and parentid in ({string.Join(",", ids)})";
+            DataSet ds = SQLiteHelper.ExecuteDataset(cmdText);
+            foreach (DataRow item in ds.Tables[0].Rows)
+            {
+                list.Add(RowToModel(item));
+            }
+
+            return list;
+        }
+
         public CommentListModelResult GetPaged(CommentListQuery listModel)
         {
             CommentListModelResult result = new CommentListModelResult();
             result.List = new List<Comment>();
 
-            StringBuilder builder = new StringBuilder("select * from Comment where Enable = 1");
+            StringBuilder builder = new StringBuilder("select * from Comment where Enable = 1 and parentId = 0");
 
             if (!string.IsNullOrEmpty(listModel.ArticleId))
                 builder.Append(" and ArticleId = ?");
@@ -135,7 +151,7 @@ namespace Blog.Repository
                 result.List.Add(RowToModel(item));
             }
 
-            StringBuilder countSql = new StringBuilder("select count(1) from Comment where Enable = 1");
+            StringBuilder countSql = new StringBuilder("select count(1) from Comment where Enable = 1 and parentId = 0");
             if (!string.IsNullOrEmpty(listModel.ArticleId))
                 countSql.Append(" and ArticleId = ?");
 

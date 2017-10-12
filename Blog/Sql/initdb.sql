@@ -76,6 +76,7 @@ CREATE TABLE [Comment] (
   [ArticleId] INTEGER NOT NULL,
   [UserName] NVARCHAR(50),
   [Content] NVARCHAR(50),
+  [ParentId] INTEGER,
   [CreateTime] DATETIME NOT NULL, 
   [UpdateTime] DATETIME, 
   [Enable] INT NOT NULL);

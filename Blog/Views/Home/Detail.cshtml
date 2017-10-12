@@ -67,15 +67,18 @@
     </div>
     <button id="loadCommentBtn">展示评论区</button>
     <div class="commentBox hidden">
+        <div class="commentBoxTitle">评论区</div>
         <div style="width:526px;">
             <div id="content" class="commentcontent" contenteditable="true"></div>
-            <img id="btn" src="~/Images/emoji.png" />
-            <button id="publishBtn">发表</button>
+            <img id="btn" class="emojiBtn" src="~/Images/emoji.png" />
+            <button id="publishBtn" class="publishBtn">发表</button>
         </div>
         <div id="commentlist" style="margin-top: 23px;"></div>
-        <div>
-            <button id="btnPreview">上一页</button>
-            <button id="btnNext">下一页</button>
+        <div style="margin-top:5px;" id="pageBox">
+            <input type="hidden" name="pageNumber" />
+            <button id="btnPreview" onclick="previewPage();">上一页</button>
+            第<span name="pageNumber"></span>页，共<span id="totalPage"></span>页
+            <button id="btnNext" onclick="nextPage();">下一页</button>
         </div>
     </div>
     <div class="hidden">
@@ -88,7 +91,8 @@
                     <div class="name">{0}</div>
                     <div class="cc">{1}</div>
                 </div>
-                <div class="handle">{2}<a href="#">回复</a></div>
+                <div class="handle">{2}<a href="javascript:void(0);" cid="{3}" onclick="showReplyBox(this);">回复</a></div>
+                <div class="replyList" cid="{3}">{4}</div>
             </div>
         </div>
     </div>
@@ -156,6 +160,7 @@
             $("#msg").html(msg);
         }
 
+        /*获取评论信息*/
         getList = function (page) {
             $.get("/comment/List", { articleId: articleId, page: page }, function (result) {
                 if (result.code == 200) {
@@ -164,30 +169,68 @@
                         var record = result.data[i];
                         addRecord(record);
                     }
-                    debugger
-                    if (result.pageNumber == 1) {
-                        $("#btnPreview").addClass('disable');
+                    
+                    $("input[name = pageNumber]").val(result.pageNumber);
+                    $("span[name = pageNumber]").html(result.pageNumber);
+                    $("#totalPage").html(result.pageCount);
+
+                    if (result.data.length <= 10) {
+                        $("#pageBox").addClass("hidden");
                     } else {
-                        $("#btnPreview").removeClass('disable');
+                        $("#pageBox").removeClass("hidden");
+                    }
+                    
+                    if (result.pageNumber == 1) {
+                        $("#btnPreview").attr('disabled', "true");
+                    } else {
+                        $("#btnPreview").removeAttr('disabled');
                     }
                     if (result.pageNumber == result.pageCount) {
-                        $("#btnNext").addClass('disable');
+                        $("#btnNext").attr('disabled', "true");
                     } else {
-                        $("#btnNext").removeClass('disable');
+                        $("#btnNext").removeAttr('disabled');
                     }
 
                 }
             });
         }
+
         var content = $("#commentlistModel").prop("outerHTML");
+
         addRecord = function (record) {
-
-
             var c2 = content
                      .replace("{0}", record.UserName)
                      .replace("{1}", record.Content)
-                     .replace("{2}", data_string(record.CreateTime));
+                     .replace("{2}", data_string(record.CreateTime))
+                     .replace("{3}", record.CommentId)
+                     .replace("{3}", record.CommentId);
+
+            //构建回复列表
+            var arr = new Array();
+            if (record.Children) {
+                for (var i = 0; i < record.Children.length; i++) {
+                    var replyHtml = buildReplyItem(record.Children[i]);
+                    arr.push(replyHtml);
+                }
+            }
+            var arrStr = arr.join('');            
+            c2 = c2.replace("{4}", arrStr);
             $("#commentlist").append(c2);
+        }
+
+        //构建回复列表项
+        buildReplyItem = function (comment) {
+            console.log(comment);
+            var html = "<div class='replyContainer'>" +
+                        "<div class='replytitle'>{0}</div>:" +
+                        "<div class='replyContent'>{1}</div> " +
+                        "<div class='replyDate'>{2}</div>" +
+                        "</div>";
+            html = html
+                .replace("{0}", comment.UserName)
+                .replace("{1}", comment.Content)
+                .replace("{2}", data_string(comment.CreateTime));
+            return html;
         }
 
         function data_string(str) {
@@ -197,6 +240,63 @@
             return ar_date.slice(0, 3).join('-') + ' ' + ar_date.slice(3).join(':');
 
             function dFormat(i) { return i < 10 ? "0" + i.toString() : i; }
+        }
+
+        previewPage = function () {
+            var pageNumber = $("input[name = pageNumber]").val();
+            pageNumber--
+            getList(pageNumber);
+        }
+
+        nextPage = function () {
+            var pageNumber = $("input[name = pageNumber]").val();
+            pageNumber++;
+            getList(pageNumber);
+        }
+
+        /*点击回复按钮*/
+        showReplyBox = function (btn) {
+            $(".replyBox").remove();
+            var html = '<div class="replyBox" style="width:460px;margin-top:5px;">' +
+                            '<div id="content2" style="width:434px;" class="commentcontent" contenteditable="true"></div>' +
+                            '<img id="btn2" class="emojiBtn" src="/Images/emoji.png" />' +
+                            '<button id="publishBtn2" class="publishBtn">发表</button>' +
+                        '</div>';
+            $(btn).parent().parent().append(html);
+
+            $("#content2").emoji({
+                button: "#btn2",
+                showTab: false,
+                animation: 'none',
+                icons: [{
+                    name: "QQ表情",
+                    path: "/scripts/emoji/img/qq/",
+                    maxNum: 91,
+                    excludeNums: [41, 45, 54, 15],
+                    file: ".gif"
+                }]
+            });
+
+            $("#publishBtn2").click(function () {
+                var content = $("#content2").html();
+                var replyListDiv = $(this).parent().parent().find('div.replyList');
+                var commentId = replyListDiv.attr('cid');
+                var data = { articleId: articleId, Content: content, CommentId: commentId };
+                debugger
+                var replyBoxDiv = $(this).parent();
+
+                $.post("/Comment/Add", AddAntiForgeryToken(data), function (result) {
+                    console.log(result);
+                    if (result.code == 200) {
+                        var record = result.data;
+                        var html = buildReplyItem(record);
+                        replyListDiv.append(html);
+                        replyBoxDiv.remove();
+                    } else {
+                        alert("发表失败");
+                    }
+                });
+            });
         }
     </script>
 
