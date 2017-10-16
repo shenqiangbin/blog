@@ -139,8 +139,7 @@
                 getList(1);
             });
 
-            $("#publishBtn").click(function () {
-                alert('button ok');
+            $("#publishBtn").click(function () {                
                 var content = $("#content").html();
                 var data = { articleId: articleId, Content: content };
                 alert(JSON.stringify(AddAntiForgeryToken(data)));
@@ -148,9 +147,7 @@
                     type: "POST",
                     url: "/Comment/Add",
                     data: data,
-                    success: function (result) {
-                        alert('post ok');
-                        console.log(result);
+                    success: function (result) {                                            
                         if (result.code == 200) {
                             showMsg("发表成功");
                             getList();
@@ -247,7 +244,7 @@
 
         //构建回复列表项
         buildReplyItem = function (comment) {
-            console.log(comment);
+            //console.log(comment);
             var html = "<div class='replyContainer'>" +
                         "<div class='replytitle'>{0}</div>:" +
                         "<div class='replyContent'>{1}</div> " +
@@ -312,7 +309,7 @@
                 var replyBoxDiv = $(this).parent();
 
                 $.post("/Comment/Add", data, function (result) {
-                    console.log(result);
+                    //console.log(result);
                     if (result.code == 200) {
                         var record = result.data;
                         var html = buildReplyItem(record);
