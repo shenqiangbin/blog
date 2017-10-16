@@ -6,6 +6,59 @@ body {
     padding: 0;
 }
 
+
+/*文本框*/
+input[type='text'], input[type='password'] {
+    font-family: PingFangSC-Regular;
+    height: 36px;
+    background: #FFFFFF;
+    border: 1px solid #D4D4D4;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    padding: 2px 10px;
+    box-sizing: border-box;
+}
+
+    input[type='text']:focus, input[type='password']:focus {
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba(16,142,233,.2);
+    }
+
+    input[type='text']:hover, input[type='password']:hover {
+        border: 1px solid #3D8FE4;
+    }
+
+/*按钮*/
+button {   
+    height: 30px;
+    color: white;
+    background: #3D8FE4;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+}
+
+    button:hover {
+        background-color: #538dde;
+    }
+    button[disabled]{
+       background-color: gray;
+       cursor:not-allowed;
+    }
+
+/*必填*/
+.must {
+    color: red;
+}
+
+.hidden{
+    display:none;
+}
+
 .nav {
     position: fixed;
     left: 0;

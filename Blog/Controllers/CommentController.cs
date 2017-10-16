@@ -26,7 +26,7 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Add(string articleId, string content, string commentId)
         {

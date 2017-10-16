@@ -22,7 +22,7 @@ namespace Blog.Controllers
             {
                 using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/xss.txt"), true))
                 {
-                    _testData.WriteLine(data+ "\r\n\r\n\r\n");  
+                    _testData.WriteLine(data+ "------------------------");  
                 }
                 return Content("");
             }

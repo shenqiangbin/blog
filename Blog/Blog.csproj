@@ -718,7 +718,6 @@
     <Content Include="Scripts\layui\font\iconfont.woff" />
     <Content Include="controller.ashx" />
     <Content Include="config.json" />
-    <Content Include="Views\Comment\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -731,6 +730,7 @@
     <Folder Include="Areas\backmgr\Models\" />
     <Folder Include="Areas\backmgr\Views\Db\" />
     <Folder Include="Images\emoji\" />
+    <Folder Include="Views\Comment\" />
     <Folder Include="Views\RSA\" />
     <Folder Include="Views\XSS\" />
   </ItemGroup>

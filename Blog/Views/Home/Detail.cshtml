@@ -28,6 +28,9 @@
     }
 }
 <div class="content">
+
+    @Html.AntiForgeryToken()
+
     <div class="detail-nav">
         <a href="@backUrl">返回</a>
     </div>
@@ -60,20 +63,22 @@
             }
             else
             {
-                <div>扫码分享</div>
+                <div>扫码分享</div>               
             }
-            <div id="qrcode" style=""></div>
+            <div id="qrcode" style=""></div>            
         </div>
     </div>
-    <button id="loadCommentBtn">展示评论区</button>
+    <div class="loadCommentBtnBox">
+        <button id="loadCommentBtn">展示评论区</button>
+    </div>
     <div class="commentBox hidden">
         <div class="commentBoxTitle">评论区</div>
-        <div style="width:526px;">
+        <div class="commentBoxBox">
             <div id="content" class="commentcontent" contenteditable="true"></div>
             <img id="btn" class="emojiBtn" src="~/Images/emoji.png" />
             <button id="publishBtn" class="publishBtn">发表</button>
         </div>
-        <div id="commentlist" style="margin-top: 23px;"></div>
+        <div id="commentlist" class="commentlistBox"></div>
         <div style="margin-top:5px;" id="pageBox">
             <input type="hidden" name="pageNumber" />
             <button id="btnPreview" onclick="previewPage();">上一页</button>
@@ -96,8 +101,6 @@
             </div>
         </div>
     </div>
-
-    @Html.AntiForgeryToken()
 </div>
 
 
@@ -137,17 +140,41 @@
             });
 
             $("#publishBtn").click(function () {
+                alert('button ok');
                 var content = $("#content").html();
                 var data = { articleId: articleId, Content: content };
-                $.post("/Comment/Add", AddAntiForgeryToken(data), function (result) {
-                    console.log(result);
-                    if (result.code == 200) {
-                        showMsg("发表成功");
-                        getList();
-                    } else {
-                        showMsg("发表失败");
+                alert(JSON.stringify(AddAntiForgeryToken(data)));
+                $.ajax({
+                    type: "POST",
+                    url: "/Comment/Add",
+                    data: data,
+                    success: function (result) {
+                        alert('post ok');
+                        console.log(result);
+                        if (result.code == 200) {
+                            showMsg("发表成功");
+                            getList();
+                        } else {
+                            showMsg("发表失败");
+                        }
+                    },
+                    error: function (msg) {
+                        alert(JSON.stringify(msg));
                     }
                 });
+
+                //$.post("/Comment/Add", AddAntiForgeryToken(data), function (result) {
+                //    alert('post ok');
+                //    console.log(result);
+                //    if (result.code == 200) {
+                //        showMsg("发表成功");
+                //        getList();
+                //    } else {
+                //        showMsg("发表失败");
+                //    }
+                //}, function () {
+                //    alert('error');
+                //});
             });
         });
 
@@ -257,8 +284,8 @@
         /*点击回复按钮*/
         showReplyBox = function (btn) {
             $(".replyBox").remove();
-            var html = '<div class="replyBox" style="width:460px;margin-top:5px;">' +
-                            '<div id="content2" style="width:434px;" class="commentcontent" contenteditable="true"></div>' +
+            var html = '<div class="replyBox">' +
+                            '<div id="content2" class="commentcontent commentcontent2" contenteditable="true"></div>' +
                             '<img id="btn2" class="emojiBtn" src="/Images/emoji.png" />' +
                             '<button id="publishBtn2" class="publishBtn">发表</button>' +
                         '</div>';
@@ -281,11 +308,10 @@
                 var content = $("#content2").html();
                 var replyListDiv = $(this).parent().parent().find('div.replyList');
                 var commentId = replyListDiv.attr('cid');
-                var data = { articleId: articleId, Content: content, CommentId: commentId };
-                debugger
+                var data = { articleId: articleId, Content: content, CommentId: commentId };                
                 var replyBoxDiv = $(this).parent();
 
-                $.post("/Comment/Add", AddAntiForgeryToken(data), function (result) {
+                $.post("/Comment/Add", data, function (result) {
                     console.log(result);
                     if (result.code == 200) {
                         var record = result.data;
