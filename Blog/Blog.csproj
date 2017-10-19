@@ -170,6 +170,7 @@
     <Content Include="Images\tip.svg" />
     <Content Include="Images\useravatar.svg" />
     <Content Include="Images\emoji.png" />
+    <Content Include="Images\weixin.png" />
     <Content Include="Lib\System.Data.SQLite.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -661,6 +662,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSAController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\XSSController.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Filters\UserAuthorizeAttribute.cs" />
