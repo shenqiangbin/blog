@@ -174,3 +174,16 @@ pre {
 :-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #BEBEBE;
 }
+
+table{
+    border-collapse:collapse;
+    font-family:微软雅黑;
+    font-size:small;      
+    width:100%;      
+}
+table td, table th
+{
+    border:1px solid red;
+    text-align:left;
+    height:30px;
+}

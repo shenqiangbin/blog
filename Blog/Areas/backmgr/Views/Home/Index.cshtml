@@ -8,8 +8,9 @@
     @Styles.Render("~/Content/backindex")
 }
 <div class="content">
-    <div style="padding-top:20px;">
+    <div class="backIndexNav">
         <a href="@Url.Action("Add","Article")">写博客</a>
+        <a href="@Url.Action("List","Comment")">评论管理</a>
         <a href="@Url.Action("Download","Db")">数据库备份下载</a>
     </div>
 
