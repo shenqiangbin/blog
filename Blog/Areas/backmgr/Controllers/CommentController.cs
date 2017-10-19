@@ -1,4 +1,5 @@
-﻿using Blog.Models;
+﻿using Blog.Filters;
+using Blog.Models;
 using Blog.Service;
 using PagedList;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Blog.Areas.backmgr.Controllers
 {
+    [UserAuthorize]
     public class CommentController : Controller
     {
         private CommentService _commentService;

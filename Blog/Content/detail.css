@@ -68,6 +68,10 @@ p {
     }
 
 /*评论*/
+.loadCommentBtnBox{
+    margin-top:30px;    
+}
+
 .commentBox{
     margin-top:30px;
 }

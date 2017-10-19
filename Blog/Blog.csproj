@@ -171,6 +171,7 @@
     <Content Include="Images\useravatar.svg" />
     <Content Include="Images\emoji.png" />
     <Content Include="Images\weixin.png" />
+    <Content Include="Images\bigtou.jpg" />
     <Content Include="Lib\System.Data.SQLite.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
