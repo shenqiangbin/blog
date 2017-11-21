@@ -8,7 +8,7 @@
 <style>
     .titleContainer {
         margin: 20px auto;
-    }   
+    }
 
     .title {
         font-weight: bold;
@@ -16,14 +16,14 @@
         font-size: large;
     }
 
-    .form-line{
-        border:0px solid red;
-        margin-bottom:15px;
+    .form-line {
+        border: 0px solid red;
+        margin-bottom: 15px;
     }
 
-    .form-line div:first-child{
-        margin-bottom:5px;
-    }
+        .form-line div:first-child {
+            margin-bottom: 5px;
+        }
 
     .addtitle {
         width: 100%;
@@ -38,7 +38,7 @@
         top: 10%;
         right: 0%;
         z-index: 999;
-        background-color: green;        
+        background-color: green;
         padding: 20px;
     }
 
@@ -112,7 +112,7 @@
         <div><span class="must">*</span>题目：</div>
         <input type="text" name="title" value="@Model.Title" class="addtitle" id="title" />
     </div>
-   
+
     <div class="form-line">
         <div><span class="must">*</span>Url题目（url中使用）：</div>
         <input type="text" name="urlTitle" value="@Model.UrlTitle" class="addtitle" id="urlTitle" />
@@ -133,7 +133,12 @@
 
     </div>
     <div id="labelDb" class="hidden">
-
+    </div>
+    <p></p>
+    <div>
+        <input type="text" id="labelNew" maxlength="50" />
+        <input type="button" value="新增标签" id="btnLableNew" />
+        <span id="labelNewMsg"></span>
     </div>
 
     <div class="handleContainer">
@@ -292,6 +297,46 @@
                     }
                 });
             }
+
+            $("#btnLableNew").click(function () {
+
+                $("#btnLableNew").attr("disabled", "true");
+
+                var labelNew = $.trim($("#labelNew").val());
+                if (!labelNew) {
+                    $("#labelNewMsg").html('新标签名称不能为空');
+                    $("#btnLableNew").removeAttr("disabled");
+                    return;
+                }
+                var data = {};
+                data.LabelName = labelNew;
+
+                $.ajax({
+                    type: "Post",
+                    url: "/backmgr/Label/Add",
+                    data: AddAntiForgeryToken(data),
+                    success: function (result) {
+                        if (result.code == 200) {                            
+                            $("#labelNewMsg").html('新增成功');
+                            $("#labelNew").val('');
+
+                            //展示列表
+                            $("#labelDb").addClass('hidden');
+                            $("#selectLabel").click();
+                        } else {                            
+                            $("#labelNewMsg").html(result.msg);
+                        }
+                        $("#btnLableNew").removeAttr("disabled");
+                    },
+                    error: function (msg) {
+                        $("#labelNewMsg").html(msg);
+                        $("#btnLableNew").removeAttr("disabled");
+                    }
+
+                });
+            });
+
+
         });
 
 
