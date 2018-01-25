@@ -160,5 +160,62 @@ namespace Blog.Repository
 
             return result;
         }
+
+        public CommentInfoListModelResult GetInfoPaged(CommentInfoListQuery listModel)
+        {
+            CommentInfoListModelResult result = new CommentInfoListModelResult();
+            result.List = new List<CommentInfo>();
+
+            StringBuilder builder = new StringBuilder("select Comment.*,Article.Title as ArticleTitle from comment left join Article on Article.ArticleId = Comment.articleid where Comment.Enable = 1");
+
+            if (!string.IsNullOrEmpty(listModel.ArticleId))
+                builder.Append(" and Comment.ArticleId = ?");
+
+            if (string.IsNullOrEmpty(listModel.Order))
+                builder.Append(" order by Comment.createtime desc,Comment.CommentId asc");
+
+            object[] para = { listModel.ArticleId };
+
+            DataTable dt = SQLiteHelper.ExecutePager(listModel.PageIndex, listModel.PageSize, builder.ToString(), para);
+            foreach (DataRow item in dt.Rows)
+            {
+                result.List.Add(RowToModelInfo(item));
+            }
+
+            StringBuilder countSql = new StringBuilder("select count(1) from Comment left join Article on Article.ArticleId = Comment.articleid where Comment.Enable = 1");
+            if (!string.IsNullOrEmpty(listModel.ArticleId))
+                countSql.Append(" and Comment.ArticleId = ?");
+
+            object countNum = SQLiteHelper.ExecuteScalar(countSql.ToString(), para);
+            result.TotalCount = Convert.ToInt32(countNum);
+
+            return result;
+        }
+
+        private CommentInfo RowToModelInfo(DataRow row)
+        {
+            if (row == null)
+                return null;
+
+            CommentInfo model = new CommentInfo();
+            model.CommentId = Convert.ToInt32(row["CommentId"]);
+            model.ArticleId = Convert.ToInt32(row["ArticleId"]);
+            model.UserName = Convert.ToString(row["UserName"]);
+            model.Content = Convert.ToString(row["Content"]);
+            model.ParentId = Convert.ToInt32(row["ParentId"]);
+            model.CreateTime = Convert.ToDateTime(row["CreateTime"]);
+            model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
+            model.Enable = Convert.ToInt32(row["Enable"]);
+
+            if (row["UpdateTime"] != DBNull.Value)
+                model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
+
+            model.Enable = Convert.ToInt32(row["Enable"]);
+            model.ArticleTitle = Convert.ToString(row["ArticleTitle"]);
+
+            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
+
+            return model;
+        }
     }
 }

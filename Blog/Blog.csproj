@@ -143,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\commentList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Content\backLogList.css" />
     <Content Include="Content\backindex.css" />
@@ -170,6 +171,7 @@
     <Content Include="Images\useravatar.svg" />
     <Content Include="Images\emoji.png" />
     <Content Include="Images\weixin.png" />
+    <Content Include="Images\bigtou.jpg" />
     <Content Include="Lib\System.Data.SQLite.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -641,6 +643,7 @@
     <Compile Include="Areas\backmgr\backmgrAreaRegistration.cs" />
     <Compile Include="Areas\backmgr\Controllers\AccountController.cs" />
     <Compile Include="Areas\backmgr\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\backmgr\Controllers\CommentController.cs" />
     <Compile Include="Areas\backmgr\Controllers\DbController.cs" />
     <Compile Include="Areas\backmgr\Controllers\HomeController.cs" />
     <Compile Include="Areas\backmgr\Controllers\LabelController.cs" />
@@ -720,6 +723,7 @@
     <Content Include="Scripts\layui\font\iconfont.woff" />
     <Content Include="controller.ashx" />
     <Content Include="config.json" />
+    <Content Include="Areas\backmgr\Views\Comment\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

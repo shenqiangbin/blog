@@ -8,9 +8,11 @@
     @Styles.Render("~/Content/backindex")
 }
 <div class="content">
-    <div style="padding-top:20px;">
+    <div class="backIndexNav">
         <a href="@Url.Action("Add","Article")">写博客</a>
+        <a href="@Url.Action("List","Comment")">评论管理</a>
         <a href="@Url.Action("Download","Db")">数据库备份下载</a>
+        <a target="_blank" href="https://tongji.baidu.com/web/welcome/ico?s=ef18c725ee26ac659f672367d8d541ee">百度统计</a>
     </div>
 
     <div class="indexcontainer">

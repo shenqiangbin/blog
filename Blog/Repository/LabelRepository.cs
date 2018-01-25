@@ -11,7 +11,7 @@ namespace Blog.Repository
     {
         public int Add(Label model)
         {
-            string cmdText = "insert into label values(?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+            string cmdText = "insert into label values(?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
                     model.Name,

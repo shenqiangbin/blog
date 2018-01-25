@@ -1,4 +1,12 @@
-﻿.record {
+﻿.backIndexNav{
+    padding-top:20px;
+}
+
+.backIndexNav a{
+    margin-right:20px;
+}
+
+.record {
     border-bottom: 1px solid gray;
     margin-bottom: 5px;
     line-height: 30px;
