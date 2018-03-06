@@ -178,6 +178,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Lib\System.Data.SQLite.XML" />
+    <Content Include="S.png" />
     <Content Include="Scripts\backcommon.js" />
     <Content Include="Scripts\business\articledetail.js" />
     <Content Include="Scripts\emoji\css\jquery.emoji.css" />
