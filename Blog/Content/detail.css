@@ -1,4 +1,9 @@
-﻿.detail-nav {
+﻿a{
+    word-break:break-all;
+    word-wrap:break-word;
+}
+
+.detail-nav {
     margin-top: 22px;
 }
 

@@ -156,7 +156,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Lib\sqlite3.def" />
-    <EmbeddedResource Include="Lib\sqlite3.dll" />
+    <EmbeddedResource Include="Lib\sqlite3.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Images\label2.png" />
     <Content Include="Images\label3.png" />
     <Content Include="Images\loadingbar.gif" />
