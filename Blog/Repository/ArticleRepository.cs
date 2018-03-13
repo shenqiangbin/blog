@@ -12,7 +12,7 @@ namespace Blog.Repository
     {
         public int Add(Article model)
         {
-            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
+            model.Content = Common.XSSHelper.Sanitize(model.Content);
 
             string cmdText = @"insert into article (ArticleId, Title, Content, ContentLevel, PublishStatus, KeyWords, UrlTitle, UrlTitleNum, DisplayCreatedTime, CreateUser, CreatedTime, UpdateTime, Enable) 
                 values(?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
@@ -41,7 +41,7 @@ namespace Blog.Repository
 
         public int Update(Article model)
         {
-            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
+            model.Content = Common.XSSHelper.Sanitize(model.Content);
 
             string sql = @"
 update Article set 
@@ -97,7 +97,7 @@ Enable = ?
             model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
             model.Enable = Convert.ToInt32(row["Enable"]);
 
-            model.Content = new Ganss.XSS.HtmlSanitizer().Sanitize(model.Content);
+            model.Content = Common.XSSHelper.Sanitize(model.Content);
 
             return model;
         }

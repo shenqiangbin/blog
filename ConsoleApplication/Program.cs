@@ -25,6 +25,12 @@ namespace ConsoleApplication
             var md5 = MD5Helper.MD5Value("abc");
             var s = HashHelper.HashMd5("123", md5);
 
+            var sanitizer = new Ganss.XSS.HtmlSanitizer();
+            sanitizer.AllowedTags.Add("iframe");
+            sanitizer.AllowedAttributes.Add("frameborder");
+            sanitizer.AllowedAttributes.Add("allowfullscreen");
+            var str = sanitizer.Sanitize("abc<iframe height=800px width=100% src='http://player.youku.com/embed/XMzQ2MTI0NDA0NA==' frameborder=0 allowfullscreen></iframe>");
+
             Console.WriteLine("ok");
             Console.ReadLine();
         }

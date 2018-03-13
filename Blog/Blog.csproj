@@ -661,6 +661,7 @@
     <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\ValidateException.cs" />
     <Compile Include="Common\ValidateHelper.cs" />
+    <Compile Include="Common\XSSHelper.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
