@@ -3,6 +3,10 @@
     word-wrap:break-word;
 }
 
+iframe{
+    height:732px;
+}
+
 .detail-nav {
     margin-top: 22px;
 }
