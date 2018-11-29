@@ -7,6 +7,8 @@
 *.userosscache
 *.sln.docstates
 *.db3
+blog.pubxml
+blog.db3
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -211,3 +213,4 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+*.db3
