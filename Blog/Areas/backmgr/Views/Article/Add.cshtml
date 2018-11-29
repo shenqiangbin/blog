@@ -4,6 +4,7 @@
     ViewBag.Title = ViewBag.IsNew ? "新增文章" : "编辑文章";
     string backUrl = Request.UrlReferrer != null ? Request.UrlReferrer.OriginalString : "/backmgr/home";
 }
+@Styles.Render("~/Scripts/editor.md/css/editormd.min.css")
 
 <style>
     .titleContainer {
@@ -93,9 +94,6 @@
                 background: red;
             }
 
-    .hidden {
-        display: none;
-    }
 </style>
 
 <div class="content">
@@ -125,8 +123,23 @@
 
     内容：
     <br />
-    <script id="caseContent" name="caseContent" type="text/plain" style="width:100%;height:400px;margin-top:5px;">
-    </script>
+    
+    <div>
+        <input type="radio" name="radioEditor" value="0" id="radioSecret1" /><label for="radioSecret1">MarkDown编辑器</label>
+        <input type="radio" name="radioEditor" value="1" id="radioSecret2" /><label for="radioSecret2">UE编辑器</label>
+    </div>
+
+    <div id="ueBox" class="hidden">
+        <script id="caseContent" name="caseContent" type="text/plain" style="width:100%;height:400px;margin-top:5px;">
+        </script>
+    </div>
+    <div id="mdBox" class="hidden">
+        <div id="editormd">
+            <textarea style="display:none;"></textarea>
+        </div>
+    </div>
+
+
 
     <input type="button" value="选择标签" id="selectLabel" />
     <div id="labelContainer">
@@ -158,6 +171,7 @@
 
     @Scripts.Render("~/Scripts/ueditor/js")
     @Scripts.Render("~/Scripts/ueditor/lang/zh-cn/zh")
+    @Scripts.Render("~/Scripts/editor.md/editormd.min.js")
 
     <script>
         $(function () {
@@ -168,6 +182,7 @@
                 return articleId;
             }
 
+            //初始化UEditor
             var ue = "";
             initUEditor();
 
@@ -176,6 +191,59 @@
                     ue = UE.getEditor('caseContent');
                 }
             }
+
+            //初始化 editormd
+            var testEditor = editormd("editormd", {
+                placeholder: "开始编辑...",
+                width: "100%",
+                height: 640,
+                //syncScrolling: "single",
+                imageUpload: true,//图片上传功能  
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL: "../article/uploadImage",
+                path: "/Scripts/editor.md/lib/",
+                emoji: false,
+                tocm: true,  // Using [TOCM]  
+                tex: true,  // 开启科学公式TeX语言支持
+                flowChart: true,
+                sequenceDiagram: true,
+                toolbarIcons: function () {
+                    // Or return editormd.toolbarModes[name]; // full, simple, mini  
+                    // Using "||" set icons align right.  
+                    return ["undo", "redo", "|", "bold", "italic", "quote", "uppercase", "lowercase", "|", "h1", "h2", "h3", "h4", "|", "list-ul", "list-ol", "hr", "|", "link", "image", "code", "code-block", "table", "html-entities", "|", "watch", "preview", "fullscreen", "clear", "|", "help"]
+                },
+            });
+
+            var theEditor = 0;//默认editormd
+            //theEditor = getFromDb; //编辑状态需要重新赋值
+           
+            var showEditorBox = function (selectVal) {
+                if (selectVal == 0) {
+                    $("#mdBox").show();
+                    $("#ueBox").hide();
+
+                    //removejscssfile("/Scripts/ueditor/third-party/codemirror/codemirror.css", "css");
+                } else {
+                    $("#mdBox").hide();
+                    $("#ueBox").show();
+
+                    //loadjscssfile("/Scripts/ueditor/third-party/codemirror/codemirror.css", "css");
+                }
+                $("input[name=radioEditor][value=" + selectVal + "]").prop("checked", true);
+            }
+
+            //setTimeout(function () {; }, 1000);
+            showEditorBox(0);
+            
+
+            //保存时，要根据情况保存
+
+            $("input[name=radioEditor]").change(function () {
+                var selectVal = $("input[name=radioEditor]:checked").val();
+                showEditorBox(selectVal);
+            });
+
+            
 
             $("#btnSave").click(function () {
                 save(function (id) {

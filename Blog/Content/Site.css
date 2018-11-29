@@ -180,3 +180,6 @@ pre {
     color: #BEBEBE;
 }
 
+.hidden {
+    display: none;
+}
