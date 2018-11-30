@@ -14,8 +14,8 @@ namespace Blog.Repository
         {
             model.Content = Common.XSSHelper.Sanitize(model.Content);
 
-            string cmdText = @"insert into article (ArticleId, Title, Content, ContentLevel, PublishStatus, KeyWords, UrlTitle, UrlTitleNum, DisplayCreatedTime, CreateUser, CreatedTime, UpdateTime, Enable) 
-                values(?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+            string cmdText = @"insert into article (ArticleId, Title, Content, ContentLevel, PublishStatus, KeyWords, UrlTitle, UrlTitleNum, Editor, DisplayCreatedTime, CreateUser, CreatedTime, UpdateTime, Enable) 
+                values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
                     model.Title,
@@ -25,6 +25,7 @@ namespace Blog.Repository
                     model.KeyWords,
                     model.UrlTitle,
                     model.UrlTitleNum,
+                    model.Editor,
                     model.DisplayCreatedTime,
                     model.CreateUser,
                     model.CreatedTime,
@@ -53,6 +54,7 @@ DisplayCreatedTime = ?,
 KeyWords = ?,
 UrlTitle = ?,
 UrlTitleNum = ?,
+Editor = ?,
 CreatedTime = ?,
 UpdateTime = ?,
 Enable = ?
@@ -67,6 +69,7 @@ Enable = ?
                     model.KeyWords,
                     model.UrlTitle,
                     model.UrlTitleNum,
+                    model.Editor,
                     model.CreatedTime,
                     model.UpdateTime,
                     model.Enable,
@@ -92,6 +95,7 @@ Enable = ?
             model.KeyWords = Convert.ToString(row["KeyWords"]);
             model.UrlTitle = Convert.ToString(row["UrlTitle"]);
             model.UrlTitleNum = Convert.ToString(row["UrlTitleNum"]);
+            model.Editor = Convert.ToInt32(row["Editor"]);
             model.CreateUser = Convert.ToString(row["CreateUser"]);
             model.CreatedTime = Convert.ToDateTime(row["CreatedTime"]);
             model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);

@@ -37,6 +37,10 @@ namespace Blog.Models
         /// url标题数字（需要唯一）
         /// </summary>
         public string UrlTitleNum { get; set; }
+        /// <summary>
+        /// 使用的编辑器
+        /// </summary>
+        public int Editor { get; set; }
 
         public string CreateUser { get; set; }
         public DateTime CreatedTime { get; set; }
@@ -77,5 +81,11 @@ namespace Blog.Models
         /// 全部
         /// </summary>
         All = 2,
+    }
+
+    public enum ArticleEditor
+    {
+        MarkDown = 0,
+        UEditor = 1,
     }
 }

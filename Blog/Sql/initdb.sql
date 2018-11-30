@@ -19,6 +19,11 @@ UPDATE Article set createuser  = 'shenqiangbin@163.com'
 ALTER TABLE Article ADD COLUMN KeyWords nvarchar(50);
 ALTER TABLE Article ADD COLUMN UrlTitle nvarchar(50);
 ALTER TABLE Article ADD COLUMN UrlTitleNum nvarchar(50);
+/*2018-11-30*/
+/*文章添加编辑器列，0-markdown编辑器，1-ue编辑器*/
+ALTER TABLE Article ADD COLUMN Editor int;
+/*更新已有记录*/
+UPDATE Article set Editor = 1;
 
 
 /*分类*/

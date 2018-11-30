@@ -105,6 +105,7 @@
 
     <input type="hidden" id="articleId" name="articleId" value="@(ViewBag.IsNew ?  "" : Model.ArticleId.ToString() )" />
     <input type="hidden" id="contentHidden" value="@Model.Content" />
+    <input type="hidden" id="modelEditor" value="@Model.Editor" />
 
     <div class="form-line">
         <div><span class="must">*</span>题目：</div>
@@ -133,7 +134,7 @@
         <script id="caseContent" name="caseContent" type="text/plain" style="width:100%;height:400px;margin-top:5px;">
         </script>
     </div>
-    <div id="mdBox" class="hidden">
+    <div id="mdBox">
         <div id="editormd">
             <textarea style="display:none;"></textarea>
         </div>
@@ -177,9 +178,18 @@
         $(function () {
 
             var articleId = $("#articleId").val();
+            var content = "";
+            var theEditor = 0;//默认editormd
 
             function isEdit() {
                 return articleId;
+            }
+
+            //编辑时，初始化数据
+            if (isEdit()) {
+                content = $("#contentHidden").val();
+                theEditor = $("#modelEditor").val();
+                initLabelContainer();
             }
 
             //初始化UEditor
@@ -191,6 +201,13 @@
                     ue = UE.getEditor('caseContent');
                 }
             }
+
+            if (theEditor == 1) {
+                ue.ready(function () {
+                    ue.setContent(content);
+                });
+            }
+           
 
             //初始化 editormd
             var testEditor = editormd("editormd", {
@@ -212,38 +229,42 @@
                     // Using "||" set icons align right.  
                     return ["undo", "redo", "|", "bold", "italic", "quote", "uppercase", "lowercase", "|", "h1", "h2", "h3", "h4", "|", "list-ul", "list-ol", "hr", "|", "link", "image", "code", "code-block", "table", "html-entities", "|", "watch", "preview", "fullscreen", "clear", "|", "help"]
                 },
+                onload: function () {
+                    if (theEditor == 0) 
+                        testEditor.setMarkdown(content);
+                }
             });
 
-            var theEditor = 0;//默认editormd
-            //theEditor = getFromDb; //编辑状态需要重新赋值
-           
             var showEditorBox = function (selectVal) {
                 if (selectVal == 0) {
                     $("#mdBox").show();
                     $("#ueBox").hide();
-
-                    //removejscssfile("/Scripts/ueditor/third-party/codemirror/codemirror.css", "css");
                 } else {
                     $("#mdBox").hide();
                     $("#ueBox").show();
-
-                    //loadjscssfile("/Scripts/ueditor/third-party/codemirror/codemirror.css", "css");
                 }
                 $("input[name=radioEditor][value=" + selectVal + "]").prop("checked", true);
             }
 
-            //setTimeout(function () {; }, 1000);
-            showEditorBox(0);
-            
-
-            //保存时，要根据情况保存
+            setTimeout(function () { showEditorBox(theEditor); }, 1000);
 
             $("input[name=radioEditor]").change(function () {
                 var selectVal = $("input[name=radioEditor]:checked").val();
                 showEditorBox(selectVal);
             });
 
-            
+            //保存时，要根据情况获取content值
+            function getContent() {
+                var selectVal = $("input[name=radioEditor]:checked").val();
+                if (selectVal == 0) {
+                    return testEditor.getMarkdown();
+                } else {
+                    if (ue)
+                        return ue.getContent();
+                    else
+                        return "";
+                }
+            }
 
             $("#btnSave").click(function () {
                 save(function (id) {
@@ -265,8 +286,8 @@
                 data.urlTitle = $.trim($("#urlTitle").val());
                 data.keywords = $.trim($("#keywords").val());
                 data.lables = getSelectedItems();
-                if (ue)
-                    data.content = ue.getContent();
+                data.editor = $("input[name=radioEditor]:checked").val();
+                data.content = getContent();
 
                 if (!validateData(data))
                     return;
@@ -300,15 +321,6 @@
 
             function showMsg(msg) {
                 $('#msg').html(msg);
-            }
-
-            //编辑时，初始化数据
-            if (isEdit()) {
-                ue.ready(function () {
-                    ue.setContent($("#contentHidden").val());
-                });
-
-                initLabelContainer();
             }
 
             //定时保存
@@ -384,14 +396,14 @@
                     url: "/backmgr/Label/Add",
                     data: AddAntiForgeryToken(data),
                     success: function (result) {
-                        if (result.code == 200) {                            
+                        if (result.code == 200) {
                             $("#labelNewMsg").html('新增成功');
                             $("#labelNew").val('');
 
                             //展示列表
                             $("#labelDb").addClass('hidden');
                             $("#selectLabel").click();
-                        } else {                            
+                        } else {
                             $("#labelNewMsg").html(result.msg);
                         }
                         $("#btnLableNew").removeAttr("disabled");
