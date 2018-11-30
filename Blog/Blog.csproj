@@ -1030,7 +1030,9 @@
     <Compile Include="Common\ValidateHelper.cs" />
     <Compile Include="Common\XSSHelper.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\Default1Controller.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSAController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -1123,6 +1125,7 @@
     <Folder Include="Areas\backmgr\Views\Db\" />
     <Folder Include="Images\emoji\" />
     <Folder Include="Views\Comment\" />
+    <Folder Include="Views\File\" />
     <Folder Include="Views\RSA\" />
     <Folder Include="Views\XSS\" />
   </ItemGroup>
