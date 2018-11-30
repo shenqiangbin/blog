@@ -1,22 +1,5 @@
 ﻿$(function () {
 
-    //折叠
-    $('pre').each(function () {
-        var item = $("<div style='color:blue;cursor:pointer;margin-bottom:-12px;font-size:14px;'>折叠</div>");
-        item.click(function () {
-            var val = item.html();
-            if (val == "折叠") {
-                item.next().hide();
-                item.html("展开");
-                item.css('margin-bottom', '0px');
-            } else {
-                item.next().show();
-                item.html("折叠");
-                item.css('margin-bottom', '-12px');
-            }
-        });
-        $(this).before(item);
-    });
 
     //二维码
     var url = location.href;
