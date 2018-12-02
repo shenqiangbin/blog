@@ -1,4 +1,5 @@
-﻿@model Article
+﻿
+@model Article
 
 @{
     ViewBag.Title = ViewBag.IsNew ? "新增文章" : "编辑文章";
@@ -126,8 +127,10 @@
     <br />
     
     <div>
-        <input type="radio" name="radioEditor" value="0" id="radioSecret1" /><label for="radioSecret1">MarkDown编辑器</label>
-        <input type="radio" name="radioEditor" value="1" id="radioSecret2" /><label for="radioSecret2">UE编辑器</label>
+        <input type="radio" name="radioEditor" value="0" id="radioSecret1" /><label for="radioSecret1">Markdown编辑器</label>
+        <span><a href="http://pandao.github.io/editor.md/" target="_blank">[Markdown语法帮助]</a></span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="radioEditor" value="1" id="radioSecret2" /><label for="radioSecret2">UE编辑器</label>        
     </div>
 
     <div id="ueBox" class="hidden">
