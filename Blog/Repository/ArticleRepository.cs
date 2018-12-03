@@ -12,7 +12,8 @@ namespace Blog.Repository
     {
         public int Add(Article model)
         {
-            model.Content = Common.XSSHelper.Sanitize(model.Content);
+            if (model.Editor == (int)ArticleEditor.UEditor)
+                model.Content = Common.XSSHelper.Sanitize(model.Content);
 
             string cmdText = @"insert into article (ArticleId, Title, Content, ContentLevel, PublishStatus, KeyWords, UrlTitle, UrlTitleNum, Editor, DisplayCreatedTime, CreateUser, CreatedTime, UpdateTime, Enable) 
                 values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
@@ -42,7 +43,8 @@ namespace Blog.Repository
 
         public int Update(Article model)
         {
-            model.Content = Common.XSSHelper.Sanitize(model.Content);
+            if (model.Editor == (int)ArticleEditor.UEditor)
+                model.Content = Common.XSSHelper.Sanitize(model.Content);
 
             string sql = @"
 update Article set 
@@ -101,7 +103,8 @@ Enable = ?
             model.UpdateTime = Convert.ToDateTime(row["UpdateTime"]);
             model.Enable = Convert.ToInt32(row["Enable"]);
 
-            model.Content = Common.XSSHelper.Sanitize(model.Content);
+            if (model.Editor == (int)ArticleEditor.UEditor)
+                model.Content = Common.XSSHelper.Sanitize(model.Content);
 
             return model;
         }
