@@ -27,9 +27,22 @@ namespace ConsoleApplication
 
             var sanitizer = new Ganss.XSS.HtmlSanitizer();
             sanitizer.AllowedTags.Add("iframe");
+            sanitizer.AllowedTags.Add("link");
+            sanitizer.AllowedTags.Add("script");
             sanitizer.AllowedAttributes.Add("frameborder");
             sanitizer.AllowedAttributes.Add("allowfullscreen");
-            var str = sanitizer.Sanitize("abc<iframe height=800px width=100% src='http://player.youku.com/embed/XMzQ2MTI0NDA0NA==' frameborder=0 allowfullscreen></iframe>");
+            var ms = @"> 引入样式
+
+`<link rel='stylesheet' href='css/editormd.min.css' />`
+
+> 引入js
+
+````
+<script src='jquery.min.js'></script>
+<script src='editormd.min.js'></script>
+````
+> HTML";
+            var str = sanitizer.Sanitize(ms);
 
             Console.WriteLine("ok");
             Console.ReadLine();

@@ -11,6 +11,8 @@ namespace Blog.Common
         {
             var sanitizer = new Ganss.XSS.HtmlSanitizer();
             sanitizer.AllowedTags.Add("iframe");
+            sanitizer.AllowedTags.Add("link");
+            sanitizer.AllowedTags.Add("script");
             sanitizer.AllowedAttributes.Add("frameborder");
             sanitizer.AllowedAttributes.Add("allowfullscreen");
             return sanitizer.Sanitize(html);
