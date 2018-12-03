@@ -6,6 +6,11 @@ iframe{
     height:210px;
 }
 
+.editormd-html-preview pre.prettyprint{
+    white-space: pre !important;
+    overflow-x: scroll;
+}
+
 a{
     word-break:break-all;
     word-wrap:break-word;
@@ -14,6 +19,7 @@ a{
 .detail-title {
     text-align: center;
     margin-bottom: 30px;
+    margin-top: 60px;
 }
 
 .sec * {
@@ -59,6 +65,7 @@ p {
     font-size: 14px;
     letter-spacing: 4px;
     z-index: 999;
+    margin-top: 15px;
 }
 
     .qrcodeContainer div:first-child {
