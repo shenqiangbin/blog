@@ -78,6 +78,10 @@
     <div class="commentBox hidden">
         <div class="commentBoxTitle">评论区</div>
         <div class="commentBoxBox">
+            <p>昵称：<input type="text" id="userName" value="" /></p>
+            <p>邮箱：<input type="text" id="email" value="" /><span>回复消息将通过邮件发送</span></p>
+            <p>站点：<input type="text" id="site" value="" /></p>
+            <p>内容：</p>
             <div id="content" class="commentcontent" contenteditable="true"></div>
             <img id="btn" class="emojiBtn" src="~/Images/emoji.png" />
             <button id="publishBtn" class="publishBtn">发表</button>
@@ -169,13 +173,13 @@
             $("#publishBtn").click(function () {                
                 var content = $("#content").html();
                 var data = { articleId: articleId, Content: content };
-                alert(JSON.stringify(AddAntiForgeryToken(data)));
                 $.ajax({
                     type: "POST",
                     url: "/Comment/Add",
                     data: data,
-                    success: function (result) {                                            
+                    success: function (result) {
                         if (result.code == 200) {
+                            $("#content").html("");
                             showMsg("发表成功");
                             getList();
                         } else {
@@ -308,11 +312,12 @@
         /*点击回复按钮*/
         showReplyBox = function (btn) {
             $(".replyBox").remove();
-            var html = '<div class="replyBox">' +
-                            '<div id="content2" class="commentcontent commentcontent2" contenteditable="true"></div>' +
-                            '<img id="btn2" class="emojiBtn" src="/Images/emoji.png" />' +
-                            '<button id="publishBtn2" class="publishBtn">发表</button>' +
-                        '</div>';
+            var html = `<div class='replyBox'>
+                            <div id='content2' class='commentcontent commentcontent2' contenteditable='true'></div> 
+                            <img id='btn2' class='emojiBtn' src='/Images/emoji.png' />
+                            <button id='publishBtn2' class='publishBtn'>发表</button> 
+                        </div>
+                        `;
             $(btn).parent().parent().append(html);
 
             $("#content2").emoji({

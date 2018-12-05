@@ -196,8 +196,10 @@ p {
 
 /*回复列表*/
  .replyContainer{
-     margin-top:5px;
-     border:1px solid #aff6a7;     
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    padding: 5px;
+    border-radius: 6px;
  }
 
  .replyBox{
