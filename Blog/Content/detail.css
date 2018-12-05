@@ -221,3 +221,8 @@ p {
     color: gray;
     margin-top: 10px;
  }
+
+ /*必填*/
+ .must{
+     color:red;
+ }

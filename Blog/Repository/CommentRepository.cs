@@ -14,12 +14,14 @@ namespace Blog.Repository
         {
             model.Content = Common.XSSHelper.Sanitize(model.Content);
 
-            string cmdText = @"INSERT INTO Comment (CommentId, ArticleId, UserName, Content,ParentId, CreateTime, UpdateTime, Enable)
-                VALUES (?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+            string cmdText = @"INSERT INTO Comment (CommentId, ArticleId, UserName, Email, Site, Content,ParentId, CreateTime, UpdateTime, Enable)
+                VALUES (?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                             null,  //对应的主键不要赋值了
                             model.ArticleId,
                             model.UserName,
+                            model.Email,
+                            model.Site,
                             model.Content,
                             model.ParentId,
                             model.CreateTime,
@@ -87,6 +89,8 @@ namespace Blog.Repository
             model.CommentId = Convert.ToInt32(row["CommentId"]);
             model.ArticleId = Convert.ToInt32(row["ArticleId"]);
             model.UserName = Convert.ToString(row["UserName"]);
+            model.Email = Convert.ToString(row["Email"]);
+            model.Site = Convert.ToString(row["Site"]);
             model.Content = Convert.ToString(row["Content"]);
             model.ParentId = Convert.ToInt32(row["ParentId"]);
             model.CreateTime = Convert.ToDateTime(row["CreateTime"]);
@@ -201,6 +205,8 @@ namespace Blog.Repository
             model.CommentId = Convert.ToInt32(row["CommentId"]);
             model.ArticleId = Convert.ToInt32(row["ArticleId"]);
             model.UserName = Convert.ToString(row["UserName"]);
+            model.Email = Convert.ToString(row["Email"]);
+            model.Site = Convert.ToString(row["Site"]);
             model.Content = Convert.ToString(row["Content"]);
             model.ParentId = Convert.ToInt32(row["ParentId"]);
             model.CreateTime = Convert.ToDateTime(row["CreateTime"]);

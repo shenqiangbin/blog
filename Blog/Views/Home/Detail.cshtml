@@ -78,10 +78,19 @@
     <div class="commentBox hidden">
         <div class="commentBoxTitle">评论区</div>
         <div class="commentBoxBox">
-            <p>昵称：<input type="text" id="userName" value="" /></p>
-            <p>邮箱：<input type="text" id="email" value="" /><span>回复消息将通过邮件发送</span></p>
-            <p>站点：<input type="text" id="site" value="" /></p>
-            <p>内容：</p>
+            <p>
+                <span style="width:74px;display: inline-block;"><span class="must">*</span>昵称：</span>
+                <input type="text" id="userName" value="" style="width:335px"/>
+            </p>
+            <p>
+                <span style="width:74px;display: inline-block;"><span class="must">*</span>邮箱：</span>
+                <input type="text" id="email" value="" style="width:335px"/>
+            </p>
+            <p>
+                <span style="width:74px;display: inline-block;">个人站点：</span>
+                <input type="text" id="site" value="" style="width:335px"/>
+            </p>
+            <p><span class="must">*</span>想说的话：</p>
             <div id="content" class="commentcontent" contenteditable="true"></div>
             <img id="btn" class="emojiBtn" src="~/Images/emoji.png" />
             <button id="publishBtn" class="publishBtn">发表</button>
@@ -135,6 +144,7 @@
 
     <script src="~/Scripts/editor.md/editormd.min.js"></script>
 
+    <script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
 
     <script>
         $(function () {
@@ -170,9 +180,29 @@
                 getList(1);
             });
 
-            $("#publishBtn").click(function () {                
+            $("#loadCommentBtn").click();
+
+            $("#publishBtn").click(function () {
+                var userName = $("#userName").val().trim();
+                var email = $("#email").val().trim();
+                var site = $("#site").val().trim();
                 var content = $("#content").html();
-                var data = { articleId: articleId, Content: content };
+
+                //长度和邮箱，网址 验证略
+                if (!userName) {
+                    layer.msg("昵称不能为空");
+                    return;
+                }
+                if (!email) {
+                    layer.msg("邮箱不能为空");
+                    return;
+                }
+                if (!content) {
+                    layer.msg("评论不能为空");
+                    return;
+                }
+
+                var data = { articleId: articleId, Content: content, userName: userName, email:email, site:site  };
                 $.ajax({
                     type: "POST",
                     url: "/Comment/Add",
@@ -183,11 +213,11 @@
                             showMsg("发表成功");
                             getList();
                         } else {
-                            showMsg("发表失败");
+                            showMsg(result.msg);
                         }
                     },
                     error: function (msg) {
-                        alert(JSON.stringify(msg));
+                        showMsg("发表失败");
                     }
                 });
 
@@ -212,7 +242,7 @@
         };
 
         showMsg = function (msg) {
-            $("#msg").html(msg);
+            layer.msg(msg);
         }
 
         /*获取评论信息*/

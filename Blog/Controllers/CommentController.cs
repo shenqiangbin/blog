@@ -28,17 +28,19 @@ namespace Blog.Controllers
         [HttpPost]
         //[ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Add(string articleId, string content, string commentId)
+        public ActionResult Add(string articleId, string userName, string email, string site, string content, string commentId)
         {
             try
             {
-                AddValidate(articleId, content);
+                AddValidate(articleId, content, userName, email, site);
 
                 int id = _commentService.Add(
                     new Comment
                     {
                         ArticleId = Convert.ToInt32(articleId),
-                        UserName = "游客",
+                        UserName = string.IsNullOrEmpty(userName) ? "游客" : userName,
+                        Email = email,
+                        Site = site,
                         Content = content,
                         ParentId = Convert.ToInt32(commentId)
                     }
@@ -53,16 +55,35 @@ namespace Blog.Controllers
             }
         }
 
-        private void AddValidate(string articleId, string content)
+        private void AddValidate(string articleId, string content, string userName, string email, string site)
         {
             if (ValidateHelper.IsEmpty(articleId))
                 throw new ValidateException(101, "articleId不能为空");
             if (ValidateHelper.IsOverLength(articleId, 50))
                 throw new ValidateException(102, $"articleId请在50字内");
+
+            if (ValidateHelper.IsEmpty(userName))
+                throw new ValidateException(101, "请填写昵称");
+            if (ValidateHelper.IsOverLength(userName, 10))
+                throw new ValidateException(102, $"昵称请少于10个字");
+
+            if (ValidateHelper.IsEmpty(email))
+                throw new ValidateException(101, "请填写邮箱");
+            if (ValidateHelper.IsOverLength(email, 50))
+                throw new ValidateException(102, $"昵称请少于50个字");
+
             if (ValidateHelper.IsEmpty(content))
                 throw new ValidateException(101, "请填写内容");
             if (ValidateHelper.IsOverLength(content, 500))
                 throw new ValidateException(102, $"内容请少于500字");
+
+            if (ValidateHelper.IsEmpty(site)) {
+            }
+            else
+            {
+                if(ValidateHelper.IsOverLength(site, 50))
+                    throw new ValidateException(102, $"个人站点请少于50字");
+            }
         }
 
         public ActionResult List(string articleId, int? page = 1)

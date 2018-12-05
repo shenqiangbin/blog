@@ -10,6 +10,8 @@ namespace Blog.Models
         public int CommentId { get; set; }
         public int ArticleId { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Site { get; set; }
         public string Content { get; set; }
         public int ParentId { get; set; }
         public DateTime CreateTime { get; set; }
@@ -26,6 +28,8 @@ namespace Blog.Models
         public int CommentId { get; set; }
         public int ArticleId { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Site { get; set; }
         public string Content { get; set; }
         public int ParentId { get; set; }
         public DateTime CreateTime { get; set; }

@@ -19,7 +19,7 @@ UPDATE Article set createuser  = 'shenqiangbin@163.com'
 ALTER TABLE Article ADD COLUMN KeyWords nvarchar(50);
 ALTER TABLE Article ADD COLUMN UrlTitle nvarchar(50);
 ALTER TABLE Article ADD COLUMN UrlTitleNum nvarchar(50);
-/*2018-11-30*/
+/*日期：2018-11-30*/
 /*文章添加编辑器列，0-markdown编辑器，1-ue编辑器*/
 ALTER TABLE Article ADD COLUMN Editor int;
 /*更新已有记录*/
@@ -80,8 +80,16 @@ CREATE TABLE [Comment] (
   [CommentId] INTEGER PRIMARY KEY AUTOINCREMENT, 
   [ArticleId] INTEGER NOT NULL,
   [UserName] NVARCHAR(50),
+  [Email] NVARCHAR(50),
+  [Site] NVARCHAR(50),
   [Content] NVARCHAR(50),
   [ParentId] INTEGER,
   [CreateTime] DATETIME NOT NULL, 
   [UpdateTime] DATETIME, 
   [Enable] INT NOT NULL);
+
+
+/*日期：2018-11-30*/
+/*评论添加 邮箱 站点*/
+ALTER TABLE [Comment] ADD COLUMN Email NVARCHAR(50);
+ALTER TABLE [Comment] ADD COLUMN Site NVARCHAR(50);
