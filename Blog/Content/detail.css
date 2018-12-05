@@ -145,8 +145,10 @@ p {
 .commentlist{
     font-size:14px;
     width: 528px;
-    border-top: 1px solid #555;
     padding: 5px 0;    
+    border:1px solid rgba(0,0,0,.125);
+    border-radius:2px;
+    margin-bottom:10px;
 }
 
 .commentlist .avatarBox{
@@ -173,12 +175,17 @@ p {
 .commentlist .right .c{
     color: gray;
 }
+.commentlist .right .cc{
+    color:black;
+}
 .commentlist .right .cc *{
     vertical-align:middle;
 }
 
 .commentlist .name{
-    color:#339b53;
+    color:black;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .commentlist .right .handle{
@@ -208,12 +215,14 @@ p {
 
  .replytitle{
      display: inline-block;
-     color:#339b53;
+     color:black;
+    font-size: 15px;
+    font-weight: bold;
  }
 
  .replyContent{
       margin: 5px 0;
-      color:gray;
+      color:black;
  }
 
  .replyDate{
