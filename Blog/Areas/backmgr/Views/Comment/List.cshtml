@@ -56,7 +56,7 @@
                         <td style="width:300px;">
                             <a target="_blank" href="@Url.Action("Detail","Home", new { area = "", id = item.ArticleId })">@item.ArticleTitle</a>
                         </td>
-                        <td style="width:60px;">@item.UserName</td>
+                        <td style="width:60px;">@item.UserName <br/> <span>@item.Email</span> <br /> <a target="_blank" href="@item.Site">@item.Site</a></td>
                         <td style="width:150px;">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
                         <td>@Html.Raw(item.Content)</td>
                     </tr>
