@@ -110,7 +110,10 @@
             </div>
             <div class="right">
                 <div class="c">
-                    <div class="name">{0}</div>
+                    <div class="name">
+                        <span>{0}</span>
+                        <a target="_blank" style="margin-left:10px;font-size:small;vertical-align:top" href="{5}">{5}</a>
+                    </div>
                     <div class="cc">{1}</div>
                 </div>
                 <div class="handle">{2}<a href="javascript:void(0);" cid="{3}" onclick="showReplyBox(this);">回复</a></div>
@@ -211,7 +214,7 @@
                         if (result.code == 200) {
                             $("#content").html("");
                             showMsg("发表成功");
-                            getList();
+                            getList(1);
                         } else {
                             showMsg(result.msg);
                         }
@@ -259,7 +262,7 @@
                     $("span[name = pageNumber]").html(result.pageNumber);
                     $("#totalPage").html(result.pageCount);
 
-                    if (result.data.length <= 10) {
+                    if (result.pageCount <= 1) {
                         $("#pageBox").addClass("hidden");
                     } else {
                         $("#pageBox").removeClass("hidden");
@@ -288,7 +291,9 @@
                      .replace("{1}", record.Content)
                      .replace("{2}", data_string(record.CreateTime))
                      .replace("{3}", record.CommentId)
-                     .replace("{3}", record.CommentId);
+                     .replace("{3}", record.CommentId)
+                     .replace("{5}", record.Site)
+                     .replace("{5}", record.Site);
 
             //构建回复列表
             var arr = new Array();
@@ -307,13 +312,15 @@
         buildReplyItem = function (comment) {
             //console.log(comment);
             var html = "<div class='replyContainer'>" +
-                        "<div class='replytitle'>{0}</div>:" +
+                        "<div class='replytitle'>{0}<a target='_blank' style='margin-left:10px;font-size:small;vertical-align:top' href='{5}'>{5}</a></div>" +
                         "<div class='replyContent'>{1}</div> " +
                         "<div class='replyDate'>{2}</div>" +
                         "</div>";
             html = html
                 .replace("{0}", comment.UserName)
                 .replace("{1}", comment.Content)
+                .replace("{5}", comment.Site)
+                .replace("{5}", comment.Site)
                 .replace("{2}", data_string(comment.CreateTime));
             return html;
         }
@@ -343,11 +350,25 @@
         showReplyBox = function (btn) {
             $(".replyBox").remove();
             var html = `<div class='replyBox'>
+                            <p>
+                                <span style="width:74px;display: inline-block;"><span class ="must">*</span>昵称：</span>
+                                <input type="text" id="userName" value="" style="width:335px"/>
+                            </p>
+                            <p>
+                                <span style="width:74px;display: inline-block;"><span class ="must">*</span>邮箱：</span>
+                                <input type="text" id="email" value="" style="width:335px"/>
+                            </p>
+                            <p>
+                                <span style="width:74px;display: inline-block;">个人站点：</span>
+                                <input type="text" id="site" value="" style="width:335px"/>
+                            </p>
                             <div id='content2' class='commentcontent commentcontent2' contenteditable='true'></div> 
                             <img id='btn2' class='emojiBtn' src='/Images/emoji.png' />
                             <button id='publishBtn2' class='publishBtn'>发表</button> 
                         </div>
                         `;
+
+            $(".replyBox").remove();
             $(btn).parent().parent().append(html);
 
             $("#content2").emoji({
@@ -367,7 +388,12 @@
                 var content = $("#content2").html();
                 var replyListDiv = $(this).parent().parent().find('div.replyList');
                 var commentId = replyListDiv.attr('cid');
-                var data = { articleId: articleId, Content: content, CommentId: commentId };                
+
+                var userName = $(".replyBox #userName").val().trim();
+                var email = $(".replyBox #email").val().trim();
+                var site = $(".replyBox #site").val().trim();
+
+                var data = { articleId: articleId, Content: content, CommentId: commentId, userName: userName, email: email, site: site };
                 var replyBoxDiv = $(this).parent();
 
                 $.post("/Comment/Add", data, function (result) {
