@@ -181,6 +181,7 @@
     <Content Include="Lib\System.Data.SQLite.XML" />
     <Content Include="Scripts\backcommon.js" />
     <Content Include="Scripts\business\articledetail.js" />
+    <Content Include="Scripts\business\html2js.js" />
     <Content Include="Scripts\editor.md\css\editormd.logo.min.css" />
     <Content Include="Scripts\editor.md\css\editormd.min.css" />
     <Content Include="Scripts\editor.md\css\editormd.preview.min.css" />
@@ -1036,6 +1037,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSAController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\UtilController.cs" />
     <Compile Include="Controllers\XSSController.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Filters\UserAuthorizeAttribute.cs" />
@@ -1112,6 +1114,8 @@
     <Content Include="Scripts\editor.md\plugins\emoji-dialog\emoji.json" />
     <Content Include="Scripts\editor.md\plugins\help-dialog\help.md" />
     <Content Include="Scripts\editor.md\plugins\html-entities-dialog\html-entities.json" />
+    <Content Include="Views\Util\HTML2JS.cshtml" />
+    <Content Include="Views\Shared\_UtilLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

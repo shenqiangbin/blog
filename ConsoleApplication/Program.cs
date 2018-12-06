@@ -44,8 +44,37 @@ namespace ConsoleApplication
 > HTML";
             var str = sanitizer.Sanitize(ms);
 
+            HTMLToJS("");
             Console.WriteLine("ok");
             Console.ReadLine();
+        }
+
+        private static void HTMLToJS(string content)
+        {
+
+            content = @"
+<div class ='replyBox'>
+    <p>
+        <span style='width:74px;display: inline-block;'><span class ='must'>*</span>昵称：</span>
+        <input type='text' id='userName' value='' style='width:335px'/>
+    </p>
+    <p>
+        <span style='width:74px;display: inline-block;'><span class ='must'>*</span>邮箱：</span>
+        <input type='text' id='email' value='' style='width:335px'/>
+    </p>
+    <p>
+        <span style='width:74px;display: inline-block;'>个人站点：</span>
+        <input type='text' id='site' value='' style='width:335px'/>
+    </p>
+    <div id='content2' class ='commentcontent commentcontent2' contenteditable='true'></div>
+    <img id='btn2' class ='emojiBtn' src='/Images/emoji.png' />
+    <button id='publishBtn2' class ='publishBtn'>发表</button>
+</div>
+";
+            
+            string[] arr = content.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var newArr = arr.Select(m => "\"" + m + "\"");
+            string newVal = string.Join(" + \r\n", newArr);
         }
 
         private static void GetTiKu()

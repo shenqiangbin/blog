@@ -54,6 +54,8 @@ namespace Blog.App_Start
                 "~/Scripts/business/articledetail.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/Scripts/business/html2js").Include("~/Scripts/business/html2js.js"));
+
         }
     }
 }

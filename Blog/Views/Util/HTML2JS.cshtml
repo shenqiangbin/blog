@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_UtilLayout.cshtml";
+    ViewBag.Title = "HTML转JS";
+    ViewBag.Keywords = "HTML转JS";
+}
+
+@section header{
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid text-center">
+        <h1 class="display-4">HTML转JS</h1>
+        <p class="lead">拷贝HTML到文本框中，将会生成对应的拼接脚本</p>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <h2>HTML</h2>
+            <div class="input-group">
+                <textarea class="form-control" id="htmlBox" rows="20" cols="20" value="">@ViewBag.HTML</textarea>
+                <div id="htmlMsg" class="">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1 text-center m-auto">
+            <button type="button" class="btn btn-primary"  id="btnGo">走你</button>
+        </div>
+        <div class="col-sm">
+            <h2>JS</h2>
+            <div class="input-group">
+                <textarea class="form-control" id="jsBox" rows="20" cols="20"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top:30px;">
+
+    <div class="row">
+            
+            <div class="list-group col-7 m-auto">
+                <h3>历史：</h3>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">HTML转JS基本功能完成</h5>
+                        <small></small>
+                    </div>
+                    <p class="mb-1"></p>
+                    <small>2018-12-06</small>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">TODO:对输入的HTML先格式化</h5>
+                        <small></small>
+                    </div>
+                    <p class="mb-1"> 对输入的HTML先格式化 使用js库 https://github.com/beautify-web/js-beautify</p>
+                    <small></small>
+                </a>
+            </div>
+    </div>
+            
+</div>
+
+
+
+    @section footer{
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        @Scripts.Render("~/Scripts/business/html2js")
+    }
