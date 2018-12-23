@@ -60,7 +60,7 @@ p {
 .qrcodeContainer {
     position: fixed;
     right: 10px;
-    top: 75px;
+    bottom: 59px;
     text-align: center;
     font-size: 14px;
     letter-spacing: 4px;
@@ -251,3 +251,29 @@ p {
       background:url(/Images/go-top-hover.jpg);
       background-size:100% 100%;
  }
+
+
+#sidebar {
+    width: 199px;
+    height: auto;
+    position: fixed;
+    top: 75px;
+    right: 10px;
+    overflow: hidden;
+    background: #fff;
+    z-index: 100;
+    padding: 18px;
+    border: 1px solid #ddd;    
+}
+            
+#sidebar:hover {
+    overflow-y: auto;
+}
+            
+#sidebar h1 {
+    font-size: 16px;
+}
+            
+#custom-toc-container {
+    padding-left: 0;
+}

@@ -29,7 +29,12 @@
 
                 <div class="record">
                     <div>
-                        <a href="@Url.Action("Detail","Home", new { area = "", id =item.ArticleId } )" title="@item.Title" target="_blank">
+                        @{
+                            string url = string.IsNullOrEmpty(item.UrlTitle) ?
+                            Url.Action("Detail", "Home", new { id = item.ArticleId }) :
+                            $"/articles/{item.UrlTitle}.html";
+                        }
+                        <a href="@url" title="@item.Title" target="_blank">
                             <span>@item.Title</span>
                         </a>
                     </div>

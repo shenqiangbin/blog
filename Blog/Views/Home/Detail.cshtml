@@ -125,6 +125,13 @@
 
 <a href="#" id="top" class="go-top"></a>
 
+
+<div id="sidebar">
+    <h1>目录</h1>
+    <div class="markdown-body editormd-preview-container" id="custom-toc-container"></div>
+</div>
+
+
 @section footer{
     <script>var articleId = '@(Model!=null? Model.ArticleId.ToString() :"")';</script>
     @*<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>*@
@@ -157,7 +164,8 @@
                 htmlDecode: "style,script,iframe",  // you can filter tags decode
                 emoji: false,
                 taskList: true,
-                tocm: true, 
+                tocm: true,
+                tocContainer: "#custom-toc-container", // 自定义 ToC 容器层
                 tex: true,  
                 flowChart: true,
                 sequenceDiagram: true,
