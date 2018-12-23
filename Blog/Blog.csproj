@@ -169,6 +169,7 @@
     <Content Include="Images\login-background.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\new.png" />
+    <Content Include="Images\refresh.png" />
     <Content Include="Images\scrolltop.png" />
     <Content Include="Images\time.png" />
     <Content Include="Images\time2.png" />
