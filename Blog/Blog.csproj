@@ -159,6 +159,8 @@
     <EmbeddedResource Include="Lib\sqlite3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="Images\go-top-hover.jpg" />
+    <Content Include="Images\go-top.png" />
     <Content Include="Images\label2.png" />
     <Content Include="Images\label3.png" />
     <Content Include="Images\loadingbar.gif" />
@@ -804,6 +806,7 @@
     <Content Include="Scripts\Rsa\BigInt.js" />
     <Content Include="Scripts\Rsa\RSA.js" />
     <Content Include="Scripts\Rsa\RSAClient.js" />
+    <Content Include="Scripts\scrolltop.js" />
     <Content Include="Scripts\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.html" />

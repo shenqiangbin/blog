@@ -215,3 +215,18 @@ p {
     color: gray;
     margin-top: 10px;
  }
+
+  .go-top{
+     position:fixed;
+     right:0;
+     bottom:10px;
+     height: 38px;
+     width:38px;     
+     background:url(/Images/scrolltop.png);
+     background-size:100% 100%;
+ }
+
+  .go-top:hover{
+      background:url(/Images/go-top-hover.jpg);
+      background-size:100% 100%;
+ }
