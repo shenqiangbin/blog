@@ -7,9 +7,36 @@ iframe{
     height:732px;
 }
 
+/*.titlebg{
+    height:100px;    
+}*/
+/*.titlebg:before{
+    background-image: url(http://oimagec6.ydstatic.com/image?id=7347104849285270631&product=dict-homepage&w=394&h=76&fill=0&cw=394&ch=76&sbc=0&cgra=CENTER&of=jpeg);
+    background-size:100% 100%;
+    background-size: cover;
+    width: 500px;
+    height: 300px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;/*-1 可以当背景
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+}*/
+
 .detail-title {
-    text-align: left;
+    background-color: #8c31ea;
+    text-align: center;
     margin-bottom: 30px;
+    border: 1px solid #8c31ea;
+    padding-bottom: 31px;
+    border-radius: 3px;
+     color:white;
+}
+.detail-title h2{
+    font-size:48px;
+    color:white;
 }
 
     .detail-title div {
