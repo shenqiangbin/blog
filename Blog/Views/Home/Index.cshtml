@@ -31,26 +31,24 @@
         {
             foreach (var item in Model)
             {
-                <div class="record">
-                    <div>
-                        @{
-                            string url = string.IsNullOrEmpty(item.UrlTitle) ?
-                            Url.Action("Detail", "Home", new { id = item.ArticleId }) :
-                            $"/articles/{item.UrlTitle}.html";
-                        }
+                
+                    string url = string.IsNullOrEmpty(item.UrlTitle) ?
+                    Url.Action("Detail", "Home", new { id = item.ArticleId }) :
+                    $"/articles/{item.UrlTitle}.html";
+                
 
-                        <a href="@(url)" title="@item.Title">
+                <a class="record" href="@url" title="@item.Title">
+                    <div>
                             @if (item.CreatedTime.AddDays(7) > DateTime.Now)
                             {
                                 <span class="newflag"><img src="~/Images/new.png" /></span>
                             }
                             <span>@item.Title</span>
-                        </a>
                     </div>
                     <div>
                         <span class="date">@item.DisplayCreatedTime.ToString("yyyy-MM-dd")</span>
                     </div>
-                </div>
+                </a>
             }
         }
         @if (Model.PageCount > 1)

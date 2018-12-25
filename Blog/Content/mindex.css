@@ -3,6 +3,7 @@
     margin-bottom: 8px;
     line-height: 23px;
     padding: 5px;
+    display:block;
 }
 
     .record:hover {
