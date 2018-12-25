@@ -1,13 +1,24 @@
 ﻿.record {
-    border-bottom: 1px solid gray;
-    margin-bottom: 30px;
-    line-height: 30px;
-    padding: 5px 0px;    
+    border: 1px solid #e1e4e8;
+    margin-bottom: 18px;
+    /* line-height: 30px; */
+    padding: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    width: 360px;
+    height: 63px;
+    vertical-align: top;    
 }
 
     .record:hover {
         background-color: rgba(255, 255, 255, 0.15);
+        border:1px solid #FF5800;
+        cursor:pointer;
     }
+    
+.record a,.record a:hover{
+    color:black;
+}
 
 .indexcontainer {    
 }
