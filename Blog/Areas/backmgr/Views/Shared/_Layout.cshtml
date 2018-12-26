@@ -16,12 +16,22 @@
             float: right;
         }
     </style>
+
+    @*<link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>*@
+
+    <link rel="stylesheet" type="text/css" href="~/Scripts/third/3.2.1_iview.css">
+        <script type="text/javascript" src="~/Scripts/third/2.5.21_vue.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/third/3.2.21_iview.min.js"></script>
+
 </head>
 <body>
     <div class="nav">
         <div class="nav-content">
             <span class="logo"><a href="/home/index">博客</a></span>
-            @if (Blog.Common.ContextUser.IsLogined) { 
+            @if (Blog.Common.ContextUser.IsLogined)
+            {
                 <span class="navli">
                     <a href="@Url.Action("index","home")">首页</a>
                     <a href="@Url.Action("list","log")">错误日志</a>
@@ -40,7 +50,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container" id="app">
         @RenderBody()
     </div>
 

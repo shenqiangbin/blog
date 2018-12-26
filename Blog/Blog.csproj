@@ -809,6 +809,9 @@
     <Content Include="Scripts\Rsa\RSA.js" />
     <Content Include="Scripts\Rsa\RSAClient.js" />
     <Content Include="Scripts\scrolltop.js" />
+    <Content Include="Scripts\third\2.5.21_vue.min.js" />
+    <Content Include="Scripts\third\3.2.1_iview.css" />
+    <Content Include="Scripts\third\3.2.21_iview.min.js" />
     <Content Include="Scripts\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.html" />
@@ -1030,6 +1033,7 @@
     <Compile Include="Common\HashHelper.cs" />
     <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Common\MD5Helper.cs" />
+    <Compile Include="Common\PagedResponse.cs" />
     <Compile Include="Common\RSAHelper.cs" />
     <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\ValidateException.cs" />
@@ -1121,6 +1125,7 @@
     <Content Include="Scripts\editor.md\plugins\html-entities-dialog\html-entities.json" />
     <Content Include="Views\Util\HTML2JS.cshtml" />
     <Content Include="Views\Shared\_UtilLayout.cshtml" />
+    <Content Include="Scripts\third\fonts\ionicons.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -67,11 +67,30 @@
         {
             <div>@Html.PagedListPager((IPagedList)(Model), p => Url.Action("List", new { page = p }), PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
         }
+
+        <i-table :columns="columns" :data="listModel.List">
+            <template slot-scope="{ row }" slot="article">
+                @*//articles/{item.UrlTitle}.html*@                
+                <a target="_blank" v-bind:href="'/home/detail?id='+row.ArticleId">{{ row.ArticleTitle }}</a>
+            </template>
+            <template slot-scope="{ row, index }" slot="action">
+                <i-button type="primary" size="small" style="margin-right: 5px" v-on:click="show(index)">View</i-button>
+                <i-button type="error" size="small" v-on:click="remove(index)">Delete</i-button>
+            </template>
+        </i-table>
+
+       <div style="text-align: center;margin-top: 20px;">
+           <Page v-bind:total="listModel.TotalCount" v-bind:current="listModel.CurrentPage" v-bind:page-size="listModel.PageSize" show-elevator show-sizer />
+       </div>        
+
     </div>
 </div>
 
+@section footer{
 <script>
     var delUrl = '@Url.Action("delete")';
+    var getListUrl = '@Url.Action("GetList")';
+
     function del(commentId) {
         if (confirm("删除确认？")) {
             $.post(delUrl, { commentId:commentId }, function () {
@@ -79,4 +98,60 @@
             });
         }
     }
+
+    var dataFunc = {
+        columns: [
+            { title: '文章', slot: 'article' },
+            { title: '评论', key: 'comment' },
+            { title: '操作', slot: 'action', width: 150, align: 'center' },
+        ],
+        listModel:{
+            List: [
+                { article: '小明测试', comment: '不错哈' },
+            ],
+            TotalCount: null,
+            CurrentPage: 1,
+            PageSize: 10
+        }
+    }
+
+    var loadData = function () {
+        var data = { page: app.listModel.CurrentPage, pageSize: app.listModel.PageSize };
+        $.ajax({
+            type: "POST",
+            url: getListUrl,
+            data:data,
+            success: function (result) {
+                console.log(result);
+                if (result.code == 200) {
+                    app.listModel = result.data;
+                }
+            },
+            error: function (msg) {
+                alert(msg);
+            }
+
+        });
+    }
+
+    var app = new Vue({
+        el: "#app",
+        data: dataFunc,
+        methods: {
+            loadData:loadData,
+            show (index) {
+                this.$Modal.info({
+                    title: 'User Info',
+                    content: `Name：${this.dataList[index].name}<br>Age：${this.dataList[index].age}<br>Address：${this.dataList[index].address}`
+                })
+            },
+            remove (index) {
+                this.dataList.splice(index, 1);
+            }
+        }
+    });
+
+    app.loadData();
+
 </script>
+}

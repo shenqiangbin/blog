@@ -1,4 +1,5 @@
-﻿using Blog.Filters;
+﻿using Blog.Common;
+using Blog.Filters;
 using Blog.Models;
 using Blog.Service;
 using PagedList;
@@ -42,6 +43,34 @@ namespace Blog.Areas.backmgr.Controllers
             var pageList = new StaticPagedList<CommentInfo>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);
 
             return View(pageList);
+        }
+
+        [HttpPost]
+        public ActionResult GetList(int? page = 1,int pageSize = 10)
+        {
+            try
+            {
+                CommentInfoListQuery listModel = new CommentInfoListQuery();
+                listModel.PageIndex = Convert.ToInt32(page);
+                listModel.PageSize = pageSize;
+
+                CommentInfoListModelResult result = _commentService.GetInfoPaged(listModel);
+
+                PagedResponse<CommentInfo> res = new PagedResponse<CommentInfo>()
+                {
+                    List = result.List,
+                    CurrentPage = page.Value,
+                    TotalCount = result.TotalCount,
+                    PageSize = listModel.PageSize                    
+                };
+
+                return Json(new { code = 200, msg = "ok", data = res });
+            }
+            catch (Exception ex)
+            {
+                LogService.Instance.AddAsync(Level.Error, ex);
+                return Json(new { code = 500, msg = "error" });
+            }
         }
 
         [HttpPost]
