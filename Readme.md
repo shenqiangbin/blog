@@ -1,7 +1,7 @@
 # 博客开发记录
 
 ------
-[地址 https://www.sqber.com/](https://www.sqber.com/)(未开通)
+[地址 https://www.sqber.com/](https://www.sqber.com/)
 
 本文旨在记录开发博客的整个过程。
 
