@@ -230,3 +230,7 @@ p {
       background:url(/Images/go-top-hover.jpg);
       background-size:100% 100%;
  }
+
+  li.special{
+    background-color:#dede0c !important;
+}

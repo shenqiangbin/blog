@@ -304,3 +304,7 @@ p {
 #custom-toc-container {
     padding-left: 0;
 }
+
+li.special{
+    background-color:#dede0c !important;
+}

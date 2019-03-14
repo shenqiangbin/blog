@@ -175,6 +175,17 @@
                 flowChart: true,
                 sequenceDiagram: true,
             });
+            //实现部分行高亮显示
+            $("ol.linenums").each(function (index, item) {
+                $(item).children().each(function (indexLi, itemLi) {
+                    var innerHtml = $(itemLi).html();
+                    //如果包含"gl>"
+                    if (innerHtml.indexOf('gl</span><span class="pun">&gt;') > -1) {
+                        $(itemLi).addClass("special");
+                        $(itemLi).html(innerHtml.replace('gl</span><span class="pun">&gt;', ''));
+                    }
+                });
+            });
 
             $("#loadCommentBtn").click(function () {
                 $(this).remove();
