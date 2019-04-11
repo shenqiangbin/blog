@@ -17,33 +17,52 @@
     {
         @Styles.Render("~/Content/index")
     }
+    <style>
+        .lg-row{margin-bottom:10px;}
+    </style>
 }
 
-<div class="content">
+<div class="content" style="min-height:700px;">
     <h2>链接申请</h2>
+    <div style="text-align: left;width: 452px;margin: 0 auto;">
+        <p>申请要求:
+        <ol>
+            <li>其站点有一些内容</li>
+            <li>我方站点已加入对方友链</li>
+        </ol>
+        站点名称：SQBER <br/>
+        站点地址：http://blog.sqber.com/ <br />
+        站点LOGO：http://blog.sqber.com/Images/logo.png <br />
+        站点描述：没事写点技术博客的个人站点，Java、.Net方向。<br />
+
+        <br/>
+        <br/>
+        注：审核通过后才会显示。
+        </p>
+    </div>
+    <h2>我要申请</h2>
     <div>
         @using (Html.BeginForm("apply", "friendlylink", FormMethod.Post, new { id = "friendlyapply", @class = "", role = "form" }))
         {
             @Html.AntiForgeryToken()
 
             <div class="lgContent">
-                <div class="info"></div>
                 <div class="lg-row">
-                    <input type="text" id="sitename" name="sitename" placeholder="站点名称" maxlength="50" />
+                    <input type="text" id="sitename" name="sitename" placeholder="站点名称" maxlength="50" style="width:448px"/>
                 </div>
                 <div class="lg-row">
-                    <input type="text" id="siteurl" name="siteurl" placeholder="站点地址" maxlength="150" />
+                    <input type="text" id="siteurl" name="siteurl" placeholder="站点地址" maxlength="150" style="width:448px"/>
                 </div>
                 <div class="lg-row">
-                    <input type="text" id="sitedesc" name="sitedesc" placeholder="站点描述" maxlength="150" />
+                    <input type="text" id="sitedesc" name="sitedesc" placeholder="站点描述" maxlength="150" style="width:448px"/>
                 </div>
                 <div class="lg-row">
-                    <input type="text" class="codeInput" id="validateCode" name="validateCode" placeholder="请输入验证码" />
-                    <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'" />
+                    <input type="text" class="codeInput" id="validateCode" name="validateCode" placeholder="请输入验证码"  style="width:365px"/>
+                    <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'"  style="vertical-align:middle"/>
                 </div>
             </div>
         }
-        <button type="button" class="btn btn-default" onclick="submit()">提交申请</button>
+        <button type="button" class="btn btn-default" onclick="submit()" style="width:448px;">提交申请</button>
     </div>
 </div>
 
