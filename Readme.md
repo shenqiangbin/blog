@@ -134,3 +134,5 @@ todo:
 	头像随机展示
 
 友情链接
+
+[Editor.md实现代码部分高亮](http://blog.sqber.com/articles/editor.md-partial-highlight.html)
