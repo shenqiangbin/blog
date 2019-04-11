@@ -701,7 +701,6 @@
     <Content Include="Scripts\erweima\jquery.qrcode.js" />
     <Content Include="Scripts\erweima\utf.js" />
     <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Scripts\layer.js" />
     <Content Include="Scripts\layui\css\layui.css" />
     <Content Include="Scripts\layui\css\layui.mobile.css" />
     <Content Include="Scripts\layui\css\modules\code.css" />
@@ -1043,6 +1042,7 @@
     <Compile Include="Controllers\Default1Controller.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\FriendlylinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RSAController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -1053,6 +1053,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FriendlyLink.cs" />
     <Compile Include="Models\ArticleLabel.cs" />
     <Compile Include="Models\CommentListModel.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -1063,6 +1064,7 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\FriendlyLinkRepository.cs" />
     <Compile Include="Repository\ArticleLabelRepository.cs" />
     <Compile Include="Repository\LabelRepository.cs" />
     <Compile Include="Repository\LogRepository.cs" />
@@ -1071,6 +1073,7 @@
     <Compile Include="Repository\ArticleRepository.cs" />
     <Compile Include="Repository\SQLiteHelper.cs" />
     <Compile Include="Service\ArticleLabelService.cs" />
+    <Compile Include="Service\FriendlyLinkService.cs" />
     <Compile Include="Service\LabelService.cs" />
     <Compile Include="Service\LogService.cs" />
     <Compile Include="Service\PermissionService.cs" />
@@ -1126,6 +1129,8 @@
     <Content Include="Views\Util\HTML2JS.cshtml" />
     <Content Include="Views\Shared\_UtilLayout.cshtml" />
     <Content Include="Scripts\third\fonts\ionicons.ttf" />
+    <Content Include="Views\Friendlylink\Index.cshtml" />
+    <Content Include="Views\Friendlylink\Apply.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

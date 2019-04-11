@@ -93,3 +93,15 @@ CREATE TABLE [Comment] (
 /*评论添加 邮箱 站点*/
 ALTER TABLE [Comment] ADD COLUMN Email NVARCHAR(50);
 ALTER TABLE [Comment] ADD COLUMN Site NVARCHAR(50);
+
+CREATE TABLE [FriendlyLink] (
+  [FriendlyLinkId] INTEGER PRIMARY KEY AUTOINCREMENT, 
+  [sitename] NVARCHAR(50),
+  [siteurl] NVARCHAR(150),
+  [sitedesc] NVARCHAR(150),  
+  [Sort] INT, -- '排序'
+  [IsCheck] INT, -- '是否审核通过，0未审核，1通过，-1未通过'
+  [Reason] NVARCHAR(50), -- '原因'
+  [CreateTime] DATETIME NOT NULL, 
+  [UpdateTime] DATETIME,   
+  [Enable] INT NOT NULL);

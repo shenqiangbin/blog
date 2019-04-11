@@ -1,0 +1,76 @@
+﻿@model StaticPagedList<Article>
+
+@{
+    ViewBag.Title = "首页";
+    if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        Layout = "~/Views/Shared/_mLayout.cshtml";
+    }
+}
+
+@section header{
+    @if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        @Styles.Render("~/Content/mindex")
+    }
+    else
+    {
+        @Styles.Render("~/Content/index")
+    }
+}
+
+<div class="content">
+    <h2>链接申请</h2>
+    <div>
+        @using (Html.BeginForm("apply", "friendlylink", FormMethod.Post, new { id = "friendlyapply", @class = "", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="lgContent">
+                <div class="info"></div>
+                <div class="lg-row">
+                    <input type="text" id="sitename" name="sitename" placeholder="站点名称" maxlength="50" />
+                </div>
+                <div class="lg-row">
+                    <input type="text" id="siteurl" name="siteurl" placeholder="站点地址" maxlength="150" />
+                </div>
+                <div class="lg-row">
+                    <input type="text" id="sitedesc" name="sitedesc" placeholder="站点描述" maxlength="150" />
+                </div>
+                <div class="lg-row">
+                    <input type="text" class="codeInput" id="validateCode" name="validateCode" placeholder="请输入验证码" />
+                    <img alt="刷新验证码！" src="~/verify_code.ashx" onclick="this.src=this.src+'?'" />
+                </div>
+            </div>
+        }
+        <button type="button" class="btn btn-default" onclick="submit()">提交申请</button>
+    </div>
+</div>
+
+@section footer{
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+    <script>
+        function submit() {
+            $.ajax({
+                type: "POST",
+                data: $("form").serialize(),
+                success: function (data) {
+                    if (data.code == 200)
+                        layer.msg("已提交申请");
+                    else
+                        layer.msg(data.msg);
+                },
+                error: function (msg) {
+                    layer.msg(msg);
+                }
+            });
+        }
+
+        $("body").keydown(function () {
+            if (event.keyCode == "13") {//keyCode=13是回车键
+                submit();
+            };
+        });
+    </script>
+}
