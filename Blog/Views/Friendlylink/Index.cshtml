@@ -1,7 +1,7 @@
-﻿@model StaticPagedList<Article>
+﻿@model List<FriendlyLink>
 
 @{
-    ViewBag.Title = "首页";
+    ViewBag.Title = "友情链接";
     if (Blog.Common.BrowserHelper.IsPhone())
     {
         Layout = "~/Views/Shared/_mLayout.cshtml";
@@ -17,15 +17,14 @@
     {
         @Styles.Render("~/Content/index")
     }
+    <style>
+        .record{ border:none !important;width:auto !important;}
+    </style>
 }
 
 <div class="content">
-    <h2>链接申请</h2>
-    <div>
-        列表
-    </div>
-    <div class="indexcontainer">
-        @*@if (Model == null || Model.Count == 0)
+    <div class="indexcontainer" style="text-align: left;padding: 0 65px;">
+        @if (Model == null || Model.Count == 0)
         {
             <div class="record">
                 暂无数据
@@ -35,21 +34,17 @@
         {
             foreach (var item in Model)
             {
-                <a class="record" href="@url" title="@item.Title">
+                <a class="record" href="@item.siteurl" title="@item.sitename" target="_blank">
                     <div>
-                            @if (item.CreatedTime.AddDays(7) > DateTime.Now)
-                            {
-                                <span class="newflag"><img src="~/Images/new.png" /></span>
-                            }
-                            <span>@item.Title</span>
+                            <span>@item.sitename</span>
                     </div>
                     <div>
-                        <span class="date">@item.DisplayCreatedTime.ToString("yyyy-MM-dd")</span>
+                        <span class="date">@item.sitedesc</span>
                     </div>
                 </a>
             }
         }
-        @if (Model.PageCount > 1)
+        @*@if (Model.PageCount > 1)
         {
 
             <div>@Html.PagedListPager((IPagedList)(Model), p => Url.Action("Index", new { page = p }), PagedListRenderOptions.ClassicPlusFirstAndLast)</div>

@@ -92,7 +92,7 @@ namespace Blog.Repository
         {
             List<FriendlyLink> list = new List<FriendlyLink>();
 
-            string sql = "select * from FriendlyLink where enable = 1 and IsCheck = " + (int)FriendlyLinkIsCheck.OK;
+            string sql = "select * from FriendlyLink where enable = 1 order by sort desc,createtime asc";
             DataSet dt = SQLiteHelper.ExecuteDataset(sql);
             foreach (DataRow item in dt.Tables[0].Rows)
             {

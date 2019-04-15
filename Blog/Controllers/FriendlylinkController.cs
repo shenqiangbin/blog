@@ -20,7 +20,8 @@ namespace Blog.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            List<FriendlyLink> list = friendlyLinkService.GetAllChecked().ToList();
+            return View(list);
         }
 
         public ActionResult Apply()
