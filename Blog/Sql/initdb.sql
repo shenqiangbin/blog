@@ -26,7 +26,7 @@ ALTER TABLE Article ADD COLUMN Editor int;
 UPDATE Article set Editor = 1;
 
 
-/*分类*/
+/*标签*/
 drop table if exists [Label];
 CREATE TABLE [Label] (
   [LabelId] INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -104,4 +104,28 @@ CREATE TABLE [FriendlyLink] (
   [Reason] NVARCHAR(50), -- '原因'
   [CreateTime] DATETIME NOT NULL, 
   [UpdateTime] DATETIME,   
+  [Enable] INT NOT NULL);
+
+
+  /*分类*/
+drop table if exists [Category];
+CREATE TABLE [Category] (
+  [CategoryId] INTEGER PRIMARY KEY AUTOINCREMENT, 
+  [Name] NVARCHAR(50) NOT NULL UNIQUE,  
+  [ParentCategoryId] INTEGER NOT NULL,
+  [Sort] INTEGER,
+  [CreateUser] string not null,
+  [CreateTime] DATETIME NOT NULL, 
+  [UpdateTime] DATETIME, 
+  [Enable] INT NOT NULL);
+
+  /*文章&分类关系表*/
+drop table if exists [ArticleCategory];
+CREATE TABLE [ArticleCategory] (
+  [CategoryId] INTEGER,
+  [ArticleId] INTEGER,
+  [Sort] INTEGER,
+  [CreateUser] string not null,
+  [CreateTime] DATETIME NOT NULL, 
+  [UpdateTime] DATETIME, 
   [Enable] INT NOT NULL);
