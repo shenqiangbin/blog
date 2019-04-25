@@ -1053,6 +1053,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArticleCategory.cs" />
     <Compile Include="Models\FriendlyLink.cs" />
     <Compile Include="Models\ArticleLabel.cs" />
     <Compile Include="Models\CommentListModel.cs" />
@@ -1065,6 +1066,7 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ArticleCategoryRepository.cs" />
     <Compile Include="Repository\FriendlyLinkRepository.cs" />
     <Compile Include="Repository\ArticleLabelRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
@@ -1074,6 +1076,7 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\ArticleRepository.cs" />
     <Compile Include="Repository\SQLiteHelper.cs" />
+    <Compile Include="Service\ArticleCategoryService.cs" />
     <Compile Include="Service\ArticleLabelService.cs" />
     <Compile Include="Service\FriendlyLinkService.cs" />
     <Compile Include="Service\CategoryService.cs" />
