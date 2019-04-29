@@ -19,26 +19,11 @@
     }
 }
 
-<style>
-    table{
-        border-collapse:collapse;
-        font-family:微软雅黑;
-        font-size:small;      
-        width:100%;      
-    }
-    table td, table th
-    {
-        border:1px solid red;
-        text-align:left;
-        height:30px;
-    }
-</style>
-
 <div class="content">
     <div class="indexcontainer">
         <span><a href="@Url.Action("index","home")">返回</a></span>
-        <h4>评论信息</h4>               
-        @if (Model == null || Model.Count == 0)
+        <h4>评论信息</h4>
+        @*@if (Model == null || Model.Count == 0)
         {
             <div class="record">
                 暂无数据
@@ -66,21 +51,32 @@
         @if (Model.PageCount > 1)
         {
             <div>@Html.PagedListPager((IPagedList)(Model), p => Url.Action("List", new { page = p }), PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
-        }
+        }*@
 
         <i-table :columns="columns" :data="listModel.List">
             <template slot-scope="{ row }" slot="article">
-                @*//articles/{item.UrlTitle}.html*@                
                 <a target="_blank" v-bind:href="'/home/detail?id='+row.ArticleId">{{ row.ArticleTitle }}</a>
             </template>
+            <template slot-scope="{ row }" slot="comment">
+                <div>{{row.UserName}} {{row.Email}}</div>
+                <div><a target="_blank" href="row.Site">{{row.Site}}</a></div>
+            </template>
+            <template slot-scope="{ row }" slot="date">
+                <div>{{row.CreateTime | formatDate}}</div>
+            </template>
+            <template slot-scope="{ row }" slot="content">
+                <div v-html="row.Content"></div>
+            </template>
             <template slot-scope="{ row, index }" slot="action">
-                <i-button type="primary" size="small" style="margin-right: 5px" v-on:click="show(index)">View</i-button>
-                <i-button type="error" size="small" v-on:click="remove(index)">Delete</i-button>
+                @*<i-button type="primary" size="small" style="margin-right: 5px" v-on:click="show(index)">View</i-button>*@
+                <i-button type="error" size="small" v-on:click="remove(index)">删除</i-button>
             </template>
         </i-table>
 
        <div style="text-align: center;margin-top: 20px;">
-           <Page v-bind:total="listModel.TotalCount" v-bind:current="listModel.CurrentPage" v-bind:page-size="listModel.PageSize" show-elevator show-sizer />
+           <Page v-bind:total="listModel.TotalCount" v-bind:current="listModel.CurrentPage" v-bind:page-size="listModel.PageSize" show-elevator show-sizer 
+                 v-on:on-change="pageChange"
+                 v-on:on-page-size-change="pageSizeChange" />
        </div>        
 
     </div>
@@ -91,18 +87,28 @@
     var delUrl = '@Url.Action("delete")';
     var getListUrl = '@Url.Action("GetList")';
 
-    function del(commentId) {
+    function remove(index) {
+        var app = this;
         if (confirm("删除确认？")) {
-            $.post(delUrl, { commentId:commentId }, function () {
-                window.location.reload();
+            var row = app.listModel.List[index];
+            $.post(delUrl, { commentId: row.CommentId }, function (data) {
+                if (data.code == 200) {
+                    app.listModel.List.splice(index, 1);
+                    this.$Message.success('删除成功');
+                } else {
+                    this.$Message.error('删除失败');
+                }
             });
         }
+        
     }
 
     var dataFunc = {
         columns: [
             { title: '文章', slot: 'article' },
-            { title: '评论', key: 'comment' },
+            { title: '评论', slot: 'comment' },
+            { title: '时间', slot: 'date' },
+            { title: '内容', slot: 'content' },
             { title: '操作', slot: 'action', width: 150, align: 'center' },
         ],
         listModel:{
@@ -134,6 +140,17 @@
         });
     }
 
+    var pageChange = function (page) {
+        app.listModel.CurrentPage = page;
+        app.loadData();
+    }
+
+    var pageSizeChange = function (pageSize) {
+        app.listModel.PageSize = pageSize;
+        app.loadData();
+    }
+
+
     var app = new Vue({
         el: "#app",
         data: dataFunc,
@@ -145,9 +162,9 @@
                     content: `Name：${this.dataList[index].name}<br>Age：${this.dataList[index].age}<br>Address：${this.dataList[index].address}`
                 })
             },
-            remove (index) {
-                this.dataList.splice(index, 1);
-            }
+            remove: remove,
+            pageChange: pageChange,
+            pageSizeChange: pageSizeChange,
         }
     });
 

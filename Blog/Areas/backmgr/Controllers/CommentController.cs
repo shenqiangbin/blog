@@ -61,7 +61,7 @@ namespace Blog.Areas.backmgr.Controllers
                     List = result.List,
                     CurrentPage = page.Value,
                     TotalCount = result.TotalCount,
-                    PageSize = listModel.PageSize                    
+                    PageSize = listModel.PageSize
                 };
 
                 return Json(new { code = 200, msg = "ok", data = res });

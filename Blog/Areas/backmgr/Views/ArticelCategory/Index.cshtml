@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "首页";
+    if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        Layout = "~/Views/Shared/_mLayout.cshtml";
+    }
+}
+
+<div class="content">
+</div>
+
+@section footer{
+    <script>
+    
+
+    var dataFunc = {
+       
+    }
+
+
+    var app = new Vue({
+        el: "#app",
+        data: dataFunc,
+        methods: {
+        }
+    });
+
+
+    </script>
+}

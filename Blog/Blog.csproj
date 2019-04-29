@@ -802,6 +802,7 @@
     <Content Include="Scripts\layui\lay\modules\tree.js" />
     <Content Include="Scripts\layui\lay\modules\upload.js" />
     <Content Include="Scripts\layui\lay\modules\util.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\prettify.load.js" />
     <Content Include="Scripts\Rsa\Barrett.js" />
     <Content Include="Scripts\Rsa\BigInt.js" />
@@ -1000,6 +1001,7 @@
     <Content Include="Scripts\ueditor\third-party\zeroclipboard\ZeroClipboard.swf" />
     <Content Include="Scripts\ueditor\ueditor.all.min.js" />
     <Content Include="Scripts\ueditor\ueditor.config.js" />
+    <Content Include="Scripts\vue-filter\filter.js" />
     <Content Include="Sql\initdb.sql" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1019,6 +1021,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\backmgr\backmgrAreaRegistration.cs" />
     <Compile Include="Areas\backmgr\Controllers\AccountController.cs" />
+    <Compile Include="Areas\backmgr\Controllers\ArticelCategoryController.cs" />
     <Compile Include="Areas\backmgr\Controllers\ArticleController.cs" />
     <Compile Include="Areas\backmgr\Controllers\CommentController.cs" />
     <Compile Include="Areas\backmgr\Controllers\DbController.cs" />
@@ -1137,6 +1140,7 @@
     <Content Include="Scripts\third\fonts\ionicons.ttf" />
     <Content Include="Views\Friendlylink\Index.cshtml" />
     <Content Include="Views\Friendlylink\Apply.cshtml" />
+    <Content Include="Areas\backmgr\Views\ArticelCategory\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
