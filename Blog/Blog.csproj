@@ -809,6 +809,8 @@
     <Content Include="Scripts\Rsa\RSA.js" />
     <Content Include="Scripts\Rsa\RSAClient.js" />
     <Content Include="Scripts\scrolltop.js" />
+    <Content Include="Scripts\sort\Sortable.min.js" />
+    <Content Include="Scripts\sort\vuedraggable.umd.min.js" />
     <Content Include="Scripts\third\2.5.21_vue.min.js" />
     <Content Include="Scripts\third\3.2.1_iview.css" />
     <Content Include="Scripts\third\3.2.21_iview.min.js" />

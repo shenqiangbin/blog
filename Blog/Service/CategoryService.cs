@@ -48,7 +48,7 @@ namespace Blog.Service
         {
             var dbModel = _CategoryRepository.SelectByName(model.Name);
             if (dbModel != null && dbModel.CategoryId != model.CategoryId)
-                throw new ValidateException(301, "标签已存在");
+                throw new ValidateException(301, "分类已存在");
 
             model.UpdateTime = DateTime.Now;
             return _CategoryRepository.Update(model);
@@ -59,5 +59,9 @@ namespace Blog.Service
             return _CategoryRepository.GetAll();
         }
 
+        public void UpdateSort(List<Category> list)
+        {
+            _CategoryRepository.UpdateSort(list);
+        }
     }
 }

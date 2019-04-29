@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace Blog.Repository
@@ -65,6 +66,18 @@ Enable = ?
             return RowToModel(row);
         }
 
+        internal void UpdateSort(List<Category> list)
+        {
+            string cmdText = "update Category set Sort = {0} where CategoryId = {1};";
+            StringBuilder builder = new StringBuilder();
+            foreach (var item in list)
+            {
+                builder.AppendLine(String.Format(cmdText, item.Sort, item.CategoryId));
+            }
+
+            SQLiteHelper.ExecuteNonQuery(builder.ToString());
+        }
+
         private Category RowToModel(DataRow row)
         {
             if (row == null)
@@ -87,7 +100,7 @@ Enable = ?
         {
             List<Category> list = new List<Category>();
 
-            string sql = "select * from Category where enable = 1";
+            string sql = "select * from Category where enable = 1 order by Sort asc";
             DataSet dt = SQLiteHelper.ExecuteDataset(sql);
             foreach (DataRow item in dt.Tables[0].Rows)
             {

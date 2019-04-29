@@ -52,6 +52,10 @@ button {
        cursor:not-allowed;
     }
 
+button.ivu-btn{
+    height:auto !important;
+}
+
 /*必填*/
 .must {
     color: red;
