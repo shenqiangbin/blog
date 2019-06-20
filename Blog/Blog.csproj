@@ -155,7 +155,9 @@
     <Content Include="Content\mSite.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
-    <EmbeddedResource Include="Lib\sqlite3.def" />
+    <EmbeddedResource Include="Lib\sqlite3.def">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Lib\sqlite3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

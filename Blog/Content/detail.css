@@ -81,7 +81,7 @@ h2 {
 p {
     margin-bottom: 18px;
     margin: 5px 0;
-    font-size: 14px;
+    font-size: medium;
 }
 
 .qrcodeContainer {
@@ -89,7 +89,7 @@ p {
     right: 10px;
     bottom: 59px;
     text-align: center;
-    font-size: 14px;
+    font-size: medium;
     letter-spacing: 4px;
     z-index: 999;
 }

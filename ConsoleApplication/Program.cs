@@ -23,7 +23,7 @@ namespace ConsoleApplication
             long number = MD5Helper.MD5ToNum($"sqlite-helper-summary");
 
             var md5 = MD5Helper.MD5Value("abc");
-            var s = HashHelper.HashMd5("123", md5);
+            var s = HashHelper.HashMd5("lyb123", md5);
 
             var sanitizer = new Ganss.XSS.HtmlSanitizer();
             sanitizer.AllowedTags.Add("iframe");
