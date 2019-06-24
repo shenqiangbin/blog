@@ -282,8 +282,9 @@
 
             $("#btnSavePreview").click(function () {
                 save(function (id) {
+                    var urlTitle = $.trim($("#urlTitle").val())
                     articleId = id;
-                    window.open("/Home/Detail/" + id, "_blank");
+                    window.open("/articles/" + urlTitle + ".html", "_blank");
                 });
             });
 
