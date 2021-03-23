@@ -1,4 +1,24 @@
-﻿a{
+﻿.markdown-body h3 {
+    font-size: 19px !important;
+    line-height: 0.8;
+}
+.markdown-body h4 {
+    font-size: 17px !important;
+    line-height: 0.8;
+}
+.markdown-body h5 {
+    font-size: 16px !important;
+    line-height: 0.8;
+}
+.markdown-body{
+	font-family:'verdana,Arial,Helvetica,sans-serif' !important;
+}
+.markdown-body p{
+	font-size:14px !important;
+	font-family:'verdana,Arial,Helvetica,sans-serif' !important;
+}
+
+a{
     word-break:break-all;
     word-wrap:break-word;
 }
