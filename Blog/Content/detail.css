@@ -2,6 +2,9 @@
     font-size: 19px !important;
     line-height: 0.8;
 }
+.markdown-body img {
+    max-width: 600px !important;
+}
 .markdown-body h4 {
     font-size: 17px !important;
     line-height: 0.8;
