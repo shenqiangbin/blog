@@ -1,9 +1,11 @@
-﻿using Blog.Models;
+﻿using Blog.Filters;
+using Blog.Models;
 using Blog.Repository;
 using Blog.Service;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -43,6 +45,7 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        [StaticHtml]
         public ActionResult ViewArticle(string urlTitle)
         {
             if (string.IsNullOrEmpty(urlTitle))

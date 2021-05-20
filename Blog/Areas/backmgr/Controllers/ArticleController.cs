@@ -4,6 +4,7 @@ using Blog.Models;
 using Blog.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -107,6 +108,7 @@ namespace Blog.Areas.backmgr.Controllers
                                 _articleLabelService.Add(int.Parse(articleId), item);
                             }
                         }
+                        RemoveHtmlFile(urlTitle);
                     }
                     catch (Exception ex)
                     {
@@ -152,6 +154,16 @@ namespace Blog.Areas.backmgr.Controllers
 
             //if (ValidateHelper.IsOverLength(content, 50))
             //    throw new ValidateException(102, $"标题请在50字内");
+        }
+
+        private void RemoveHtmlFile(string urlTitle)
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "html", "Home-ViewArticle");
+            string fileName = Path.Combine(path, urlTitle + ".html");
+            if (System.IO.File.Exists(fileName))
+            {
+                System.IO.File.Delete(fileName);
+            }
         }
 
         [HttpPost]
