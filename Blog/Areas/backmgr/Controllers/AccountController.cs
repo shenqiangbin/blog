@@ -1,4 +1,5 @@
 ﻿using Blog.Common;
+using Blog.Models;
 using Blog.Service;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ namespace Blog.Areas.backmgr.Controllers
             catch (Exception ex)
             {
                 //Logger.Log(ex);
+                LogService.Instance.AddAsync(Level.Error, ex);
                 ViewBag.Msg = "登录失败";
             }
 
