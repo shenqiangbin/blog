@@ -53,8 +53,7 @@
         }
         @if (Model.PageCount > 1)
         {
-
-            <div>@Html.PagedListPager((IPagedList)(Model), p => Url.Action("Index", new { page = p }), PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
+            <div>@Html.PagedListPager((IPagedList)(Model), p => $"/articles/p{p}.html", PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
         }
     </div>
 </div>
