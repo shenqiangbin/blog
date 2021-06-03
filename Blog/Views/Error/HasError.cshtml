@@ -1,0 +1,27 @@
+﻿@model StaticPagedList<Article>
+
+@{
+    ViewBag.Title = "出问题了";
+    if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        Layout = "~/Views/Shared/_mLayout.cshtml";
+    }
+}
+
+@section header{
+    @if (Blog.Common.BrowserHelper.IsPhone())
+    {
+        @Styles.Render("~/Content/mindex")
+    }
+    else
+    {
+        @Styles.Render("~/Content/index")
+    }
+}
+
+<div class="content">
+    <div class="indexcontainer">
+        <h2>出问题了，请稍后重试！</h2>
+        <p><a href="http://www.sqber.com">返回首页</a></p> 
+    </div>
+</div>

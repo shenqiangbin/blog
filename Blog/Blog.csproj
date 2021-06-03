@@ -143,6 +143,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="500.html" />
+    <Content Include="404.html" />
     <Content Include="Content\commentList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Content\backLogList.css" />
@@ -1048,6 +1050,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\Default1Controller.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FriendlylinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1146,6 +1149,8 @@
     <Content Include="Views\Friendlylink\Index.cshtml" />
     <Content Include="Views\Friendlylink\Apply.cshtml" />
     <Content Include="Areas\backmgr\Views\ArticelCategory\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\HasError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1159,6 +1164,7 @@
     <Folder Include="Areas\backmgr\Views\Db\" />
     <Folder Include="Images\emoji\" />
     <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Eoor\" />
     <Folder Include="Views\File\" />
     <Folder Include="Views\RSA\" />
     <Folder Include="Views\XSS\" />
