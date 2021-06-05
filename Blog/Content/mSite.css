@@ -70,7 +70,7 @@ button {
     color: white;
     z-index: 100;
     text-align: center;
-    background-color:#5333b5;
+    background-color:#000;
 }
 
 .nav-content {
@@ -107,6 +107,7 @@ button {
 
 a {
     text-decoration: none;
+    color:#000;
 }
 .copyright{
     margin-top:2px;

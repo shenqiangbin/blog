@@ -1,0 +1,3 @@
+﻿User-agent: *
+Disallow: /backmgr/
+Sitemap: http://www.sqber.com/sitemap.xml

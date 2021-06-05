@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title | SQBER</title>
-    <meta name="description" content="@ViewBag.Title SQBER的博客" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <meta itemprop="name" content="@ViewBag.Title SQBER的博客" />
     <meta itemprop="image" content="/favicon.ico" />
-    <meta name="keywords" content="@(!string.IsNullOrEmpty(ViewBag.Keywords)? ViewBag.Keywords : "SQBER的博客,MVC,.NET,ASP.NET,ASP.NET MVC,JS,JavaScript,JQuery")" />
-    @Styles.Render("~/Content/css")
+    <meta name="keywords" content="@(!string.IsNullOrEmpty(ViewBag.Keywords)? ViewBag.Keywords : "SQBER的博客,个人博客,一个程序员的博客")" />
+    <meta name="description" content="@ViewBag.Title SQBER的博客,这个一个90后小伙子的博客,一个后台研发人员的博客" />
+     @Styles.Render("~/Content/css")
     @RenderSection("header", required: false)
 </head>
 <body>
@@ -18,10 +18,10 @@
         <div class="nav-content">
             <span class="logo">
                 <a href="http://www.sqber.com">
-                    <img src="~/Images/logo.png"/>
+                    <img src="~/Images/logo.png"/><span>SQBER</span>
                 </a></span>
             <a href="/">首页</a>
-            <a href="/friendlylink" style="margin-left:40px;">友情链接</a>
+            <a href="/friendlylink" style="margin-left:20px;">友情链接</a>
             @*<a href="/">分类</a>
             <a href="/">关于</a>*@
         </div>
