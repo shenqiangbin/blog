@@ -1,4 +1,14 @@
-﻿.markdown-body h3 {
+﻿.container {
+    background:#fff;
+}
+
+.content .blog {
+    width: -webkit-calc(100% - 200px);
+    width: -moz-calc(100% - 200px);
+    width: calc(100% - 200px);
+}
+
+.markdown-body h3 {
     font-size: 19px !important;
     line-height: 0.8;
 }
@@ -49,6 +59,7 @@ iframe{
 }*/
 
 .detail-title {
+    margin-top:80px;
     background-color: #8c31ea;
     text-align: center;
     margin-bottom: 30px;

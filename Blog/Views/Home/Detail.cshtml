@@ -27,107 +27,110 @@
     @Styles.Render("~/Scripts/editor.md/css/editormd.preview.min.css")
 }
 <div class="content">
+    <div class="blog">
 
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    @if (Model == null)
-    {
-        <h2>文章不存在</h2>
-    }
-    else
-    {
-        <div class="detail-title">           
-            <h2>@Model.Title</h2>          
-            <div class="sec">
-                <span class="timebox">
-                    <img src="/Images/time3.png" alt="时间" width="14" />
-                    <span>@Model.DisplayCreatedTime</span>
-                </span>
-                <span id='labelContainer'><img src="~/Images/loadingbar.gif" alt="加载中..." /></span>
-            </div>
-        </div>
-        <div>
-            @if (Model.Editor == (int)ArticleEditor.UEditor)
-            {
-                @Html.Raw(Model.Content)
-            }
-            else
-            {
-                <div id="test-editormd-view" style="padding:0;overflow:visible;">
-                    <textarea style="display:none;" name="test-editormd-markdown-doc">@Model.Content</textarea>
+        @if (Model == null)
+        {
+            <h2>文章不存在</h2>
+        }
+        else
+        {
+            <div class="detail-title">
+                <h2>@Model.Title</h2>
+                <div class="sec">
+                    <span class="timebox">
+                        <img src="/Images/time3.png" alt="时间" width="14" />
+                        <span>@Model.DisplayCreatedTime</span>
+                    </span>
+                    <span id='labelContainer'><img src="~/Images/loadingbar.gif" alt="加载中..." /></span>
                 </div>
-            }
-        </div>
-    }
-    <div>
-        <div class="qrcodeContainer">
-            @if (Blog.Common.BrowserHelper.IsPhone())
-            {
-                <div></div>
-            }
-            else
-            {
-                <div>扫码分享</div>               
-            }
-            <div id="qrcode" style=""></div>            
-        </div>
-    </div>
-    <div class="cr">
-        <div>版权说明</div>
-        <div>作者：SQBER</div>
-        <div>文章来源：<a href="@Request.Url.AbsoluteUri">@Request.Url.AbsoluteUri</a></div>
-        <div>本文版权归作者所有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</div>
-    </div>
-    <div class="loadCommentBtnBox">
-        <button id="loadCommentBtn">展示评论区</button>
-    </div>
-    <div class="commentBox hidden">
-        <div class="commentBoxTitle">评论区</div>
-        <div class="commentBoxBox">
-            <p>
-                <span style="width:100px;display: inline-block;"><span class="must">*</span>昵称：</span>
-                <input type="text" id="userName" value="" style="width:335px"/>
-            </p>
-            <p>
-                <span style="width:100px;display: inline-block;"><span class="must">*</span>邮箱：</span>
-                <input type="text" id="email" value="" style="width:335px"/>
-            </p>
-            <p>
-                <span style="width:100px;display: inline-block;">个人站点：</span>
-                <input type="text" id="site" value="" style="width:335px"/>
-            </p>
-            <p><span class="must">*</span>想说的话：</p>
-            <div id="content" class="commentcontent" contenteditable="true"></div>
-            <img id="btn" class="emojiBtn" src="~/Images/emoji.png" />
-            <button id="publishBtn" class="publishBtn">发表</button>
-        </div>
-        <div id="commentlist" class="commentlistBox"></div>
-        <div style="margin-top:5px;" id="pageBox">
-            <input type="hidden" name="pageNumber" />
-            <button id="btnPreview" onclick="previewPage();">上一页</button>
-            第<span name="pageNumber"></span>页，共<span id="totalPage"></span>页
-            <button id="btnNext" onclick="nextPage();">下一页</button>
-        </div>
-    </div>
-    <div class="hidden">
-        <div id="commentlistModel" class="commentlist">
-            <div class="avatarBox">
-                <img class="avatar" src="~/Images/useravatar.svg" alt="">
             </div>
-            <div class="right">
-                <div class="c">
-                    <div class="name">
-                        <span>{0}</span>
-                        <a target="_blank" style="margin-left:10px;font-size:small;vertical-align:top" href="{5}">{5}</a>
+            <div>
+                @if (Model.Editor == (int)ArticleEditor.UEditor)
+                {
+                    @Html.Raw(Model.Content)
+                }
+                else
+                {
+                    <div id="test-editormd-view" style="padding:0;overflow:visible;">
+                        <textarea style="display:none;" name="test-editormd-markdown-doc">@Model.Content</textarea>
                     </div>
-                    <div class="cc">{1}</div>
+                }
+            </div>
+        }
+        <div>
+            <div class="qrcodeContainer">
+                @if (Blog.Common.BrowserHelper.IsPhone())
+            {
+                    <div></div>
+                }
+                else
+                {
+                    <div>扫码分享</div>
+                }
+                <div id="qrcode" style=""></div>
+            </div>
+        </div>
+        <div class="cr">
+            <div>版权说明</div>
+            <div>作者：SQBER</div>
+            <div>文章来源：<a href="@Request.Url.AbsoluteUri">@Request.Url.AbsoluteUri</a></div>
+            <div>本文版权归作者所有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</div>
+        </div>
+        <div class="loadCommentBtnBox">
+            <button id="loadCommentBtn">展示评论区</button>
+        </div>
+        <div class="commentBox hidden">
+            <div class="commentBoxTitle">评论区</div>
+            <div class="commentBoxBox">
+                <p>
+                    <span style="width:100px;display: inline-block;"><span class="must">*</span>昵称：</span>
+                    <input type="text" id="userName" value="" style="width:335px" />
+                </p>
+                <p>
+                    <span style="width:100px;display: inline-block;"><span class="must">*</span>邮箱：</span>
+                    <input type="text" id="email" value="" style="width:335px" />
+                </p>
+                <p>
+                    <span style="width:100px;display: inline-block;">个人站点：</span>
+                    <input type="text" id="site" value="" style="width:335px" />
+                </p>
+                <p><span class="must">*</span>想说的话：</p>
+                <div id="content" class="commentcontent" contenteditable="true"></div>
+                <img id="btn" class="emojiBtn" src="~/Images/emoji.png" />
+                <button id="publishBtn" class="publishBtn">发表</button>
+            </div>
+            <div id="commentlist" class="commentlistBox"></div>
+            <div style="margin-top:5px;" id="pageBox">
+                <input type="hidden" name="pageNumber" />
+                <button id="btnPreview" onclick="previewPage();">上一页</button>
+                第<span name="pageNumber"></span>页，共<span id="totalPage"></span>页
+                <button id="btnNext" onclick="nextPage();">下一页</button>
+            </div>
+        </div>
+        <div class="hidden">
+            <div id="commentlistModel" class="commentlist">
+                <div class="avatarBox">
+                    <img class="avatar" src="~/Images/useravatar.svg" alt="">
                 </div>
-                <div class="handle">{2}<a href="javascript:void(0);" cid="{3}" onclick="showReplyBox(this);">回复</a></div>
-                <div class="replyList" cid="{3}">{4}</div>
+                <div class="right">
+                    <div class="c">
+                        <div class="name">
+                            <span>{0}</span>
+                            <a target="_blank" style="margin-left:10px;font-size:small;vertical-align:top" href="{5}">{5}</a>
+                        </div>
+                        <div class="cc">{1}</div>
+                    </div>
+                    <div class="handle">{2}<a href="javascript:void(0);" cid="{3}" onclick="showReplyBox(this);">回复</a></div>
+                    <div class="replyList" cid="{3}">{4}</div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <a href="#" id="top" class="go-top"></a>
 
