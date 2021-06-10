@@ -1150,6 +1150,7 @@
     <Content Include="Areas\backmgr\Views\ArticelCategory\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\HasError.cshtml" />
+    <Content Include="Views\Home\Summary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

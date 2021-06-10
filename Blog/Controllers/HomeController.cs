@@ -53,5 +53,10 @@ namespace Blog.Controllers
             Article model = _articleService.GetByUrlTitle(urlTitle);            
             return View("Detail",model);
         }
+
+        public ActionResult Summary()
+        {
+            return View();
+        }
     }
 }
