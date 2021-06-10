@@ -2,10 +2,21 @@
     background:#fff;
 }
 
-.content .blog {
-    width: -webkit-calc(100% - 0px);
-    width: -moz-calc(100% - 0px);
-    width: calc(100% - 0px);
+
+@media only screen and (min-width: 1700px){
+    .content .blog {
+        width: -webkit-calc(100% - 0px);
+        width: -moz-calc(100% - 0px);
+        width: calc(100% - 0px);
+    }
+}
+
+@media only screen and (max-width: 1700px){
+    .content .blog {
+        width: -webkit-calc(100% - 200px);
+        width: -moz-calc(100% - 200px);
+        width: calc(100% - 200px);
+    }
 }
 
 a.reference-link {
