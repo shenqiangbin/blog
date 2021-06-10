@@ -13,6 +13,8 @@ namespace Blog.Models
         public int ArticleId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+
+        public string HtmlContent { get; set; }
         /// <summary>
         /// 内容级别：（0：正常 1：置顶 2：精华）
         /// </summary>

@@ -47,7 +47,7 @@ namespace Blog.Areas.backmgr.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public JsonResult Add(string articleId, string title, string content, List<int> lables, string keyWords, string urlTitle, string editor)
+        public JsonResult Add(string articleId, string title, string content, string htmlContent, List<int> lables, string keyWords, string urlTitle, string editor)
         {
             try
             {
@@ -59,6 +59,7 @@ namespace Blog.Areas.backmgr.Controllers
                     Article article = new Article();
                     article.Title = title;
                     article.Content = content;
+                    article.HtmlContent = htmlContent;
                     article.KeyWords = keyWords;
                     article.UrlTitle = urlTitle;
                     article.Editor = Convert.ToInt32(editor);
@@ -93,6 +94,7 @@ namespace Blog.Areas.backmgr.Controllers
 
                     model.Title = title;
                     model.Content = content;
+                    model.HtmlContent = htmlContent;
                     model.KeyWords = keyWords;
                     model.UrlTitle = urlTitle;
                     model.Editor = Convert.ToInt32(editor);

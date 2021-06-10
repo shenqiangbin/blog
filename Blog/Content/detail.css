@@ -3,9 +3,9 @@
 }
 
 .content .blog {
-    width: -webkit-calc(100% - 200px);
-    width: -moz-calc(100% - 200px);
-    width: calc(100% - 200px);
+    width: -webkit-calc(100% - 0px);
+    width: -moz-calc(100% - 0px);
+    width: calc(100% - 0px);
 }
 
 .markdown-body h3 {
@@ -34,6 +34,10 @@
 a{
     word-break:break-all;
     word-wrap:break-word;
+}
+
+.markdown-toc-list a {
+    color: #4183c4;
 }
 
 iframe{

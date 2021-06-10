@@ -25,6 +25,7 @@
         @Styles.Render("~/Content/detail")
     }
     @Styles.Render("~/Scripts/editor.md/css/editormd.preview.min.css")
+    @Styles.Render("~/Scripts/editor.md/css/editormd.min.css")
 }
 <div class="content">
     <div class="blog">
@@ -54,9 +55,12 @@
                 }
                 else
                 {
-                    <div id="test-editormd-view" style="padding:0;overflow:visible;">
+
+                    @Html.Raw(Model.HtmlContent)
+
+                    @*<div id="test-editormd-view" style="padding:0;overflow:visible;">
                         <textarea style="display:none;" name="test-editormd-markdown-doc">@Model.Content</textarea>
-                    </div>
+                    </div>*@
                 }
             </div>
         }
@@ -135,12 +139,12 @@
 <a href="#" id="top" class="go-top"></a>
 
 
-@if (Model.Editor != (int)ArticleEditor.UEditor)
+@if (Model != null && Model.Editor != (int)ArticleEditor.UEditor)
 {
-    <div id="sidebar">
+    @*<div id="sidebar">
         <h1>目录</h1>
         <div class="markdown-body editormd-preview-container" id="custom-toc-container"></div>
-    </div>
+    </div>*@
 }
 
 
@@ -169,16 +173,16 @@
     <script>
         $(function () {
 
-            var testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-                htmlDecode: "style,script,iframe",  // you can filter tags decode
-                emoji: false,
-                taskList: true,
-                tocm: true,
-                tocContainer: "#custom-toc-container", // 自定义 ToC 容器层
-                tex: true,  
-                flowChart: true,
-                sequenceDiagram: true,
-            });
+            //var testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+            //    htmlDecode: "style,script,iframe",  // you can filter tags decode
+            //    emoji: false,
+            //    taskList: true,
+            //    tocm: true,
+            //    tocContainer: "#custom-toc-container", // 自定义 ToC 容器层
+            //    tex: true,  
+            //    flowChart: true,
+            //    sequenceDiagram: true,
+            //});
             //实现部分行高亮显示
             $("ol.linenums").each(function (index, item) {
                 $(item).children().each(function (indexLi, itemLi) {

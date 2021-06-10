@@ -231,6 +231,7 @@
                 tocm: true,  // Using [TOCM]  
                 tex: true,  // 开启科学公式TeX语言支持
                 flowChart: true,
+                saveHTMLToTextarea: true,
                 sequenceDiagram: true,
                 toolbarIcons: function () {
                     // Or return editormd.toolbarModes[name]; // full, simple, mini  
@@ -274,6 +275,15 @@
                 }
             }
 
+            function getHtmlContent() {
+                var selectVal = $("input[name=radioEditor]:checked").val();
+                if (selectVal == 0) {
+                    return testEditor.getPreviewedHTML();
+                    //return testEditor.getHTML();
+                }
+                return "";
+            }
+
             $("#btnSave").click(function () {
                 save(function (id) {
                     articleId = id;
@@ -297,6 +307,7 @@
                 data.lables = getSelectedItems();
                 data.editor = $("input[name=radioEditor]:checked").val();
                 data.content = getContent();
+                data.htmlContent = getHtmlContent();
 
                 if (!validateData(data))
                     return;

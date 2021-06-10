@@ -15,12 +15,13 @@ namespace Blog.Repository
             if (model.Editor == (int)ArticleEditor.UEditor)
                 model.Content = Common.XSSHelper.Sanitize(model.Content);
 
-            string cmdText = @"insert into article (ArticleId, Title, Content, ContentLevel, PublishStatus, KeyWords, UrlTitle, UrlTitleNum, Editor, DisplayCreatedTime, CreateUser, CreatedTime, UpdateTime, Enable) 
+            string cmdText = @"insert into article (ArticleId, Title, Content, htmlContent, ContentLevel, PublishStatus, KeyWords, UrlTitle, UrlTitleNum, Editor, DisplayCreatedTime, CreateUser, CreatedTime, UpdateTime, Enable) 
                 values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
                     model.Title,
                     model.Content,
+                    model.HtmlContent,
                     model.ContentLevel,
                     model.PublishStatus,
                     model.KeyWords,
@@ -50,6 +51,7 @@ namespace Blog.Repository
 update Article set 
 title = ?,
 content = ?,
+htmlContent = ?,
 ContentLevel = ?,
 PublishStatus = ?,
 DisplayCreatedTime = ?,
@@ -65,6 +67,7 @@ Enable = ?
             object[] paramList = {
                     model.Title,
                     model.Content,
+                    model.HtmlContent,
                     model.ContentLevel,
                     model.PublishStatus,
                     model.DisplayCreatedTime,
@@ -91,6 +94,7 @@ Enable = ?
             model.ArticleId = Convert.ToInt32(row["ArticleId"]);
             model.Title = Convert.ToString(row["Title"]);
             model.Content = Convert.ToString(row["Content"]);
+            model.HtmlContent = Convert.ToString(row["HtmlContent"]);
             model.ContentLevel = Convert.ToInt32(row["ContentLevel"]);
             model.PublishStatus = Convert.ToInt32(row["PublishStatus"]);
             model.DisplayCreatedTime = Convert.ToDateTime(row["DisplayCreatedTime"]);
