@@ -16,7 +16,7 @@ namespace Blog.Repository
                 model.Content = Common.XSSHelper.Sanitize(model.Content);
 
             string cmdText = @"insert into article (ArticleId, Title, Content, htmlContent, ContentLevel, PublishStatus, KeyWords, UrlTitle, UrlTitleNum, Editor, DisplayCreatedTime, CreateUser, CreatedTime, UpdateTime, Enable) 
-                values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
+                values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);select last_insert_rowid() newid;";
             object[] paramList = {
                     null,  //对应的主键不要赋值了
                     model.Title,
