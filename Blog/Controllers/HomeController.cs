@@ -21,11 +21,14 @@ namespace Blog.Controllers
             _articleService = articleService;
         }
 
-        public ActionResult Index(int? page = 1)
+        public ActionResult Index(int? page = 1, string search = "")
         {
+            ViewBag.SearchValue = search;
+
             ArticleListQuery listModel = new ArticleListQuery();
             listModel.PageIndex = Convert.ToInt32(page);
             listModel.PageSize = 10;
+            listModel.Search = search;
 
             ArticleListModelResult result = _articleService.GetPaged(listModel);
             var pageList = new StaticPagedList<Article>(result.List, listModel.PageIndex, listModel.PageSize, result.TotalCount);

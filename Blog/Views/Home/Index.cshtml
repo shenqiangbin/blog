@@ -21,6 +21,11 @@
 
 <div class="content">
     <div class="indexcontainer">
+                    
+        <form action="/articles.html" method="get" style="margin-bottom: 20px;">
+            <input type="text" name="search" value="@ViewBag.SearchValue" placeholder="检索标题和内容" style="width:300px"/>
+        </form>
+
         @if (Model == null || Model.Count == 0)
         {
             <div class="record">
@@ -53,7 +58,7 @@
         }
         @if (Model.PageCount > 1)
         {
-            <div>@Html.PagedListPager((IPagedList)(Model), p => $"/articles/p{p}.html", PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
+            <div>@Html.PagedListPager((IPagedList)(Model), p => $"/articles/p{p}.html?search={ViewBag.SearchValue}", PagedListRenderOptions.ClassicPlusFirstAndLast)</div>
         }
     </div>
 </div>

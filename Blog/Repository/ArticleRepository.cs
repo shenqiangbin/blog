@@ -161,6 +161,14 @@ Enable = ?
                 paraList.Add(listModel.TheUserData);
             }
 
+            if (!string.IsNullOrEmpty(listModel.Search))
+            {
+                builder.Append(" and (title like ? or content like ? or HtmlContent like ?)");
+                paraList.Add("%" + listModel.Search + "%");
+                paraList.Add("%" + listModel.Search + "%");
+                paraList.Add("%" + listModel.Search + "%");
+            }
+
             if (string.IsNullOrEmpty(listModel.Order))
                 builder.Append(" order by createdtime desc,articleId asc");
             else
@@ -178,6 +186,11 @@ Enable = ?
                 countSqlBuilder.Append(" and PublishStatus = ?");
             if (!string.IsNullOrEmpty(listModel.TheUserData))
                 countSqlBuilder.Append(" and createUser = ? ");
+
+            if (!string.IsNullOrEmpty(listModel.Search))
+            {
+                countSqlBuilder.Append(" and (title like ? or content like ? or HtmlContent like ?)");
+            }
 
             object countNum = SQLiteHelper.ExecuteScalar(countSqlBuilder.ToString(), paraList.ToArray());
             result.TotalCount = Convert.ToInt32(countNum);

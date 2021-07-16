@@ -10,6 +10,7 @@ namespace Blog.Models
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
         public string Order { get; set; }
+        public string Search { get; set; }
 
         /// <summary>
         /// 展示指定人的数据
