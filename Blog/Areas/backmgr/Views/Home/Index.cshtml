@@ -16,6 +16,11 @@
     </div>
 
     <div class="indexcontainer">
+
+        <form action="/backmgr/Home" method="get" style="margin-bottom: 20px;">
+            <input type="text" name="search" value="@ViewBag.SearchValue" placeholder="检索标题和内容" style="width:300px" />
+        </form>
+
         @if (Model == null || Model.Count == 0)
         {
             <div class="record">

@@ -23,12 +23,15 @@ namespace Blog.Areas.backmgr.Controllers
             _permissionService = permissionService;
         }
 
-        public ActionResult Index(int? page = 1)
+        public ActionResult Index(int? page = 1, string search = "")
         {
+            ViewBag.SearchValue = search;
+
             ArticleListQuery query = new ArticleListQuery();
             query.PageIndex = Convert.ToInt32(page);
             query.PageSize = 10;
             query.PublishStatus = PublishStatus.All;
+            query.Search = search;
 
             if (_permissionService.OnlyAccessSelf(ContextUser.Email, Permission.BlogList))
                 query.TheUserData = ContextUser.Email;
