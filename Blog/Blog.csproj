@@ -1039,6 +1039,7 @@
     <Compile Include="Common\ContextUser.cs" />
     <Compile Include="Common\HashHelper.cs" />
     <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\MailHelper.cs" />
     <Compile Include="Common\MD5Helper.cs" />
     <Compile Include="Common\PagedResponse.cs" />
     <Compile Include="Common\RSAHelper.cs" />

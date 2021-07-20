@@ -16,6 +16,11 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
 
+
+            MailHelper mailHelper = new MailHelper("1348907384@qq.com", "");
+            mailHelper.sendEmail(new List<string>() { "1969858717@qq.com" }, "test", "<p>test content <a href='http://www.baidu.com'>123</a></p>", true);
+
+
             //GetTiKu();
             //HandleTiKu();
             //HandleTiKu2();
